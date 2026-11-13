@@ -131,245 +131,415 @@ const INITIAL_CHECKLIST: ChecklistItem[] = [
   }
 ];
 
-// --- GUIDE BOOK CHAPTERS ---
-const GUIDE_BOOK_CHAPTERS = [
+// --- GUIDE BOOK CHAPTERS (HINDI & ENGLISH SUPPORT) ---
+interface GuideChapter {
+  id: string;
+  badge: { hi: string; en: string };
+  title: { hi: string; en: string };
+  subtitle: { hi: string; en: string };
+  content: { hi: React.ReactNode; en: React.ReactNode };
+}
+
+const GUIDE_BOOK_CHAPTERS: GuideChapter[] = [
   {
     id: 'windows',
-    title: '1. Tatkal Timings & Quotas',
-    subtitle: 'AC vs Non-AC Rules, Opening Minutes & Fare Math',
-    badge: 'Timing Rule',
-    badgeColor: 'emerald',
-    content: (
-      <div className="space-y-4 text-xs sm:text-sm text-slate-300 leading-relaxed">
-        <p>
-          Indian Railways mein Tatkal booking subah do alag-alag slots mein khulti hai:
-        </p>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          <div className="p-3.5 rounded-xl bg-emerald-950/30 border border-emerald-500/40">
-            <div className="font-bold text-white flex items-center justify-between">
-              <span>❄️ AC Tatkal Window</span>
-              <span className="font-mono text-emerald-400 text-xs">10:00:00 AM IST</span>
-            </div>
-            <p className="text-xs text-slate-300 mt-1.5">
-              Classes: <strong>2A, 3A, 3E, CC, EC, 1A</strong>.
-              Subah <strong>09:57:00 AM</strong> par RailOne app mein login karein.
-            </p>
-          </div>
-          <div className="p-3.5 rounded-xl bg-amber-950/30 border border-amber-500/40">
-            <div className="font-bold text-white flex items-center justify-between">
-              <span>🚂 Non-AC Tatkal Window</span>
-              <span className="font-mono text-amber-400 text-xs">11:00:00 AM IST</span>
-            </div>
-            <p className="text-xs text-slate-300 mt-1.5">
-              Classes: <strong>Sleeper (SL) & 2S (Second Sitting)</strong>.
-              Subah <strong>10:57:00 AM</strong> par RailOne app mein login karein.
-            </p>
-          </div>
-        </div>
-        <div className="rounded-lg bg-slate-900 border border-slate-800 p-3">
-          <h4 className="font-bold text-slate-200 mb-1">⚠️ Confirmed Tatkal Cancellation Rule:</h4>
-          <p className="text-xs text-slate-400">
-            Confirmed Tatkal ticket cancel karne par <strong>₹0.00 refund (Zero Refund)</strong> milta hai.
-            Sirf agar ticket Waiting List ya RAC reh jaye chart banne tak, tabhi IRCTC clerkage fee (₹20-₹60) kaat kar baaki paise auto-refund karta hai.
+    badge: { hi: 'समय नियम', en: 'Timing Rule' },
+    title: { hi: '१. तत्काल समय एवं कोटा नियम', en: '1. Tatkal Timings & Quotas' },
+    subtitle: {
+      hi: 'एसी बनाम नॉन-एसी नियम, खुलने का सही समय और किराया गणित',
+      en: 'AC vs Non-AC Rules, Opening Minutes & Fare Math'
+    },
+    content: {
+      hi: (
+        <div className="space-y-4 text-xs sm:text-sm text-slate-300 leading-relaxed font-sans">
+          <p className="text-slate-200">
+            भारतीय रेल (IRCTC) में तत्काल टिकट बुकिंग प्रतिदिन सुबह दो अलग-अलग समय पर खुलती है:
           </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div className="p-3.5 rounded-xl bg-emerald-950/30 border border-emerald-500/40 space-y-1.5">
+              <div className="font-bold text-white flex items-center justify-between">
+                <span>❄️ वातानुकूलित (AC) तत्काल</span>
+                <span className="font-mono text-emerald-400 text-xs">सुबह 10:00:00 AM IST</span>
+              </div>
+              <p className="text-xs text-slate-300">
+                <strong>श्रेणियां:</strong> 2A, 3A, 3E, CC, EC, 1A.<br />
+                सुबह <strong className="text-emerald-300 font-mono">09:57:00 AM</strong> पर रेलवन (RailOne) ऐप में लॉगिन करें।
+              </p>
+            </div>
+            <div className="p-3.5 rounded-xl bg-amber-950/30 border border-amber-500/40 space-y-1.5">
+              <div className="font-bold text-white flex items-center justify-between">
+                <span>🚂 गैर-वातानुकूलित (Non-AC) तत्काल</span>
+                <span className="font-mono text-amber-400 text-xs">सुबह 11:00:00 AM IST</span>
+              </div>
+              <p className="text-xs text-slate-300">
+                <strong>श्रेणियां:</strong> स्लीपर (SL) एवं सेकंड सीटिंग (2S).<br />
+                सुबह <strong className="text-amber-300 font-mono">10:57:00 AM</strong> पर रेलवन ऐप में लॉगिन करें।
+              </p>
+            </div>
+          </div>
+          <div className="rounded-lg bg-slate-900 border border-slate-800 p-3 space-y-1">
+            <h4 className="font-bold text-slate-100 flex items-center gap-1.5">
+              <span>⚠️ कन्फर्म तत्काल रद्दीकरण (Cancellation) नियम:</span>
+            </h4>
+            <p className="text-xs text-slate-400 leading-relaxed">
+              कन्फर्म तत्काल टिकट रद्द करने पर रेलवे द्वारा <strong>₹0.00 रिफंड (शून्य रिफंड)</strong> दिया जाता है।
+              केवल यदि टिकट चार्ट बनने तक वेटिंग लिस्ट या आरएसी रह जाए, तभी आईआरसीटीसी क्लर्केज शुल्क (₹20-₹60) काटकर बाकी राशि बैंक खाते में वापस भेजता है।
+            </p>
+          </div>
         </div>
-      </div>
-    )
+      ),
+      en: (
+        <div className="space-y-4 text-xs sm:text-sm text-slate-300 leading-relaxed">
+          <p>Indian Railways Tatkal booking opens in two separate daily windows:</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div className="p-3.5 rounded-xl bg-emerald-950/30 border border-emerald-500/40">
+              <div className="font-bold text-white flex items-center justify-between">
+                <span>❄️ AC Tatkal Window</span>
+                <span className="font-mono text-emerald-400 text-xs">10:00:00 AM IST</span>
+              </div>
+              <p className="text-xs text-slate-300 mt-1.5">
+                Classes: <strong>2A, 3A, 3E, CC, EC, 1A</strong>.<br />
+                Log in to RailOne at <strong>09:57:00 AM</strong>.
+              </p>
+            </div>
+            <div className="p-3.5 rounded-xl bg-amber-950/30 border border-amber-500/40">
+              <div className="font-bold text-white flex items-center justify-between">
+                <span>🚂 Non-AC Tatkal Window</span>
+                <span className="font-mono text-amber-400 text-xs">11:00:00 AM IST</span>
+              </div>
+              <p className="text-xs text-slate-300 mt-1.5">
+                Classes: <strong>Sleeper (SL) & 2S</strong>.<br />
+                Log in to RailOne at <strong>10:57:00 AM</strong>.
+              </p>
+            </div>
+          </div>
+          <div className="rounded-lg bg-slate-900 border border-slate-800 p-3">
+            <h4 className="font-bold text-slate-200 mb-1">⚠️ Confirmed Tatkal Cancellation Rule:</h4>
+            <p className="text-xs text-slate-400">
+              Confirmed Tatkal tickets yield <strong>₹0.00 refund (Zero Refund)</strong>.
+              Only RAC or Waiting List Tatkal tickets that remain unconfirmed after chart preparation receive an automatic refund minus clerkage fee.
+            </p>
+          </div>
+        </div>
+      )
+    }
   },
   {
     id: 'origin-trap',
-    title: '2. Multi-Day Train Origin Trap',
-    subtitle: 'Sabse badi galti jo 35% yatri karte hain!',
-    badge: 'Critical Math',
-    badgeColor: 'rose',
-    content: (
-      <div className="space-y-4 text-xs sm:text-sm text-slate-300 leading-relaxed">
-        <div className="p-3.5 rounded-xl bg-rose-950/30 border border-rose-500/40 text-rose-200">
-          <h4 className="font-bold text-white mb-1">🚨 Railway Rule: Origin Date vs Boarding Date</h4>
-          <p className="text-xs leading-relaxed">
-            Tatkal quota <strong>aapke baithne wale station se nahi</strong>, balki train jis station se chali hai (Origin Station) uski journey date se <strong>1 din pehle</strong> khulta hai!
-          </p>
+    badge: { hi: 'महत्वपूर्ण गणित', en: 'Critical Math' },
+    title: { hi: '२. मल्टी-डे ट्रेन ओरिजिन जाल', en: '2. Multi-Day Train Origin Trap' },
+    subtitle: {
+      hi: 'वह सबसे बड़ी भूल जो ३५% यात्री करते हैं!',
+      en: 'The biggest mistake that 35% of passengers make!'
+    },
+    content: {
+      hi: (
+        <div className="space-y-4 text-xs sm:text-sm text-slate-300 leading-relaxed font-sans">
+          <div className="p-3.5 rounded-xl bg-rose-950/30 border border-rose-500/40 text-rose-200 space-y-1">
+            <h4 className="font-bold text-white">🚨 आधिकारिक रेलवे नियम: बोर्डिंग नहीं, ओरिजिन तारीख मान्य है</h4>
+            <p className="text-xs leading-relaxed">
+              तत्काल कोटा आपके स्टेशन से नहीं, बल्कि <strong>ट्रेन जहां से अपनी यात्रा शुरू करती है (Origin Station)</strong>, उस तारीख से <strong>१ दिन पहले</strong> खुलता है!
+            </p>
+          </div>
+          <div className="space-y-2">
+            <h4 className="font-bold text-slate-100">वास्तविक उदाहरण (लंबी दूरी की ट्रेनें):</h4>
+            <p className="text-xs text-slate-300">
+              मान लीजिए आपको <strong>शुक्रवार २० तारीख</strong> को अपने शहर से ट्रेन पकड़नी है। लेकिन वह ट्रेन <strong>बुधवार १८ तारीख</strong> को अपने मूल स्टेशन (Origin) से रवाना हुई थी:
+            </p>
+            <ul className="list-disc pl-5 space-y-1 text-xs text-slate-300">
+              <li>ट्रेन शुरू होने की तारीख: <strong>बुधवार १८ तारीख</strong></li>
+              <li>तत्काल खुलने की वास्तविक तारीख: <strong className="text-emerald-400">मंगलवार १७ तारीख सुबह १०:०० AM!</strong></li>
+              <li>यदि आप गुरुवार १९ तारीख को ऐप खोलेंगे, तो सारी सीटें ४८ घंटे पहले ही बुक हो चुकी होंगी!</li>
+            </ul>
+          </div>
+          <div className="p-3 rounded-lg bg-slate-900 border border-slate-800 text-xs text-cyan-300">
+            💡 <strong>समाधान:</strong> कमांड सेंटर के <em>"Train Origin Day Check (Day 1 / Day 2 / Day 3)"</em> बटन का उपयोग करें—यह सटीक बुकिंग तारीख स्वतः प्रदर्शित करेगा।
+          </div>
         </div>
-        <div className="space-y-2">
-          <h4 className="font-bold text-slate-200">Asli Example (Vivek Express / Long Distance Trains):</h4>
-          <p className="text-xs text-slate-300">
-            Maan lijiye aapko <strong>Friday 20 Tarikh</strong> ko Vijayawada se train pakadni hai. Lekin wo train <strong>Wednesday 18 Tarikh</strong> ko Dibrugarh se shuru hui thi:
-          </p>
-          <ul className="list-disc pl-5 space-y-1 text-xs text-slate-300">
-            <li>Origin Date: <strong>Wednesday 18th</strong></li>
-            <li>Tatkal Khulne ki Asli Tarikh: <strong>Tuesday 17th Subah 10:00 AM!</strong></li>
-            <li>Agar aap Thursday 19th ko tatkal kholenge, to saari seats 48 ghante pehle hi bik chuki hongi!</li>
-          </ul>
+      ),
+      en: (
+        <div className="space-y-4 text-xs sm:text-sm text-slate-300 leading-relaxed">
+          <div className="p-3.5 rounded-xl bg-rose-950/30 border border-rose-500/40 text-rose-200">
+            <h4 className="font-bold text-white mb-1">🚨 Railway Rule: Origin Date vs Boarding Date</h4>
+            <p className="text-xs leading-relaxed">
+              Tatkal opens 1 day before the date of journey from the <strong>train originating station</strong>, NOT from your boarding station.
+            </p>
+          </div>
+          <div className="space-y-2">
+            <h4 className="font-bold text-slate-200">Real-World Case Study:</h4>
+            <p className="text-xs text-slate-300">
+              If your train arrives at your boarding station on Friday 20th, but originated in Assam/Bengal on Wednesday 18th:
+            </p>
+            <ul className="list-disc pl-5 space-y-1 text-xs text-slate-300">
+              <li>Origin Date: <strong>Wednesday 18th</strong></li>
+              <li>Tatkal Booking Date: <strong>Tuesday 17th at 10:00 AM IST!</strong></li>
+              <li>If you wait until Thursday, all quota seats will be completely sold out.</li>
+            </ul>
+          </div>
         </div>
-        <div className="p-3 rounded-lg bg-slate-900 border border-slate-800 text-xs text-cyan-300">
-          💡 <strong>Solution:</strong> Command Center ka <em>"Train Origin Day Check (Day 1 / Day 2 / Day 3)"</em> button dabayein — engine khud-b-khud exact Tatkal Booking Date calculate karke display karega!
-        </div>
-      </div>
-    )
+      )
+    }
   },
   {
     id: 'master-list',
-    title: '3. Master List Protocol (Saves 22s)',
-    subtitle: '09:45 AM se pehle passenger details pre-save karne ka rule',
-    badge: 'Speed Weapon',
-    badgeColor: 'cyan',
-    content: (
-      <div className="space-y-4 text-xs sm:text-sm text-slate-300 leading-relaxed">
-        <p>
-          Tatkal rush mein haath se passenger ka Naam, Umar, Gender aur Berth likhne mein <strong>20 se 30 seconds</strong> lag jaate hain. Utni der mein quota khatam ho jata hai.
-        </p>
-        <div className="space-y-2">
-          <h4 className="font-bold text-emerald-300">Master List Kaise Kaam Karti Hai:</h4>
-          <ol className="list-decimal pl-5 space-y-1.5 text-xs text-slate-300">
-            <li>RailOne ya IRCTC App open karein $\rightarrow$ <strong>Account / Profile</strong> $\rightarrow$ <strong>Master List</strong> mein jayein.</li>
-            <li>Subah <strong>09:45 AM se pehle</strong> apne sabhi yatriyon ke naam add kar lein.</li>
-            <li>10:00 AM booking ke waqt sirf <em>"Add from Master List"</em> tap karein aur checkboxes tick karein — <strong>matra 1.5 seconds</strong> mein passengers select ho jayenge!</li>
-          </ol>
+    badge: { hi: 'समय बचत', en: 'Speed Weapon' },
+    title: { hi: '३. मास्टर लिस्ट प्रोटोकॉल (२२ सेकंड की बचत)', en: '3. Master List Protocol (Saves 22s)' },
+    subtitle: {
+      hi: 'सुबह ०९:४५ AM से पहले यात्री विवरण सुरक्षित करने का नियम',
+      en: 'Pre-save passenger details before 09:45 AM'
+    },
+    content: {
+      hi: (
+        <div className="space-y-4 text-xs sm:text-sm text-slate-300 leading-relaxed font-sans">
+          <p className="text-slate-200">
+            तत्काल की आपाधापी में हाथ से यात्री का नाम, आयु, लिंग और सीट चयन टाइप करने में <strong>२० से ३० सेकंड</strong> लग जाते हैं। इतने समय में कोटा समाप्त हो जाता है।
+          </p>
+          <div className="space-y-2">
+            <h4 className="font-bold text-emerald-300">मास्टर लिस्ट कैसे उपयोग करें:</h4>
+            <ol className="list-decimal pl-5 space-y-1.5 text-xs text-slate-300">
+              <li>रेलवन (RailOne) या आईआरसीटीसी ऐप खोलें $\rightarrow$ <strong>Account / Profile</strong> $\rightarrow$ <strong>Master List</strong> में जाएं।</li>
+              <li>सुबह <strong>०९:४५ AM से पहले</strong> अपने सभी यात्रियों के नाम जोड़ लें।</li>
+              <li>१०:०० AM पर केवल <em>"Add from Master List"</em> चुनें और चेकबॉक्स टिक करें—<strong>मात्र १.५ सेकंड</strong> में सभी यात्री जुड़ जाएंगे!</li>
+            </ol>
+          </div>
+          <div className="rounded-lg bg-amber-950/30 border border-amber-500/40 p-3 text-xs text-amber-200">
+            ⚠️ <strong>मास्टर लिस्ट फ्रीज नियम:</strong> आईआरसीटीसी सुबह ०९:४५ से १०:१५ AM (AC) और १०:४५ से ११:१५ AM (Non-AC) के बीच मास्टर लिस्ट में नए नाम जोड़ने की अनुमति नहीं देता। अतः सुबह ०९:४५ AM से पहले ही तैयारी पूरी कर लें!
+          </div>
         </div>
-        <div className="rounded-lg bg-amber-950/30 border border-amber-500/40 p-3 text-xs text-amber-200">
-          ⚠️ <strong>Master List Freeze Window:</strong> IRCTC subah 09:45 se 10:15 AM (AC) aur 10:45 se 11:15 AM (Non-AC) ke dauran Master List mein naye naam add karne par rok laga deta hai. Isliye 09:45 AM se pehle hi ready rakhein!
+      ),
+      en: (
+        <div className="space-y-4 text-xs sm:text-sm text-slate-300 leading-relaxed">
+          <p>
+            Manually typing passenger name, age, gender, and berth preference takes 20 to 30 seconds. By then, Tatkal seats are exhausted.
+          </p>
+          <div className="space-y-2">
+            <h4 className="font-bold text-emerald-300">How to use Master List:</h4>
+            <ol className="list-decimal pl-5 space-y-1.5 text-xs text-slate-300">
+              <li>Open RailOne/IRCTC App ➔ Profile ➔ Master List.</li>
+              <li>Add all passengers before 09:45 AM.</li>
+              <li>At 10:00 AM, select "Add from Master List" ➔ takes under 2 seconds!</li>
+            </ol>
+          </div>
         </div>
-      </div>
-    )
+      )
+    }
   },
   {
     id: 'strike-radar',
-    title: '4. The 35-Second Strike Window Protocol',
-    subtitle: 'T-3m se lekar T-0s tak second-by-second action roadmap',
-    badge: 'Tactical Timing',
-    badgeColor: 'emerald',
-    content: (
-      <div className="space-y-3 text-xs sm:text-sm text-slate-300 leading-relaxed">
-        <p>Tatkal mein timing hi sab kuch hai. Har second ka protocol niche diya gaya hai:</p>
-        <div className="space-y-2">
-          <div className="p-2.5 rounded-lg bg-slate-900 border border-slate-800 flex items-start gap-2.5">
-            <span className="font-mono font-bold text-cyan-400 shrink-0 text-xs">09:57:00 AM</span>
-            <div className="text-xs">
-              <strong className="text-white">Phase 2: App Login & Train Search</strong>
-              <p className="text-slate-400 mt-0.5">MPIN ya Biometric se login karein. From, To, Date dalein. Quota mein <strong>TATKAL</strong> select karein. Train list screen par pahunch jayein.</p>
+    badge: { hi: 'रणनीतिक समय', en: 'Tactical Timing' },
+    title: { hi: '४. ३५-सेकंड स्ट्राइक प्रोटोकॉल', en: '4. The 35-Second Strike Protocol' },
+    subtitle: {
+      hi: 'T-3m से T-0s तक सेकंड-दर-सेकंड एक्शन योजना',
+      en: 'Second-by-second action roadmap from T-3m to T-0s'
+    },
+    content: {
+      hi: (
+        <div className="space-y-3 text-xs sm:text-sm text-slate-300 leading-relaxed font-sans">
+          <p className="text-slate-200">तत्काल में सफलता केवल सही सेकंड पर सही बटन दबाने से मिलती है:</p>
+          <div className="space-y-2">
+            <div className="p-2.5 rounded-lg bg-slate-900 border border-slate-800 flex items-start gap-2.5">
+              <span className="font-mono font-bold text-cyan-400 shrink-0 text-xs">09:57:00 AM</span>
+              <div className="text-xs">
+                <strong className="text-white">फेज़ २: ऐप लॉगिन एवं ट्रेन खोज</strong>
+                <p className="text-slate-400 mt-0.5">बायोमेट्रिक या पिन से लॉगिन करें। स्टेशन और तारीख चुनें, कोटा में <strong>TATKAL</strong> चुनें और ट्रेन सूची स्क्रीन पर पहुंचें।</p>
+              </div>
             </div>
-          </div>
 
-          <div className="p-2.5 rounded-lg bg-slate-900 border border-amber-500/30 flex items-start gap-2.5">
-            <span className="font-mono font-bold text-amber-400 shrink-0 text-xs">09:59:30 AM</span>
-            <div className="text-xs">
-              <strong className="text-white">Phase 3: Hold Position (T-30s)</strong>
-              <p className="text-slate-400 mt-0.5">Screen refresh na karein! Angutha apni train ke 3A / 2A / SL button ke upar rakhein. Secondary phone par UPI ready rakhein.</p>
+            <div className="p-2.5 rounded-lg bg-slate-900 border border-amber-500/30 flex items-start gap-2.5">
+              <span className="font-mono font-bold text-amber-400 shrink-0 text-xs">09:59:30 AM</span>
+              <div className="text-xs">
+                <strong className="text-white">फेज़ ३: स्थिति संभालें (T-30s)</strong>
+                <p className="text-slate-400 mt-0.5">स्क्रीन को कतई रीफ्रेश न करें! अपना अंगूठा ट्रेन के 3A/2A/SL बटन पर रखें। दूसरे फोन पर यूपीआई ऐप खोलकर रखें।</p>
+              </div>
             </div>
-          </div>
 
-          <div className="p-2.5 rounded-lg bg-emerald-950/40 border border-emerald-500/50 flex items-start gap-2.5">
-            <span className="font-mono font-bold text-emerald-400 shrink-0 text-xs">09:59:58 AM</span>
-            <div className="text-xs">
-              <strong className="text-white">Phase 4: Strike Zone (T-2s)</strong>
-              <p className="text-slate-300 mt-0.5"><strong>Class button (3A/SL) par tap karein!</strong> Internet latency ke kaaran aapki request IRCTC server par theek 10:00:00.05 par register hogi.</p>
+            <div className="p-2.5 rounded-lg bg-emerald-950/40 border border-emerald-500/50 flex items-start gap-2.5">
+              <span className="font-mono font-bold text-emerald-400 shrink-0 text-xs">09:59:58 AM</span>
+              <div className="text-xs">
+                <strong className="text-white">फेज़ ४: स्ट्राइक ज़ोन (T-2s)</strong>
+                <p className="text-slate-200 mt-0.5"><strong>क्लास बटन (3A/SL) पर तुरंत टैप करें!</strong> इंटरनेट लेटेंसी के कारण आपका अनुरोध ठीक 10:00:00 पर सर्वर पहुंचेगा।</p>
+              </div>
             </div>
-          </div>
 
-          <div className="p-2.5 rounded-lg bg-slate-900 border border-slate-800 flex items-start gap-2.5">
-            <span className="font-mono font-bold text-slate-200 shrink-0 text-xs">10:00:05 AM</span>
-            <div className="text-xs">
-              <strong className="text-white">Phase 5: Pax Selection & Checkboxes</strong>
-              <p className="text-slate-400 mt-0.5">Master List se passenger select karein. <em>"Book only if confirm berths are allotted"</em> tick karein.</p>
+            <div className="p-2.5 rounded-lg bg-slate-900 border border-slate-800 flex items-start gap-2.5">
+              <span className="font-mono font-bold text-slate-200 shrink-0 text-xs">10:00:05 AM</span>
+              <div className="text-xs">
+                <strong className="text-white">फेज़ ५: यात्री चयन एवं चेकबॉक्स</strong>
+                <p className="text-slate-400 mt-0.5">मास्टर लिस्ट से यात्रियों को चुनें और <em>"Book only if confirm berths are allotted"</em> पर अनिवार्य टिक करें।</p>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    )
+      ),
+      en: (
+        <div className="space-y-3 text-xs sm:text-sm text-slate-300 leading-relaxed">
+          <p>Timing is everything in Tatkal. Follow the critical second markers:</p>
+          <div className="space-y-2">
+            <div className="p-2.5 rounded-lg bg-slate-900 border border-slate-800 flex items-start gap-2.5">
+              <span className="font-mono font-bold text-cyan-400 shrink-0 text-xs">09:57:00 AM</span>
+              <div className="text-xs">
+                <strong className="text-white">Phase 2: App Login & Train Search</strong>
+                <p className="text-slate-400 mt-0.5">Log in via Biometrics/PIN. Search route with Quota: TATKAL.</p>
+              </div>
+            </div>
+            <div className="p-2.5 rounded-lg bg-emerald-950/40 border border-emerald-500/50 flex items-start gap-2.5">
+              <span className="font-mono font-bold text-emerald-400 shrink-0 text-xs">09:59:58 AM</span>
+              <div className="text-xs">
+                <strong className="text-white">Phase 4: Strike Zone (T-2s)</strong>
+                <p className="text-slate-200 mt-0.5">Tap class refresh button so your request lands at 10:00:00 sharp.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )
+    }
   },
   {
     id: 'payment-tactics',
-    title: '5. Dual-Phone Payment Setup',
-    subtitle: 'App crash aur OTP delay se bachne ka 100% fail-proof tarika',
-    badge: 'Payment Hack',
-    badgeColor: 'amber',
-    content: (
-      <div className="space-y-4 text-xs sm:text-sm text-slate-300 leading-relaxed">
-        <div className="p-3.5 rounded-xl bg-slate-900 border border-slate-800 space-y-2">
-          <h4 className="font-bold text-white flex items-center gap-2">
-            <Smartphone className="w-4 h-4 text-emerald-400" />
-            Do Phones (Dual-Device) ka Formula:
-          </h4>
-          <p className="text-xs text-slate-300 leading-relaxed">
-            Phone 1 par ticket book karte waqt jab log GPay ya PhonePe kholne ke liye App Switch karte hain, to Android aur iOS memory clean karne ke chakkar mein RailOne app ko background mein band kar dete hain, jisse booking cancel ho jati hai!
+    badge: { hi: 'भुगतान तकनीक', en: 'Payment Hack' },
+    title: { hi: '५. दो फोन (Dual-Device) भुगतान विधि', en: '5. Dual-Phone Payment Setup' },
+    subtitle: {
+      hi: 'ऐप क्रैश और ओटीपी देरी से बचने का अचूक उपाय',
+      en: 'Eliminate app reload crashes and OTP delays'
+    },
+    content: {
+      hi: (
+        <div className="space-y-4 text-xs sm:text-sm text-slate-300 leading-relaxed font-sans">
+          <div className="p-3.5 rounded-xl bg-slate-900 border border-slate-800 space-y-2">
+            <h4 className="font-bold text-white flex items-center gap-2">
+              <Smartphone className="w-4 h-4 text-emerald-400" />
+              दो फोन (Dual-Phone) का वैज्ञानिक फॉर्मूला:
+            </h4>
+            <p className="text-xs text-slate-300 leading-relaxed">
+              फोन १ पर टिकट बुक करते समय जब यात्री GPay या PhonePe खोलने के लिए ऐप स्विच करते हैं, तो फोन की रैम रेलवन ऐप को बैकग्राउंड में बंद कर देती है, जिससे बुकिंग रद्द हो जाती है!
+            </p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+            <div className="p-3 rounded-lg bg-slate-950 border border-slate-800 space-y-1">
+              <span className="font-mono font-bold text-cyan-300">पहला फोन (बुकिंग फोन)</span>
+              <p className="text-slate-400">इस पर रेलवन ऐप खुला रखें। भुगतान स्क्रीन पर दूसरे फोन की यूपीआई आईडी (उदा. 9876543210@ybl) पेस्ट करें।</p>
+            </div>
+            <div className="p-3 rounded-lg bg-slate-950 border border-slate-800 space-y-1">
+              <span className="font-mono font-bold text-emerald-300">दूसरा फोन (भुगतान फोन)</span>
+              <p className="text-slate-400">इस पर GPay/PhonePe खोलकर तैयार रखें। रिक्वेस्ट आते ही पिन डालें। पहले फोन पर टिकट तुरंत डाउनलोड हो जाएगा!</p>
+            </div>
+          </div>
+        </div>
+      ),
+      en: (
+        <div className="space-y-4 text-xs sm:text-sm text-slate-300 leading-relaxed">
+          <p>
+            Switching apps to approve payments on the booking phone often triggers mobile OS memory cleanups, crashing your session.
           </p>
-        </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-          <div className="p-3 rounded-lg bg-slate-950 border border-slate-800 space-y-1">
-            <span className="font-mono font-bold text-cyan-300">Device 1 (Booking Phone)</span>
-            <p className="text-slate-400">Is par RailOne App khola rakhein. Payment screen par UPI VPA (jaise 9876543210@ybl) paste karein.</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+            <div className="p-3 rounded-lg bg-slate-950 border border-slate-800 space-y-1">
+              <span className="font-mono font-bold text-cyan-300">Device 1 (Booking)</span>
+              <p className="text-slate-400">Keep RailOne open. Enter Device 2's UPI ID at payment screen.</p>
+            </div>
+            <div className="p-3 rounded-lg bg-slate-950 border border-slate-800 space-y-1">
+              <span className="font-mono font-bold text-emerald-300">Device 2 (Payment)</span>
+              <p className="text-slate-400">Unlock GPay/PhonePe. Approve payment request instantly without touching Device 1.</p>
+            </div>
           </div>
-          <div className="p-3 rounded-lg bg-slate-950 border border-slate-800 space-y-1">
-            <span className="font-mono font-bold text-emerald-300">Device 2 (Payment Phone)</span>
-            <p className="text-slate-400">Is par GPay/PhonePe khol kar samne rakhein. Request aate hi PIN dalein aur approve karein. Device 1 par ticket turant download ho jayega!</p>
-          </div>
         </div>
-        <div className="p-2.5 rounded-lg bg-emerald-950/20 border border-emerald-500/30 text-xs text-emerald-300">
-          ✨ <strong>Alternative:</strong> R-Wallet ya IRCTC e-Wallet mein pehle se paise daal kar rakhein — isme zero gateway failure hota hai.
-        </div>
-      </div>
-    )
+      )
+    }
   },
   {
     id: 'emergency-vault',
-    title: '6. 1-Tap Speed Vault & Fallback',
-    subtitle: 'Agar Master List load na ho to kya karein?',
-    badge: 'Backup Plan',
-    badgeColor: 'cyan',
-    content: (
-      <div className="space-y-4 text-xs sm:text-sm text-slate-300 leading-relaxed">
-        <p>
-          Kabhi-kabhi heavy load ke waqt IRCTC error deta hai: <em>"Unable to fetch Master List"</em>.
-          Aise time par ghabrayein nahi:
-        </p>
-        <div className="space-y-2">
-          <div className="p-3 rounded-lg bg-slate-900 border border-slate-800 text-xs space-y-1">
-            <strong className="text-white">1. Screen ke bagal mein Tatkal Pro Vault rakhein:</strong>
-            <p className="text-slate-400">Har passenger ke naam ke bagal mein <strong>"1-Tap Copy"</strong> button hai. Ek click mein naam copy hota hai aur aap RailOne mein paste kar sakte hain.</p>
-          </div>
-          <div className="p-3 rounded-lg bg-slate-900 border border-slate-800 text-xs space-y-1">
-            <strong className="text-white">2. Berth Preference mein "No Choice / Any" rakhein:</strong>
-            <p className="text-slate-400">Tatkal mein Lower Berth mangne se confirmation chances kam ho jate hain kyunki algorithm filter karne mein time lagata hai. Always select 'Any'.</p>
+    badge: { hi: 'आपातकालीन बैकअप', en: 'Backup Plan' },
+    title: { hi: '६. १-टैप स्पीड वॉल्ट और बैकअप', en: '6. 1-Tap Speed Vault & Fallback' },
+    subtitle: {
+      hi: 'यदि मास्टर लिस्ट लोड न हो तो क्या करें?',
+      en: 'What to do if Master List fails to load?'
+    },
+    content: {
+      hi: (
+        <div className="space-y-4 text-xs sm:text-sm text-slate-300 leading-relaxed font-sans">
+          <p className="text-slate-200">
+            भारी ट्रैफिक के समय कभी-कभी आईआरसीटीसी एरर देता है: <em>"Unable to fetch Master List"</em>. ऐसी स्थिति में:
+          </p>
+          <div className="space-y-2">
+            <div className="p-3 rounded-lg bg-slate-900 border border-slate-800 text-xs space-y-1">
+              <strong className="text-white">१. स्पीड वॉल्ट से १-क्लिक कॉपी:</strong>
+              <p className="text-slate-400">कमांड सेंटर के स्पीड वॉल्ट में हर यात्री के नाम के आगे <strong>"Copy Name"</strong> बटन है। एक क्लिक में नाम कॉपी करके रेलवन में तुरंत पेस्ट करें।</p>
+            </div>
+            <div className="p-3 rounded-lg bg-slate-900 border border-slate-800 text-xs space-y-1">
+              <strong className="text-white">२. सीट विकल्प में हमेशा 'No Choice / Any' रखें:</strong>
+              <p className="text-slate-400">तत्काल में लोअर बर्थ मांगने से बचने की सलाह दी जाती है क्योंकि एल्गोरिदम सीट तलाशने में अतिरिक्त समय लेता है।</p>
+            </div>
           </div>
         </div>
-      </div>
-    )
+      ),
+      en: (
+        <div className="space-y-4 text-xs sm:text-sm text-slate-300 leading-relaxed">
+          <p>If IRCTC servers fail to populate your Master List due to peak rush load:</p>
+          <div className="space-y-2">
+            <div className="p-3 rounded-lg bg-slate-900 border border-slate-800 text-xs space-y-1">
+              <strong className="text-white">1. Instant Copy from Speed Vault:</strong>
+              <p className="text-slate-400">Use the 1-Tap copy button for each passenger to paste names rapidly into RailOne.</p>
+            </div>
+          </div>
+        </div>
+      )
+    }
   },
   {
     id: 'golden-rules',
-    title: '7. Golden Rules & IRCTC Compliance',
-    subtitle: 'Account safe rakhne aur 100% legal rehne ke 5 niyam',
-    badge: 'Legal & Safe',
-    badgeColor: 'emerald',
-    content: (
-      <div className="space-y-3 text-xs sm:text-sm text-slate-300 leading-relaxed">
-        <div className="space-y-2">
-          {[
-            {
-              rule: '1. Kabhi bhi multiple tabs ya phones par ek hi IRCTC account login na karein.',
-              desc: 'IRCTC ka anti-fraud system duplicate login detect karke dono session turant terminate kar deta hai.'
-            },
-            {
-              rule: '2. Subah 09:55 AM se pehle login na karein.',
-              desc: 'IRCTC session ka idle timeout 3 minute hota hai. Agar aap 09:52 par login karenge to 09:59 par automatically logout ho jayenge!'
-            },
-            {
-              rule: '3. Kisi bhi illegal Tatkal auto-fill extension ya bot ka use na karein.',
-              desc: 'Railway Act Section 143 ke antargat bots ka use illegal hai. Hamara Command Center 100% compliant hai kyunki yeh sirf ek manual companion hai.'
-            },
-            {
-              rule: '4. "Book only if confirm berths are allotted" hamesha check karein.',
-              desc: 'Tatkal Waiting List ka ticket banne se bachiye, warna cancellation par paise fas jaate hain.'
-            }
-          ].map((item, idx) => (
-            <div key={idx} className="p-2.5 rounded-lg bg-slate-900 border border-slate-800 text-xs">
-              <strong className="text-slate-100">{item.rule}</strong>
-              <p className="text-slate-400 mt-0.5">{item.desc}</p>
-            </div>
-          ))}
+    badge: { hi: 'कानूनी व सुरक्षित', en: 'Legal & Safe' },
+    title: { hi: '७. आईआरसीटीसी के सुनहरे नियम व सुरक्षा', en: '7. Golden Rules & IRCTC Compliance' },
+    subtitle: {
+      hi: 'अकाउंट सुरक्षित रखने और १००% कानूनी रहने के ४ नियम',
+      en: 'Stay 100% legal, avoid bot bans and security locks'
+    },
+    content: {
+      hi: (
+        <div className="space-y-3 text-xs sm:text-sm text-slate-300 leading-relaxed font-sans">
+          <div className="space-y-2">
+            {[
+              {
+                rule: '१. कभी भी एक ही आईआरसीटीसी खाते को दो अलग-अलग टैब या फोन पर एक साथ लॉगिन न करें।',
+                desc: 'आईआरसीटीसी का फ्रॉड डिटेक्शन सिस्टम डुप्लीकेट लॉगिन मिलते ही दोनों सत्र तत्काल समाप्त कर देता है।'
+              },
+              {
+                rule: '२. सुबह ०९:५५ AM से पहले लॉगिन न करें।',
+                desc: 'सत्र निष्क्रियता (Idle timeout) केवल ३ मिनट की होती है। ०९:५० पर लॉगिन करने से ०९:५८ पर अपने आप लॉगआउट हो जाएंगे।'
+              },
+              {
+                rule: '३. किसी भी अवैध बॉट या ऑटो-फिल एक्सटेंशन का प्रयोग न करें।',
+                desc: 'रेलवे एक्ट की धारा १४३ के तहत बॉट अवैध हैं। हमारा कमांड सेंटर पूर्णतः कानूनी, सुरक्षित व मैनुअल साथी है।'
+              },
+              {
+                rule: '४. "Book only if confirm berths are allotted" अनिवार्य रूप से टिक करें।',
+                desc: 'ताकि सीटें समाप्त होने पर वेटिंग लिस्ट तत्काल टिकट न बने और आपकी पूरी राशि सुरक्षित रहे।'
+              }
+            ].map((item, idx) => (
+              <div key={idx} className="p-2.5 rounded-lg bg-slate-900 border border-slate-800 text-xs">
+                <strong className="text-slate-100">{item.rule}</strong>
+                <p className="text-slate-400 mt-0.5">{item.desc}</p>
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
-    )
+      ),
+      en: (
+        <div className="space-y-3 text-xs sm:text-sm text-slate-300 leading-relaxed">
+          <div className="space-y-2">
+            {[
+              { rule: '1. Never login to the same IRCTC account across multiple tabs.', desc: 'Anti-fraud triggers session terminations.' },
+              { rule: '2. Do not login earlier than 09:56 AM.', desc: 'Session timeout is 3 minutes.' },
+              { rule: '3. Never use illegal auto-fill bot scripts.', desc: 'RailOne Tatkal Pro is 100% manual and compliant.' },
+              { rule: '4. Always tick "Book only if confirm berths are allotted".', desc: 'Avoids non-refundable Tatkal waiting list tickets.' }
+            ].map((item, idx) => (
+              <div key={idx} className="p-2.5 rounded-lg bg-slate-900 border border-slate-800 text-xs">
+                <strong className="text-slate-100">{item.rule}</strong>
+                <p className="text-slate-400 mt-0.5">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      )
+    }
   }
 ];
 
@@ -389,6 +559,7 @@ export default function App() {
   const [mobileTab, setMobileTab] = useState<'all' | 'clock' | 'date' | 'vault' | 'drill'>('all');
   const [showGuideBook, setShowGuideBook] = useState<boolean>(false);
   const [activeGuideChapter, setActiveGuideChapter] = useState<number>(0);
+  const [guideLang, setGuideLang] = useState<'hi' | 'en'>('hi');
   const [isFullscreen, setIsFullscreen] = useState<boolean>(false);
 
   useEffect(() => {
@@ -1747,26 +1918,57 @@ export default function App() {
         <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-2 sm:p-4">
           <div className="bg-slate-900 border border-slate-800 rounded-2xl w-full max-w-5xl xl:max-w-6xl max-h-[92vh] flex flex-col shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-150">
             {/* Modal Header */}
-            <div className="px-4 py-3 border-b border-slate-800 flex items-center justify-between bg-slate-950/80">
+            <div className="px-4 py-3 border-b border-slate-800 flex items-center justify-between bg-slate-950/80 gap-2">
               <div className="flex items-center gap-2.5">
-                <div className="w-8 h-8 rounded-lg bg-amber-500/15 border border-amber-500/40 flex items-center justify-center text-amber-400">
+                <div className="w-8 h-8 rounded-lg bg-amber-500/15 border border-amber-500/40 flex items-center justify-center text-amber-400 shrink-0">
                   <BookOpen className="w-4 h-4" />
                 </div>
                 <div>
                   <h2 className="text-sm sm:text-base font-bold text-white leading-tight">
-                    RailOne Tatkal Pro — Master Guide & Tactical Handbook
+                    {guideLang === 'hi'
+                      ? 'रेलवन तत्काल प्रो — संपूर्ण मार्गदर्शिका एवं रणनीतिक हैंडबुक'
+                      : 'RailOne Tatkal Pro — Master Guide & Tactical Handbook'}
                   </h2>
                   <p className="text-[11px] text-slate-400">
-                    Official Reference, Timing Mathematics & 100% Legal Companion
+                    {guideLang === 'hi'
+                      ? 'आधिकारिक संदर्भ, टाइमिंग गणित एवं 100% कानूनी मैन्युअल साथी'
+                      : 'Official Reference, Timing Mathematics & 100% Legal Companion'}
                   </p>
                 </div>
               </div>
-              <button
-                onClick={() => setShowGuideBook(false)}
-                className="p-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-400 hover:text-white border border-slate-800 cursor-pointer"
-              >
-                <X className="w-5 h-5" />
-              </button>
+
+              {/* Language Switcher & Close */}
+              <div className="flex items-center gap-2">
+                <div className="inline-flex rounded-lg bg-slate-900 p-0.5 border border-slate-800 shrink-0">
+                  <button
+                    onClick={() => setGuideLang('hi')}
+                    className={`px-2.5 py-1 rounded-md text-xs font-semibold transition-all cursor-pointer ${
+                      guideLang === 'hi'
+                        ? 'bg-amber-500 text-slate-950 font-bold shadow-sm'
+                        : 'text-slate-400 hover:text-slate-200'
+                    }`}
+                  >
+                    🇮🇳 हिंदी
+                  </button>
+                  <button
+                    onClick={() => setGuideLang('en')}
+                    className={`px-2.5 py-1 rounded-md text-xs font-semibold transition-all cursor-pointer ${
+                      guideLang === 'en'
+                        ? 'bg-amber-500 text-slate-950 font-bold shadow-sm'
+                        : 'text-slate-400 hover:text-slate-200'
+                    }`}
+                  >
+                    🌐 English
+                  </button>
+                </div>
+
+                <button
+                  onClick={() => setShowGuideBook(false)}
+                  className="p-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-400 hover:text-white border border-slate-800 cursor-pointer"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
             </div>
 
             {/* Modal Body: Chapter Selector + Content */}
@@ -1774,7 +1976,7 @@ export default function App() {
               {/* Left Column: Chapter List */}
               <div className="md:col-span-4 border-b md:border-b-0 md:border-r border-slate-800 bg-slate-950/60 p-2 sm:p-3 overflow-y-auto max-h-[160px] md:max-h-none space-y-1">
                 <span className="text-[10px] font-mono text-slate-500 uppercase tracking-wider px-2 block mb-1">
-                  Chapters
+                  {guideLang === 'hi' ? 'अध्याय सूची' : 'Chapters'}
                 </span>
                 {GUIDE_BOOK_CHAPTERS.map((chap, idx) => (
                   <button
@@ -1786,9 +1988,9 @@ export default function App() {
                       }`}
                   >
                     <div>
-                      <div className="text-xs font-semibold">{chap.title}</div>
+                      <div className="text-xs font-semibold">{chap.title[guideLang]}</div>
                       <div className="text-[10px] text-slate-400 truncate max-w-[180px]">
-                        {chap.subtitle}
+                        {chap.subtitle[guideLang]}
                       </div>
                     </div>
                     <ChevronRight
@@ -1804,22 +2006,24 @@ export default function App() {
                 <div className="border-b border-slate-800 pb-3">
                   <div className="flex items-center gap-2 mb-1">
                     <span className="text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-amber-500/15 text-amber-300 border border-amber-500/30">
-                      {GUIDE_BOOK_CHAPTERS[activeGuideChapter].badge}
+                      {GUIDE_BOOK_CHAPTERS[activeGuideChapter].badge[guideLang]}
                     </span>
                     <span className="text-xs font-mono text-slate-400">
-                      Chapter {activeGuideChapter + 1} of {GUIDE_BOOK_CHAPTERS.length}
+                      {guideLang === 'hi'
+                        ? `अध्याय ${activeGuideChapter + 1} / ${GUIDE_BOOK_CHAPTERS.length}`
+                        : `Chapter ${activeGuideChapter + 1} of ${GUIDE_BOOK_CHAPTERS.length}`}
                     </span>
                   </div>
                   <h3 className="text-lg font-bold text-white">
-                    {GUIDE_BOOK_CHAPTERS[activeGuideChapter].title}
+                    {GUIDE_BOOK_CHAPTERS[activeGuideChapter].title[guideLang]}
                   </h3>
                   <p className="text-xs text-slate-400">
-                    {GUIDE_BOOK_CHAPTERS[activeGuideChapter].subtitle}
+                    {GUIDE_BOOK_CHAPTERS[activeGuideChapter].subtitle[guideLang]}
                   </p>
                 </div>
 
                 <div className="pt-1">
-                  {GUIDE_BOOK_CHAPTERS[activeGuideChapter].content}
+                  {GUIDE_BOOK_CHAPTERS[activeGuideChapter].content[guideLang]}
                 </div>
 
                 {/* Chapter Navigation Buttons */}
@@ -1829,7 +2033,7 @@ export default function App() {
                     onClick={() => setActiveGuideChapter((c) => Math.max(0, c - 1))}
                     className="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 disabled:opacity-40 text-xs font-mono text-slate-300 border border-slate-700 cursor-pointer"
                   >
-                    ← Previous
+                    {guideLang === 'hi' ? '← पिछला अध्याय' : '← Previous'}
                   </button>
                   <button
                     disabled={activeGuideChapter === GUIDE_BOOK_CHAPTERS.length - 1}
@@ -1840,7 +2044,7 @@ export default function App() {
                     }
                     className="px-3.5 py-1.5 rounded-lg bg-emerald-500 hover:bg-emerald-400 disabled:opacity-40 text-xs font-mono font-bold text-slate-950 cursor-pointer"
                   >
-                    Next Chapter →
+                    {guideLang === 'hi' ? 'अगला अध्याय →' : 'Next Chapter →'}
                   </button>
                 </div>
               </div>

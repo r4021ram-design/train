@@ -1,153 +1,119 @@
-# 🚆 RAILONE TATKAL PRO — COMMAND CENTER
-## The Definitive Master Guide & Tactical Handbook (2026 Edition)
-*Authorized Manual Companion & Strategy Reference for Indian Railways (IRCTC / RailOne) Tatkal Booking*
+# 🚆 रेलवन तत्काल प्रो (RailOne Tatkal Pro) — संपूर्ण मार्गदर्शिका एवं रणनीतिक हैंडबुक
+## आईआरसीटीसी तत्काल टिकट बुकिंग का आधिकारिक एवं 100% कानूनी मैन्युअल (2026 संस्करण)
 
 ---
 
-> **100% Legal & Safe**: RailOne Tatkal Pro is a client-side situational awareness companion. It runs zero automated browser bots, injects no illegal IRCTC scripts, and makes zero unauthorized API calls. It relies entirely on atomic IST clock synchronization, ergonomic clipboard vaults, human reflex drills, and calendar mathematics.
+> **100% सुरक्षित एवं वैध (Legal):** रेलवन तत्काल प्रो एक सिचुएशनल अवेयरनेस (स्थितिजन्य जागरूकता) साथी है। यह कोई स्वचालित ब्राउज़र बॉट नहीं चलाता, न ही आईआरसीटीसी में कोई अवैध स्क्रिप्ट इंजेक्ट करता है। यह पूर्णतः भारतीय मानक समय (IST) की परमाणु घड़ी, सुरक्षित क्लिपबोर्ड वॉल्ट, कैलेंडर गणित और मानवीय रिफ्लेक्स पर आधारित है।
 
 ---
 
-## 📑 TABLE OF CONTENTS
-1. [Chapter 1: The Tatkal Battlefield & Opening Windows](#chapter-1-the-tatkal-battlefield--opening-windows)
-2. [Chapter 2: The Multi-Day Train Origin Trap (Crucial Math)](#chapter-2-the-multi-day-train-origin-trap-crucial-math)
-3. [Chapter 3: Master List Secret & T-15 Minute Setup](#chapter-3-master-list-secret--t-15-minute-setup)
-4. [Chapter 4: The Atomic Clock & Latency Calibration Engine](#chapter-4-the-atomic-clock--latency-calibration-engine)
-5. [Chapter 5: The 35-Second Strike Window Protocol (T-3s to T+30s)](#chapter-5-the-35-second-strike-window-protocol)
-6. [Chapter 6: Payment Strategy: UPI Dual-Device vs R-Wallet](#chapter-6-payment-strategy-upi-dual-device-vs-r-wallet)
-7. [Chapter 7: 1-Tap Speed Vault & Emergency Pax Fallback](#chapter-7-1-tap-speed-vault--emergency-pax-fallback)
-8. [Chapter 8: The 4-Tap Muscle Memory Speed Drill](#chapter-8-the-4-tap-muscle-memory-speed-drill)
-9. [Chapter 9: The Golden Rules & IRCTC Anti-Bot Compliance](#chapter-9-the-golden-rules--irctc-anti-bot-compliance)
+## 📑 विषय-सूची (Table of Contents)
+1. [अध्याय १: तत्काल समय एवं कोटा नियम (AC vs Non-AC)](#अध्याय-१-तत्काल-समय-एवं-कोटा-नियम)
+2. [अध्याय २: मल्टी-डे ट्रेन ओरिजिन जाल (३५% यात्रियों की भूल)](#अध्याय-२-मल्टी-डे-ट्रेन-ओरिजिन-जाल)
+3. [अध्याय ३: मास्टर लिस्ट सीक्रेट (२२ सेकंड की बचत)](#अध्याय-३-मास्टर-लिस्ट-सीक्रेट)
+4. [अध्याय ४: परमाणु घड़ी एवं लेटेंसी कैलिब्रेशन](#अध्याय-४-परमाणु-घड़ी-एवं-लेटेंसी-कैलिब्रेशन)
+5. [अध्याय ५: ३५-सेकंड स्ट्राइक प्रोटोकॉल (T-3m से T-0s)](#अध्याय-५-३५-सेकंड-स्ट्राइक-प्रोटोकॉल)
+6. [अध्याय ६: दो फोन (Dual-Device) भुगतान तकनीक](#अध्याय-६-दो-फोन-भुगतान-तकनीक)
+7. [अध्याय ७: १-टैप स्पीड वॉल्ट एवं आपातकालीन बैकअप](#अध्याय-७-१-टैप-स्पीड-वॉल्ट-एवं-बैकअप)
+8. [अध्याय ८: आईआरसीटीसी के सुनहरे नियम व सुरक्षा](#अध्याय-८-आईआरसीटीसी-के-सुनहरे-नियम-व-सुरक्षा)
 
 ---
 
-## CHAPTER 1: The Tatkal Battlefield & Opening Windows
+## अध्याय १: तत्काल समय एवं कोटा नियम
 
-Every morning across India, over 1.5 million users attempt to book approximately 150,000 Tatkal berths. Within 60 seconds of quota opening, 85% of confirmed seats in high-demand routes (e.g. Mumbai ⇄ Delhi, Patna ⇄ Delhi, Howrah ⇄ Bangalore) are completely exhausted.
+प्रतिदिन पूरे भारत में लगभग १५ लाख यात्री मात्र १.५ लाख तत्काल सीटों के लिए प्रयास करते हैं। मुख्य मार्गों पर कोटा खुलने के ६० सेकंड के भीतर ८५% सीटें समाप्त हो जाती हैं।
 
-### 1.1 The Two Golden Windows
-* **AC Tatkal Window**: Opens at **10:00:00 AM IST** sharp for classes **1A, 2A, 3A, 3E, CC, EC**.
-* **Non-AC Tatkal Window**: Opens at **11:00:00 AM IST** sharp for classes **SL (Sleeper)** and **2S (Second Sitting)**.
+### १.१ दो प्रमुख बुकिंग समय (Golden Windows)
+* **वातानुकूलित (AC) तत्काल विंडो:** ठीक **सुबह 10:00:00 AM IST** पर खुलती है। (श्रेणियां: 2A, 3A, 3E, CC, EC, 1A).
+* **गैर-वातानुकूलित (Non-AC) तत्काल विंडो:** ठीक **सुबह 11:00:00 AM IST** पर खुलती है। (श्रेणियां: स्लीपर SL एवं सेकंड सीटिंग 2S).
 
-### 1.2 Official Tatkal Fare & Cancellation Structure
-| Class | Tatkal Min Fare | Tatkal Max Fare | IRCTC Clerkage Fee on Cancellation | Refund on Confirmed Tatkal |
+### १.२ तत्काल किराया एवं रद्दीकरण नियम
+| श्रेणी (Class) | न्यूनतम तत्काल शुल्क | अधिकतम तत्काल शुल्क | क्लर्केज शुल्क | कन्फर्म तत्काल पर रिफंड |
 | :--- | :--- | :--- | :--- | :--- |
-| **AC 2 Tier (2A)** | ₹400 | ₹500 | ₹50 | **₹0.00 (Zero)** |
-| **AC 3 Tier (3A / 3E)** | ₹300 | ₹400 | ₹40 | **₹0.00 (Zero)** |
-| **AC Chair Car (CC)** | ₹125 | ₹225 | ₹40 | **₹0.00 (Zero)** |
-| **Sleeper Class (SL)** | ₹100 | ₹200 | ₹20 | **₹0.00 (Zero)** |
-| **Second Sitting (2S)**| ₹10 | ₹15 | ₹15 | **₹0.00 (Zero)** |
+| **AC 2 Tier (2A)** | ₹400 | ₹500 | ₹50 | **₹0.00 (शून्य)** |
+| **AC 3 Tier (3A / 3E)** | ₹300 | ₹400 | ₹40 | **₹0.00 (शून्य)** |
+| **AC Chair Car (CC)** | ₹125 | ₹225 | ₹40 | **₹0.00 (शून्य)** |
+| **Sleeper Class (SL)** | ₹100 | ₹200 | ₹20 | **₹0.00 (शून्य)** |
+| **Second Sitting (2S)**| ₹10 | ₹15 | ₹15 | **₹0.00 (शून्य)** |
+
+> **चेतावनी:** कन्फर्म तत्काल टिकट रद्द करने पर कोई रिफंड नहीं मिलता। केवल चार्ट बनने के बाद भी वेटिंग लिस्ट या आरएसी रहने पर ही क्लर्केज शुल्क काटकर बाकी पैसा स्वतः बैंक में वापस आता है।
 
 ---
 
-## CHAPTER 2: The Multi-Day Train Origin Trap (Crucial Math)
+## अध्याय २: मल्टी-डे ट्रेन ओरिजिन जाल
 
-Over 35% of people lose their Tatkal seats simply by calculating the booking date from their **own boarding date** instead of the **train's originating station date**.
+३५% से अधिक यात्री अपनी यात्रा की तारीख से तत्काल की गणना करते हैं, जो सबसे बड़ी भूल है।
 
-### 2.1 The Official Railway Rule
-Tatkal quota opens **one day before the date of journey from the train originating station**, NOT from your boarding station.
+### २.१ आधिकारिक रेलवे नियम
+तत्काल कोटा आपके बैठने वाले स्टेशन से नहीं, बल्कि **ट्रेन जहां से शुरू होती है (Origin Station), उस प्रस्थान तारीख से १ दिन पहले** खुलता है।
 
-### 2.2 Case Study: The 3-Day Journey Trap
-Suppose you wish to board the **Dibrugarh to Kanyakumari Vivek Express (Train 15906)** from **Vijayawada (BZA)** on **Friday, 20th November**:
-1. Train starts from **Dibrugarh (Day 1)**: **Wednesday, 18th November**.
-2. Train reaches **Kolkata/Malda (Day 2)**: **Thursday, 19th November**.
-3. Train reaches **Vijayawada (Day 3)**: **Friday, 20th November**.
-
-* **The Mistake**: If you try booking on Thursday, 19th November at 10:00 AM (assuming 1 day before your Friday journey), **all Tatkal tickets will already have been sold 48 hours ago!**
-* **The Correct Math**: Because the train originates on Wednesday 18th, Tatkal opened on **Tuesday 17th November at 10:00 AM**.
+### २.२ वास्तविक उदाहरण
+यदि आपको **शुक्रवार २० तारीख** को विजयवाड़ा से ट्रेन पकड़नी है, और वह ट्रेन असम (डिब्रूगढ़) से **बुधवार १८ तारीख** को रवाना हुई थी:
+- ट्रेन प्रस्थान तारीख: **बुधवार १८ तारीख**
+- तत्काल खुलने की वास्तविक तारीख: **मंगलवार १७ तारीख सुबह १०:०० AM!**
+- यदि आप गुरुवार १९ तारीख को ऐप खोलेंगे, तो सीटें ४८ घंटे पहले ही समाप्त हो चुकी होंगी।
 
 ---
 
-## CHAPTER 3: Master List Secret & T-15 Minute Setup
+## अध्याय ३: मास्टर लिस्ट सीक्रेट (२२ सेकंड की बचत)
 
-Typing passenger name, age, gender, and berth preference at 10:00 AM takes **18 to 28 seconds**. By 10:00:25 AM, the Tatkal quota is usually exhausted.
+हाथ से यात्री का नाम, उम्र और लिंग टाइप करने में २० से ३० सेकंड बर्बाद होते हैं।
 
-### 3.1 What is the Master List?
-The Master List is an IRCTC/RailOne feature that lets you pre-register passenger details into your profile.
-* At booking time, you tap **"Add from Master List"** -> select your passengers with checkboxes -> done in **1.8 seconds**.
-* **Time Saved**: **22+ seconds** (the difference between Confirmed and Waiting List 45).
-
-### 3.2 Rules for Master List
-1. Add passengers before **09:45 AM**.
-2. **Master List Freeze Window**: IRCTC closes passenger profile edits between **09:45 AM and 10:15 AM**, and between **10:45 AM and 11:15 AM**. You cannot add new names during this freeze!
-3. Maximum **4 passengers** are allowed per Tatkal PNR (unlike General quota which allows 6).
+### ३.१ मास्टर लिस्ट कैसे बनाएं:
+1. रेलवन (RailOne) या आईआरसीटीसी ऐप खोलें $\rightarrow$ Profile $\rightarrow$ Master List.
+2. सुबह **०९:४५ AM से पहले** अपने सभी यात्रियों (अधिकतम ४) के नाम जोड़ें।
+3. १०:०० AM पर केवल "Add from Master List" टिक करें—मात्र १.५ सेकंड में सभी यात्री जुड़ जाते हैं।
+4. **मास्टर लिस्ट फ्रीज:** सुबह ०९:४५ से १०:१५ AM और १०:४५ से ११:१५ AM के बीच मास्टर लिस्ट में नए नाम नहीं जोड़े जा सकते।
 
 ---
 
-## CHAPTER 4: The Atomic Clock & Latency Calibration Engine
+## अध्याय ४: परमाणु घड़ी एवं लेटेंसी कैलिब्रेशन
 
-Standard phone clocks can drift by **500ms to 3.5 seconds** depending on cell tower synchronization. In Tatkal:
-- Tapping **0.5 seconds too early** -> IRCTC throws *"Tatkal quota not yet opened"* error and resets your session.
-- Tapping **1.5 seconds too late** -> You get queued behind 50,000 simultaneous requests.
+मोबाइल की सामान्य घड़ी ५०० मिलीसेकंड से ३ सेकंड तक आगे-पीछे हो सकती है।
+- **०.५ सेकंड पहले क्लिक करना:** "Tatkal quota not yet opened" एरर आता है और सेशन रीलोड हो जाता है।
+- **१.५ सेकंड बाद में क्लिक करना:** आप ५०,००० कतारों के पीछे पहुंच जाते हैं।
+
+कमांड सेंटर ४० मिलीसेकंड के अंतराल पर भारतीय मानक समय (IST) प्रदर्शित करता है और आईआरसीटीसी पिंग लेटेंसी को $\pm ०.२५s$ कैलिब्रेट करने की सुविधा देता है।
 
 ---
 
-## CHAPTER 5: The 35-Second Strike Window Protocol
+## अध्याय ५: ३५-सेकंड स्ट्राइक प्रोटोकॉल
 
-### 5.1 Tactical Timeline: Step-by-Step
-
-| Time Marker | Tactical Phase | Action Item |
+| समय | चरण (Phase) | कार्य (Action) |
 | :--- | :--- | :--- |
-| **09:45:00 AM** | Quota Prep | Verify Master List in RailOne App. Ensure 4 pax max. |
-| **09:50:00 AM** | Device Check | Connect to primary Wi-Fi/5G. Put secondary phone on standby. |
-| **09:55:00 AM** | Speed Vault | Copy UPI ID from Tatkal Pro Vault into clipboard. |
-| **09:57:00 AM** | Phase 2 (T-3m) | Open RailOne app. Login with MPIN or Fingerprint. Search train. |
-| **09:59:00 AM** | Station List | Stay on Train List page. Quota must show **TATKAL**. |
-| **09:59:30 AM** | Phase 3 (T-30s)| **HOLD!** Do NOT refresh early or IRCTC will blacklist your IP for 2 min. |
-| **09:59:58 AM** | Phase 4 (Strike) | **TAP CLASS BUTTON (3A/SL)!** Your packet arrives at 10:00:00. |
-| **10:00:02 AM** | Pax Selection | Tap "Add Existing" -> Select Master List. |
-| **10:00:08 AM** | Checkboxes | Check *"Book only if confirm berths are allotted"*. Check *"Consider for Auto Upgradation"*. |
-| **10:00:14 AM** | Payment Gate | Choose **UPI (Pay via BHIM/UPI QR/VPA)**. Paste UPI ID or approve on 2nd phone. |
+| **09:57:00 AM** | फेज़ २ (T-3m) | रेलवन ऐप में लॉगिन करें। स्टेशन, तारीख चुनें। कोटा: **TATKAL** चुनें। |
+| **09:59:30 AM** | फेज़ ३ (T-30s)| **स्क्रीन रीफ्रेश न करें!** अंगूठा 3A/SL बटन पर रखें। दूसरे फोन पर यूपीआई तैयार रखें। |
+| **09:59:58 AM** | फेज़ ४ (Strike Zone) | **क्लास बटन पर तुरंत टैप करें!** आपका अनुरोध ठीक 10:00:00 पर सर्वर पहुंचेगा। |
+| **10:00:05 AM** | फेज़ ५ (Pax Selection)| मास्टर लिस्ट से यात्री चुनें। "Book only if confirm berths are allotted" टिक करें। |
+| **10:00:15 AM** | भुगतान | दूसरे फोन पर आए यूपीआई नोटिफिकेशन को अप्रूव करें। |
 
 ---
 
-## CHAPTER 6: Payment Strategy: UPI Dual-Device vs R-Wallet
+## अध्याय ६: दो फोन (Dual-Device) भुगतान तकनीक
 
-Payment is where 40% of bookings crash. A failed transaction or slow bank OTP will forfeit your reserved seat to the next person in line.
+जब यात्री फोन १ पर टिकट बुक करते हुए GPay/PhonePe खोलने के लिए ऐप बदलते हैं, तो मोबाइल की रैम रेलवन ऐप को बैकग्राउंड में बंद कर देती है और सीट हाथ से निकल जाती है।
 
-### 6.1 The Dual-Device Method (Fastest & Most Reliable)
-1. **Device 1 (Booking Phone/Tablet)**: Contains the RailOne App.
-2. **Device 2 (Secondary Phone)**: Unlocked and kept open on Google Pay, PhonePe, or Paytm.
-3. At the payment screen on Device 1, type or paste Device 2's UPI ID (e.g. `9876543210@ybl`).
-4. Device 2 instantly receives a push notification and vibrates.
-5. Enter your 4-digit/6-digit UPI PIN on Device 2.
-6. Device 1 automatically refreshes and downloads the confirmed e-Ticket.
-* **Benefit**: No app switching on Device 1!
+**समाधान:**
+1. **पहला फोन (बुकिंग फोन):** इस पर रेलवन ऐप खुला रखें। भुगतान के समय दूसरे फोन की यूपीआई आईडी डालें।
+2. **दूसरा फोन (भुगतान फोन):** इस पर पहले से GPay/PhonePe खोलकर रखें। जैसे ही अनुरोध आए, तुरंत पिन डालकर भुगतान स्वीकृत करें।
+3. पहले फोन पर टिकट तुरंत स्वतः डाउनलोड हो जाएगा।
 
 ---
 
-## CHAPTER 7: 1-Tap Speed Vault & Emergency Pax Fallback
+## अध्याय ७: १-टैप स्पीड वॉल्ट एवं आपातकालीन बैकअप
 
-Occasionally, during extreme server loads at 10:00:05 AM, IRCTC's database fails to fetch your saved Master List and throws an error: *"Unable to retrieve Master List"*.
-
-### 7.1 What to do if Master List Fails?
-1. Have RailOne Tatkal Pro open alongside.
-2. Under **2. 1-Tap Speed Vault (UPI & Pax)**, each passenger has an instant **"Copy Name"** button.
-3. Tap **Copy Name** -> switch to RailOne -> Paste.
-4. Tap Age -> Select Gender -> Proceed.
+भारी ट्रैफिक के समय यदि आईआरसीटीसी एरर दे: *"Unable to retrieve Master List"*:
+- घबराएं नहीं। कमांड सेंटर के **1-Tap Speed Vault** में हर यात्री के आगे दिए गए **"Copy Name"** बटन पर टैप करें।
+- रेलवन में तुरंत पेस्ट करें और आगे बढ़ें।
+- सीट प्रेफरेंस में हमेशा **'No Choice / Any'** रखें ताकि सर्वर फिल्टरिंग में समय न गंवाए।
 
 ---
 
-## CHAPTER 8: The 4-Tap Muscle Memory Speed Drill
+## अध्याय ८: आईआरसीटीसी के सुनहरे नियम व सुरक्षा
 
-Inside the Command Center, use the built-in **Interactive Checkout Speed Drill**:
-1. Click **Start 4-Tap Muscle Memory Drill**.
-2. Tap each action button as soon as it flashes:
-   - **Step 1: Refresh Class**
-   - **Step 2: Select Master List**
-   - **Step 3: Tick "Confirm Berth"**
-   - **Step 4: Paste UPI & Pay**
-3. Aim to complete all 4 steps in **under 3.50 seconds**.
+1. कभी भी एक ही आईआरसीटीसी खाते को दो अलग-अलग टैब या फोन पर एक साथ लॉगिन न करें।
+2. सुबह ०९:५५ AM से पहले लॉगिन न करें (३ मिनट बाद सत्र स्वतः समाप्त हो जाता है)।
+3. किसी भी अवैध बॉट या ऑटो-फिल एक्सटेंशन का प्रयोग न करें।
+4. "Book only if confirm berths are allotted" अनिवार्य रूप से टिक करें ताकि वेटिंग लिस्ट का तत्काल टिकट न बने।
 
----
-
-## CHAPTER 9: The Golden Rules & IRCTC Anti-Bot Compliance
-
-1. NEVER press Back or Browser Reload while the wheel spins.
-2. NEVER login earlier than 09:56 AM (session timeout is 3m).
-3. NEVER search for trains across multiple tabs.
-4. NEVER use unauthorized auto-fill browser extensions.
-5. ALWAYS tick "Book only if confirm berths are allotted".
-
-*RailOne Tatkal Pro — Prepared for the 60-Second Rush.*
-
+*RailOne Tatkal Pro — ६० सेकंड की आपाधापी के लिए पूर्णतः तैयार।*

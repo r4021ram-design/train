@@ -33,3 +33,4 @@ npm run build
 ## 📜 Legal & Compliance Disclaimer
 
 RailOne Tatkal Pro is an authorized situational awareness companion and training tool. It runs **zero automated browser bots**, injects **no illegal IRCTC scripts**, and executes **zero unauthorized API calls**. All booking actions remain 100% manual and compliant with Indian Railways regulations.
+
