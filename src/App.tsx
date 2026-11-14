@@ -79,6 +79,21 @@ const POPULAR_STATIONS = [
   { code: 'JP', name: 'Jaipur Jn' }
 ];
 
+export interface RoutePreset {
+  label: string;
+  from: string;
+  to: string;
+  train: string;
+  defaultClass?: string;
+}
+
+const ROUTE_PRESETS: RoutePreset[] = [
+  { label: 'CSMT ⇄ NDLS', from: 'CSMT', to: 'NDLS', train: '12951 - Tejas Rajdhani Express', defaultClass: '3A' },
+  { label: 'MMCT ⇄ ADI', from: 'BCT', to: 'ADI', train: '12009 - Shatabdi Express', defaultClass: 'CC' },
+  { label: 'CSMT ⇄ PUNE', from: 'CSMT', to: 'PUNE', train: '12123 - Deccan Queen', defaultClass: 'CC' },
+  { label: 'NDLS ⇄ HWH', from: 'NDLS', to: 'HWH', train: '12302 - Howrah Rajdhani', defaultClass: '3A' }
+];
+
 // Class Tatkal Fare Rules
 const CLASS_RULES: Record<string, ClassRule> = {
   '3A': { name: 'AC 3 Tier (3A)', slot: 'AC', minTatkal: 300, maxTatkal: 400, clerkage: 40 },
@@ -471,10 +486,10 @@ export default function App() {
 
   const toggleFullscreen = () => {
     if (!document.fullscreenElement) {
-      document.documentElement.requestFullscreen().catch(() => {});
+      document.documentElement.requestFullscreen().catch(() => { });
     } else {
       if (document.exitFullscreen) {
-        document.exitFullscreen().catch(() => {});
+        document.exitFullscreen().catch(() => { });
       }
     }
   };
@@ -669,6 +684,16 @@ export default function App() {
     setFromStn(toStn);
     setToStn(temp);
     playBeep(700, 0.05, 'sine');
+  };
+
+  const applyRoutePreset = (preset: RoutePreset) => {
+    setFromStn(preset.from);
+    setToStn(preset.to);
+    setTrainInfo(preset.train);
+    if (preset.defaultClass && CLASS_RULES[preset.defaultClass]) {
+      handleClassChange(preset.defaultClass);
+    }
+    playBeep(750, 0.05, 'sine');
   };
 
   const handleClassChange = (cls: string) => {
@@ -869,19 +894,17 @@ export default function App() {
 
   return (
     <div
-      className={`min-h-screen transition-colors duration-150 ${
-        isDark ? 'bg-[#0E0F12] text-zinc-100' : 'bg-[#F7F7F5] text-zinc-900'
-      }`}
+      className={`min-h-screen transition-colors duration-150 ${isDark ? 'bg-[#0E0F12] text-zinc-100' : 'bg-[#F7F7F5] text-zinc-900'
+        }`}
     >
       {/* ============================================================
           COMMAND BAR HEADER (UNIFIED, SLIM & HORIZONTAL)
       ============================================================ */}
       <header
-        className={`sticky top-0 z-40 border-b backdrop-blur-md px-4 sm:px-6 py-2.5 transition-colors ${
-          isDark
+        className={`sticky top-0 z-40 border-b backdrop-blur-md px-4 sm:px-6 py-2.5 transition-colors ${isDark
             ? 'bg-[#121316]/90 border-zinc-800/80 text-zinc-100'
             : 'bg-white/90 border-zinc-200/90 text-zinc-900 shadow-xs'
-        }`}
+          }`}
       >
         <div className="w-full flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3">
           {/* Brand & Quota Switch */}
@@ -898,80 +921,76 @@ export default function App() {
 
             {/* Segmented Mode Switch */}
             <div
-              className={`inline-flex rounded-md p-0.5 border text-xs ${
-                isDark ? 'bg-[#1E2026] border-zinc-800' : 'bg-zinc-100 border-zinc-200'
-              }`}
+              className={`inline-flex rounded-md p-0.5 border text-xs ${isDark ? 'bg-[#1E2026] border-zinc-800' : 'bg-zinc-100 border-zinc-200'
+                }`}
             >
               <button
                 onClick={() => setTatkalMode('AC')}
-                className={`px-2.5 py-1 rounded font-medium transition-colors cursor-pointer ${
-                  tatkalMode === 'AC'
+                className={`px-2.5 py-1 rounded font-medium transition-colors cursor-pointer ${tatkalMode === 'AC'
                     ? 'bg-blue-600 text-white shadow-xs'
                     : isDark
-                    ? 'text-zinc-400 hover:text-zinc-200'
-                    : 'text-zinc-600 hover:text-zinc-900'
-                }`}
+                      ? 'text-zinc-400 hover:text-zinc-200'
+                      : 'text-zinc-600 hover:text-zinc-900'
+                  }`}
               >
                 AC (10 AM)
               </button>
               <button
                 onClick={() => setTatkalMode('NON_AC')}
-                className={`px-2.5 py-1 rounded font-medium transition-colors cursor-pointer ${
-                  tatkalMode === 'NON_AC'
+                className={`px-2.5 py-1 rounded font-medium transition-colors cursor-pointer ${tatkalMode === 'NON_AC'
                     ? 'bg-blue-600 text-white shadow-xs'
                     : isDark
-                    ? 'text-zinc-400 hover:text-zinc-200'
-                    : 'text-zinc-600 hover:text-zinc-900'
-                }`}
+                      ? 'text-zinc-400 hover:text-zinc-200'
+                      : 'text-zinc-600 hover:text-zinc-900'
+                  }`}
               >
                 SL / 2S (11 AM)
               </button>
             </div>
           </div>
 
-          {/* Center: Live IST Clock & Target Countdown */}
-          <div className="flex items-center justify-between md:justify-center gap-4 sm:gap-6 border-t md:border-t-0 pt-2 md:pt-0 border-zinc-200 dark:border-zinc-800/80">
+          {/* Center: Live IST Clock & Target Countdown (High-Readability Pill) */}
+          <div className={`flex items-center justify-between md:justify-center gap-3 sm:gap-5 px-3.5 py-1.5 rounded-lg border transition-colors ${
+            isDark ? 'bg-zinc-900/90 border-zinc-800' : 'bg-zinc-100/90 border-zinc-200'
+          }`}>
             {/* Clock + Latency Tweak */}
             <div className="flex items-center gap-2">
-              <span className="text-xs text-zinc-500 font-sans hidden sm:inline">IST</span>
-              <div className="font-mono tabular-nums text-sm sm:text-base font-semibold tracking-tight">
+              <span className="text-[11px] font-medium text-zinc-500 font-sans tracking-wide hidden xs:inline">IST</span>
+              <div className="font-mono tabular-nums text-base sm:text-lg lg:text-xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-100">
                 {timeParts.hh}:{timeParts.mm}:{timeParts.ss}
-                <span className="text-zinc-500 text-xs font-normal">.{timeParts.ms}</span>
+                <span className="text-zinc-500 text-xs sm:text-sm font-normal">.{timeParts.ms}</span>
               </div>
-              <div className="flex items-center gap-0.5">
+              <div className="flex items-center gap-0.5 ml-1">
                 <button
                   onClick={() => setOffsetMs((m) => Math.max(-2000, m - 250))}
-                  className={`px-1.5 py-0.5 rounded text-[11px] font-mono border cursor-pointer ${
-                    isDark
-                      ? 'bg-zinc-800/60 border-zinc-700/60 text-zinc-400 hover:text-zinc-200'
-                      : 'bg-zinc-100 border-zinc-200 text-zinc-600 hover:text-zinc-900'
-                  }`}
+                  className={`px-1.5 py-0.5 rounded text-[10px] font-mono border cursor-pointer ${isDark
+                      ? 'bg-zinc-800/80 border-zinc-700/60 text-zinc-400 hover:text-zinc-200'
+                      : 'bg-zinc-200 border-zinc-300 text-zinc-600 hover:text-zinc-900'
+                    }`}
                   title="Calibrate latency -0.25s"
                 >
                   -0.25
                 </button>
                 <button
                   onClick={() => setOffsetMs(0)}
-                  className={`px-1.5 py-0.5 rounded text-[11px] font-mono border cursor-pointer ${
-                    offsetMs === 0
+                  className={`px-1.5 py-0.5 rounded text-[10px] font-mono border cursor-pointer ${offsetMs === 0
                       ? isDark
                         ? 'bg-zinc-800 border-zinc-700 text-zinc-300'
-                        : 'bg-zinc-200 border-zinc-300 text-zinc-800'
+                        : 'bg-zinc-300 border-zinc-400 text-zinc-800'
                       : isDark
-                      ? 'bg-zinc-900 border-zinc-800 text-zinc-500 hover:text-zinc-300'
-                      : 'bg-zinc-50 border-zinc-200 text-zinc-400 hover:text-zinc-700'
-                  }`}
+                        ? 'bg-zinc-900 border-zinc-800 text-zinc-500 hover:text-zinc-300'
+                        : 'bg-zinc-100 border-zinc-200 text-zinc-400 hover:text-zinc-700'
+                    }`}
                   title="Reset latency sync"
                 >
                   {offsetMs === 0 ? '0' : `${offsetMs > 0 ? '+' : ''}${offsetMs}ms`}
                 </button>
                 <button
                   onClick={() => setOffsetMs((m) => Math.min(2000, m + 250))}
-                  className={`px-1.5 py-0.5 rounded text-[11px] font-mono border cursor-pointer ${
-                    isDark
-                      ? 'bg-zinc-800/60 border-zinc-700/60 text-zinc-400 hover:text-zinc-200'
-                      : 'bg-zinc-100 border-zinc-200 text-zinc-600 hover:text-zinc-900'
-                  }`}
+                  className={`px-1.5 py-0.5 rounded text-[10px] font-mono border cursor-pointer ${isDark
+                      ? 'bg-zinc-800/80 border-zinc-700/60 text-zinc-400 hover:text-zinc-200'
+                      : 'bg-zinc-200 border-zinc-300 text-zinc-600 hover:text-zinc-900'
+                    }`}
                   title="Calibrate latency +0.25s"
                 >
                   +0.25
@@ -979,19 +998,18 @@ export default function App() {
               </div>
             </div>
 
-            <div className="h-4 w-px bg-zinc-300 dark:bg-zinc-800 hidden sm:block" />
+            <div className="h-5 w-px bg-zinc-300 dark:bg-zinc-800 hidden sm:block" />
 
             {/* Countdown */}
             <div className="flex items-center gap-1.5">
-              <span className="text-xs text-zinc-500 font-sans hidden sm:inline">Target</span>
+              <span className="text-[11px] font-medium text-zinc-500 font-sans tracking-wide hidden xs:inline">Target</span>
               <span
-                className={`font-mono tabular-nums text-sm sm:text-base font-semibold ${
-                  clockData.diffSec <= 10
+                className={`font-mono tabular-nums text-base sm:text-lg lg:text-xl font-semibold tracking-tight ${clockData.diffSec <= 10
                     ? 'text-emerald-600 dark:text-emerald-400'
                     : clockData.diffSec <= 60
-                    ? 'text-amber-600 dark:text-amber-400'
-                    : 'text-zinc-800 dark:text-zinc-200'
-                }`}
+                      ? 'text-amber-600 dark:text-amber-400'
+                      : 'text-zinc-800 dark:text-zinc-200'
+                  }`}
               >
                 T - {formatCountdown(clockData.diffSec)}
               </span>
@@ -1004,11 +1022,10 @@ export default function App() {
             {!isSimulating ? (
               <button
                 onClick={start60sSimulation}
-                className={`px-2.5 py-1 rounded-md text-xs font-medium border flex items-center gap-1.5 transition-colors cursor-pointer ${
-                  isDark
+                className={`px-2.5 py-1 rounded-md text-xs font-medium border flex items-center gap-1.5 transition-colors cursor-pointer ${isDark
                     ? 'bg-zinc-900 border-zinc-800 hover:bg-zinc-800 text-zinc-300'
                     : 'bg-zinc-100 border-zinc-200 hover:bg-zinc-200 text-zinc-700'
-                }`}
+                  }`}
                 title="Simulate the final 60 seconds before quota opening"
               >
                 <Play className="w-3 h-3 text-blue-600 dark:text-blue-400 fill-current" />
@@ -1027,11 +1044,10 @@ export default function App() {
             {/* Handbook / Guide Book */}
             <button
               onClick={() => setShowGuideBook(true)}
-              className={`px-2.5 py-1 rounded-md text-xs font-medium border flex items-center gap-1.5 transition-colors cursor-pointer ${
-                isDark
+              className={`px-2.5 py-1 rounded-md text-xs font-medium border flex items-center gap-1.5 transition-colors cursor-pointer ${isDark
                   ? 'bg-zinc-900 border-zinc-800 hover:bg-zinc-800 text-zinc-300'
                   : 'bg-zinc-100 border-zinc-200 hover:bg-zinc-200 text-zinc-700'
-              }`}
+                }`}
             >
               <BookOpen className="w-3.5 h-3.5 text-zinc-500" />
               <span className="hidden sm:inline">Handbook</span>
@@ -1040,11 +1056,10 @@ export default function App() {
             {/* Audio Toggle */}
             <button
               onClick={() => setSoundEnabled(!soundEnabled)}
-              className={`p-1.5 rounded-md border text-xs transition-colors cursor-pointer ${
-                isDark
+              className={`p-1.5 rounded-md border text-xs transition-colors cursor-pointer ${isDark
                   ? 'bg-zinc-900 border-zinc-800 hover:bg-zinc-800 text-zinc-400'
                   : 'bg-zinc-100 border-zinc-200 hover:bg-zinc-200 text-zinc-600'
-              }`}
+                }`}
               title={soundEnabled ? 'Audio alerts active' : 'Audio alerts muted'}
             >
               {soundEnabled ? <Volume2 className="w-4 h-4 text-zinc-300 dark:text-zinc-200" /> : <VolumeX className="w-4 h-4 text-zinc-400" />}
@@ -1053,11 +1068,10 @@ export default function App() {
             {/* Theme Toggle (Light / Dark) */}
             <button
               onClick={() => setTheme(isDark ? 'light' : 'dark')}
-              className={`p-1.5 rounded-md border text-xs transition-colors cursor-pointer ${
-                isDark
+              className={`p-1.5 rounded-md border text-xs transition-colors cursor-pointer ${isDark
                   ? 'bg-zinc-900 border-zinc-800 hover:bg-zinc-800 text-amber-400'
                   : 'bg-zinc-100 border-zinc-200 hover:bg-zinc-200 text-zinc-700'
-              }`}
+                }`}
               title={isDark ? 'Switch to daylight theme' : 'Switch to dark theme'}
             >
               {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
@@ -1066,11 +1080,10 @@ export default function App() {
             {/* Fullscreen Toggle */}
             <button
               onClick={toggleFullscreen}
-              className={`p-1.5 rounded-md border text-xs transition-colors cursor-pointer ${
-                isDark
+              className={`p-1.5 rounded-md border text-xs transition-colors cursor-pointer ${isDark
                   ? 'bg-zinc-900 border-zinc-800 hover:bg-zinc-800 text-zinc-400'
                   : 'bg-zinc-100 border-zinc-200 hover:bg-zinc-200 text-zinc-600'
-              }`}
+                }`}
               title={isFullscreen ? 'Exit fullscreen' : 'Enter fullscreen'}
             >
               {isFullscreen ? <Minimize2 className="w-4 h-4" /> : <Maximize2 className="w-4 h-4" />}
@@ -1084,25 +1097,23 @@ export default function App() {
       ============================================================ */}
       <div className="w-full px-4 sm:px-6 pt-3">
         <div
-          className={`w-full rounded-lg px-4 py-2.5 border text-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 ${
-            tacticalPhase.status === 'strike' || tacticalPhase.status === 'live'
+          className={`w-full rounded-lg px-4 py-2.5 border text-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 ${tacticalPhase.status === 'strike' || tacticalPhase.status === 'live'
               ? 'border-emerald-200 dark:border-emerald-900/50 bg-emerald-50 dark:bg-emerald-950/20 text-emerald-900 dark:text-emerald-300'
               : tacticalPhase.status === 'hold'
-              ? 'border-amber-200 dark:border-amber-900/50 bg-amber-50 dark:bg-amber-950/20 text-amber-900 dark:text-amber-300'
-              : isDark
-              ? 'border-zinc-800 bg-[#16181D] text-zinc-300'
-              : 'border-zinc-200 bg-white text-zinc-700 shadow-xs'
-          }`}
+                ? 'border-amber-200 dark:border-amber-900/50 bg-amber-50 dark:bg-amber-950/20 text-amber-900 dark:text-amber-300'
+                : isDark
+                  ? 'border-zinc-800 bg-[#16181D] text-zinc-300'
+                  : 'border-zinc-200 bg-white text-zinc-700 shadow-xs'
+            }`}
         >
           <div className="flex items-center gap-2">
             <span
-              className={`px-2 py-0.5 rounded text-[11px] font-medium tracking-wide uppercase ${
-                tacticalPhase.status === 'strike' || tacticalPhase.status === 'live'
+              className={`px-2 py-0.5 rounded text-[11px] font-medium tracking-wide uppercase ${tacticalPhase.status === 'strike' || tacticalPhase.status === 'live'
                   ? 'bg-emerald-600 text-white'
                   : tacticalPhase.status === 'hold'
-                  ? 'bg-amber-600 text-white'
-                  : 'bg-zinc-200 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200'
-              }`}
+                    ? 'bg-amber-600 text-white'
+                    : 'bg-zinc-200 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200'
+                }`}
             >
               {tacticalPhase.badge}
             </span>
@@ -1123,9 +1134,8 @@ export default function App() {
           <div className="lg:col-span-8 space-y-5">
             {/* Card 1: Journey & Tatkal Date Calculator */}
             <section
-              className={`rounded-xl border p-5 sm:p-6 transition-colors ${
-                isDark ? 'bg-[#16181D] border-zinc-800/80 shadow-none' : 'bg-white border-zinc-200/90 shadow-xs'
-              }`}
+              className={`rounded-xl border p-5 sm:p-6 transition-colors ${isDark ? 'bg-[#16181D] border-zinc-800/80 shadow-none' : 'bg-white border-zinc-200/90 shadow-xs'
+                }`}
             >
               <div className="border-b border-zinc-200 dark:border-zinc-800/80 pb-3 mb-4">
                 <h2 className="text-sm font-semibold tracking-tight text-zinc-900 dark:text-zinc-100">
@@ -1156,11 +1166,10 @@ export default function App() {
                         value={fromStn}
                         onChange={(e) => setFromStn(e.target.value.toUpperCase())}
                         placeholder="From Station (e.g. CSMT)"
-                        className={`w-full rounded-lg border px-3 py-2 text-xs font-sans outline-none transition-colors ${
-                          isDark
+                        className={`w-full rounded-lg border px-3 py-2 text-xs font-sans outline-none transition-colors ${isDark
                             ? 'bg-[#1E2026] border-zinc-800 text-zinc-100 placeholder-zinc-500 focus:border-blue-500'
                             : 'bg-white border-zinc-200 text-zinc-900 placeholder-zinc-400 focus:border-blue-600'
-                        }`}
+                          }`}
                       />
                       <datalist id="stations-from">
                         {POPULAR_STATIONS.map((s) => (
@@ -1176,11 +1185,10 @@ export default function App() {
                         value={toStn}
                         onChange={(e) => setToStn(e.target.value.toUpperCase())}
                         placeholder="To Station (e.g. NDLS)"
-                        className={`w-full rounded-lg border px-3 py-2 text-xs font-sans outline-none transition-colors ${
-                          isDark
+                        className={`w-full rounded-lg border px-3 py-2 text-xs font-sans outline-none transition-colors ${isDark
                             ? 'bg-[#1E2026] border-zinc-800 text-zinc-100 placeholder-zinc-500 focus:border-blue-500'
                             : 'bg-white border-zinc-200 text-zinc-900 placeholder-zinc-400 focus:border-blue-600'
-                        }`}
+                          }`}
                       />
                       <datalist id="stations-to">
                         {POPULAR_STATIONS.map((s) => (
@@ -1190,6 +1198,31 @@ export default function App() {
                         ))}
                       </datalist>
                     </div>
+                  </div>
+
+                  {/* 1-Click Route & Train Presets */}
+                  <div className="flex flex-wrap items-center gap-1.5 mt-2">
+                    <span className="text-[11px] text-zinc-500 font-medium">Quick Presets:</span>
+                    {ROUTE_PRESETS.map((p) => {
+                      const isSelected = fromStn === p.from && toStn === p.to;
+                      return (
+                        <button
+                          key={p.label}
+                          type="button"
+                          onClick={() => applyRoutePreset(p)}
+                          className={`px-2 py-0.5 rounded text-[11px] font-mono border transition-colors cursor-pointer ${
+                            isSelected
+                              ? 'bg-blue-600/15 border-blue-500/50 text-blue-600 dark:text-blue-400 font-medium'
+                              : isDark
+                                ? 'bg-[#1E2026] border-zinc-800 text-zinc-400 hover:text-zinc-200 hover:border-zinc-700'
+                                : 'bg-zinc-100 border-zinc-200 text-zinc-600 hover:text-zinc-900 hover:border-zinc-300'
+                          }`}
+                          title={`Click to fill ${p.label} (${p.train})`}
+                        >
+                          {p.label}
+                        </button>
+                      );
+                    })}
                   </div>
                 </div>
 
@@ -1204,11 +1237,10 @@ export default function App() {
                       value={trainInfo}
                       onChange={(e) => setTrainInfo(e.target.value)}
                       placeholder="12951 - Rajdhani Express"
-                      className={`w-full rounded-lg border px-3 py-2 text-xs font-sans outline-none transition-colors ${
-                        isDark
+                      className={`w-full rounded-lg border px-3 py-2 text-xs font-sans outline-none transition-colors ${isDark
                           ? 'bg-[#1E2026] border-zinc-800 text-zinc-100 placeholder-zinc-500 focus:border-blue-500'
                           : 'bg-white border-zinc-200 text-zinc-900 placeholder-zinc-400 focus:border-blue-600'
-                      }`}
+                        }`}
                     />
                   </div>
 
@@ -1219,11 +1251,10 @@ export default function App() {
                     <select
                       value={travelClass}
                       onChange={(e) => handleClassChange(e.target.value)}
-                      className={`w-full rounded-lg border px-3 py-2 text-xs font-sans outline-none transition-colors ${
-                        isDark
+                      className={`w-full rounded-lg border px-3 py-2 text-xs font-sans outline-none transition-colors ${isDark
                           ? 'bg-[#1E2026] border-zinc-800 text-zinc-100 focus:border-blue-500'
                           : 'bg-white border-zinc-200 text-zinc-900 focus:border-blue-600'
-                      }`}
+                        }`}
                     >
                       {Object.entries(CLASS_RULES).map(([code, info]) => (
                         <option key={code} value={code}>
@@ -1244,11 +1275,10 @@ export default function App() {
                       type="date"
                       value={boardingDate}
                       onChange={(e) => setBoardingDate(e.target.value)}
-                      className={`w-full rounded-lg border px-3 py-2 text-xs font-sans outline-none transition-colors ${
-                        isDark
+                      className={`w-full rounded-lg border px-3 py-2 text-xs font-sans outline-none transition-colors ${isDark
                           ? 'bg-[#1E2026] border-zinc-800 text-zinc-100 focus:border-blue-500'
                           : 'bg-white border-zinc-200 text-zinc-900 focus:border-blue-600'
-                      }`}
+                        }`}
                     />
                   </div>
 
@@ -1266,13 +1296,12 @@ export default function App() {
                           key={item.day}
                           type="button"
                           onClick={() => setTrainDayOffset(item.day)}
-                          className={`p-2 rounded-lg border text-left transition-colors cursor-pointer ${
-                            trainDayOffset === item.day
+                          className={`p-2 rounded-lg border text-left transition-colors cursor-pointer ${trainDayOffset === item.day
                               ? 'border-blue-600 bg-blue-50 dark:bg-blue-950/30 text-blue-900 dark:text-blue-100 font-medium'
                               : isDark
-                              ? 'border-zinc-800 bg-[#1E2026] text-zinc-400 hover:border-zinc-700 hover:text-zinc-200'
-                              : 'border-zinc-200 bg-zinc-50 text-zinc-600 hover:border-zinc-300'
-                          }`}
+                                ? 'border-zinc-800 bg-[#1E2026] text-zinc-400 hover:border-zinc-700 hover:text-zinc-200'
+                                : 'border-zinc-200 bg-zinc-50 text-zinc-600 hover:border-zinc-300'
+                            }`}
                         >
                           <div className="text-xs font-medium">{item.label}</div>
                           <div className="text-[10px] text-zinc-500 leading-tight">{item.desc}</div>
@@ -1285,9 +1314,8 @@ export default function App() {
                 {/* Calculation Output Box */}
                 {bookingCalculation && (
                   <div
-                    className={`rounded-lg border p-4 space-y-3 ${
-                      isDark ? 'bg-[#1B1D23] border-zinc-800' : 'bg-zinc-50 border-zinc-200'
-                    }`}
+                    className={`rounded-lg border p-4 space-y-3 ${isDark ? 'bg-[#1B1D23] border-zinc-800' : 'bg-zinc-50 border-zinc-200'
+                      }`}
                   >
                     {bookingCalculation.isMultiDayTrap && (
                       <div className="rounded-md border border-amber-200 dark:border-amber-900/60 bg-amber-50 dark:bg-amber-950/30 p-2.5 text-xs text-amber-900 dark:text-amber-200 flex items-start gap-2">
@@ -1300,28 +1328,28 @@ export default function App() {
                       </div>
                     )}
 
-                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
-                      <div>
-                        <span className="text-zinc-500 block mb-0.5">Exact Booking Date</span>
-                        <span className="font-semibold text-blue-600 dark:text-blue-400 text-sm">
+                    <div className="grid grid-cols-2 sm:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-zinc-200 dark:divide-zinc-800/80 text-xs">
+                      <div className="py-2 sm:py-0 sm:px-3.5 first:pl-0">
+                        <span className="text-zinc-500 block mb-0.5 text-[11px] font-medium">Exact Booking Date</span>
+                        <span className="font-semibold text-blue-600 dark:text-blue-400 text-sm sm:text-base tracking-tight">
                           {bookingCalculation.tatkalOpenFormatted}
                         </span>
                       </div>
-                      <div>
-                        <span className="text-zinc-500 block mb-0.5">Booking Window</span>
-                        <span className="font-semibold text-zinc-800 dark:text-zinc-200 text-sm">
+                      <div className="py-2 sm:py-0 sm:px-3.5">
+                        <span className="text-zinc-500 block mb-0.5 text-[11px] font-medium">Booking Window</span>
+                        <span className="font-semibold text-zinc-900 dark:text-zinc-100 text-sm sm:text-base tracking-tight">
                           {bookingCalculation.openTimeStr}
                         </span>
                       </div>
-                      <div>
-                        <span className="text-zinc-500 block mb-0.5">Login Window</span>
-                        <span className="font-medium text-zinc-700 dark:text-zinc-300">
+                      <div className="py-2 sm:py-0 sm:px-3.5">
+                        <span className="text-zinc-500 block mb-0.5 text-[11px] font-medium">Login Window</span>
+                        <span className="font-semibold text-zinc-800 dark:text-zinc-200 text-sm sm:text-base tracking-tight">
                           {bookingCalculation.loginTimeStr}
                         </span>
                       </div>
-                      <div>
-                        <span className="text-zinc-500 block mb-0.5">Tatkal Surcharge</span>
-                        <span className="font-mono text-zinc-700 dark:text-zinc-300">
+                      <div className="py-2 sm:py-0 sm:px-3.5 last:pr-0">
+                        <span className="text-zinc-500 block mb-0.5 text-[11px] font-medium">Tatkal Surcharge</span>
+                        <span className="font-mono font-semibold text-zinc-900 dark:text-zinc-100 text-sm sm:text-base tracking-tight">
                           ₹{bookingCalculation.rule.minTatkal} – ₹{bookingCalculation.rule.maxTatkal}
                         </span>
                       </div>
@@ -1331,13 +1359,12 @@ export default function App() {
                       <span className="text-xs text-zinc-500">Boarding: {bookingCalculation.boardingFormatted}</span>
                       <button
                         onClick={copyBookingPlanSummary}
-                        className={`px-3 py-1.5 rounded-md text-xs font-medium border flex items-center gap-1.5 cursor-pointer transition-colors ${
-                          copiedKey === 'PLAN_SUMMARY'
+                        className={`px-3 py-1.5 rounded-md text-xs font-medium border flex items-center gap-1.5 cursor-pointer transition-colors ${copiedKey === 'PLAN_SUMMARY'
                             ? 'bg-emerald-600 text-white border-emerald-600'
                             : isDark
-                            ? 'bg-zinc-800 hover:bg-zinc-700 text-zinc-200 border-zinc-700'
-                            : 'bg-white hover:bg-zinc-100 text-zinc-700 border-zinc-300'
-                        }`}
+                              ? 'bg-zinc-800 hover:bg-zinc-700 text-zinc-200 border-zinc-700'
+                              : 'bg-white hover:bg-zinc-100 text-zinc-700 border-zinc-300'
+                          }`}
                       >
                         {copiedKey === 'PLAN_SUMMARY' ? (
                           <>
@@ -1357,9 +1384,8 @@ export default function App() {
 
             {/* Card 2: Quick-Copy Passenger & UPI Vault */}
             <section
-              className={`rounded-xl border p-5 sm:p-6 transition-colors ${
-                isDark ? 'bg-[#16181D] border-zinc-800/80 shadow-none' : 'bg-white border-zinc-200/90 shadow-xs'
-              }`}
+              className={`rounded-xl border p-5 sm:p-6 transition-colors ${isDark ? 'bg-[#16181D] border-zinc-800/80 shadow-none' : 'bg-white border-zinc-200/90 shadow-xs'
+                }`}
             >
               <div className="flex items-center justify-between border-b border-zinc-200 dark:border-zinc-800/80 pb-3 mb-4">
                 <div>
@@ -1390,9 +1416,8 @@ export default function App() {
               <div className="space-y-4">
                 {/* UPI Launchers */}
                 <div
-                  className={`p-3.5 rounded-lg border space-y-2.5 ${
-                    isDark ? 'bg-[#1B1D23] border-zinc-800' : 'bg-zinc-50 border-zinc-200'
-                  }`}
+                  className={`p-3.5 rounded-lg border space-y-2.5 ${isDark ? 'bg-[#1B1D23] border-zinc-800' : 'bg-zinc-50 border-zinc-200'
+                    }`}
                 >
                   <span className="text-xs font-medium text-zinc-700 dark:text-zinc-300 block">
                     Instant UPI VPA Clipboard
@@ -1405,19 +1430,17 @@ export default function App() {
                         value={primaryUpi}
                         onChange={(e) => setPrimaryUpi(e.target.value)}
                         placeholder="Primary UPI (e.g. name@okaxis)"
-                        className={`flex-1 rounded-md border px-3 py-1.5 text-xs font-mono outline-none ${
-                          isDark
+                        className={`flex-1 rounded-md border px-3 py-1.5 text-xs font-mono outline-none ${isDark
                             ? 'bg-[#1E2026] border-zinc-800 text-zinc-100 focus:border-blue-500'
                             : 'bg-white border-zinc-200 text-zinc-900 focus:border-blue-600'
-                        }`}
+                          }`}
                       />
                       <button
                         onClick={() => copyToClipboard(primaryUpi, 'UPI_PRIMARY')}
-                        className={`px-3 py-1.5 rounded-md text-xs font-medium cursor-pointer transition-colors shrink-0 ${
-                          copiedKey === 'UPI_PRIMARY'
+                        className={`px-3 py-1.5 rounded-md text-xs font-medium cursor-pointer transition-colors shrink-0 ${copiedKey === 'UPI_PRIMARY'
                             ? 'bg-emerald-600 text-white'
                             : 'bg-blue-600 hover:bg-blue-700 text-white'
-                        }`}
+                          }`}
                       >
                         {copiedKey === 'UPI_PRIMARY' ? 'Copied' : 'Copy'}
                       </button>
@@ -1430,21 +1453,19 @@ export default function App() {
                         value={backupUpi}
                         onChange={(e) => setBackupUpi(e.target.value)}
                         placeholder="Backup UPI (e.g. 9876543210@ybl)"
-                        className={`flex-1 rounded-md border px-3 py-1.5 text-xs font-mono outline-none ${
-                          isDark
+                        className={`flex-1 rounded-md border px-3 py-1.5 text-xs font-mono outline-none ${isDark
                             ? 'bg-[#1E2026] border-zinc-800 text-zinc-100 focus:border-blue-500'
                             : 'bg-white border-zinc-200 text-zinc-900 focus:border-blue-600'
-                        }`}
+                          }`}
                       />
                       <button
                         onClick={() => copyToClipboard(backupUpi, 'UPI_BACKUP')}
-                        className={`px-3 py-1.5 rounded-md text-xs font-medium border cursor-pointer transition-colors shrink-0 ${
-                          copiedKey === 'UPI_BACKUP'
+                        className={`px-3 py-1.5 rounded-md text-xs font-medium border cursor-pointer transition-colors shrink-0 ${copiedKey === 'UPI_BACKUP'
                             ? 'bg-emerald-600 text-white border-emerald-600'
                             : isDark
-                            ? 'bg-zinc-800 hover:bg-zinc-700 text-zinc-200 border-zinc-700'
-                            : 'bg-white hover:bg-zinc-100 text-zinc-700 border-zinc-300'
-                        }`}
+                              ? 'bg-zinc-800 hover:bg-zinc-700 text-zinc-200 border-zinc-700'
+                              : 'bg-white hover:bg-zinc-100 text-zinc-700 border-zinc-300'
+                          }`}
                       >
                         {copiedKey === 'UPI_BACKUP' ? 'Copied' : 'Backup'}
                       </button>
@@ -1454,114 +1475,127 @@ export default function App() {
 
                 {/* Passenger Table / List */}
                 <div className="space-y-2">
-                  <span className="text-xs font-medium text-zinc-700 dark:text-zinc-300 block">
-                    Passenger Details (Max 4 per Tatkal PNR)
-                  </span>
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-medium text-zinc-700 dark:text-zinc-300">
+                      Passenger Details (Max 4 per Tatkal PNR)
+                    </span>
+                    <span className="text-[11px] text-zinc-500">
+                      {passengers.length} of 4 configured
+                    </span>
+                  </div>
 
-                  <div className="space-y-2 max-h-[360px] overflow-y-auto pr-0.5">
+                  <div className="space-y-1.5">
                     {passengers.map((p, idx) => (
                       <div
                         key={p.id}
-                        className={`p-3 rounded-lg border transition-colors ${
-                          isDark ? 'bg-[#1B1D23] border-zinc-800/80' : 'bg-zinc-50 border-zinc-200/80'
+                        className={`flex flex-wrap sm:flex-nowrap items-center gap-2 p-1.5 sm:p-2 rounded-lg border transition-colors ${
+                          isDark ? 'bg-[#181A20] border-zinc-800/80' : 'bg-zinc-50 border-zinc-200'
                         }`}
                       >
-                        <div className="flex items-center justify-between mb-2">
-                          <span className="text-xs font-medium text-zinc-500">Passenger {idx + 1}</span>
-                          <div className="flex items-center gap-1.5">
-                            <button
-                              onClick={() => copyToClipboard(p.name, `PAX_NAME_${p.id}`)}
-                              className={`px-2 py-0.5 rounded text-xs font-medium cursor-pointer transition-colors ${
-                                copiedKey === `PAX_NAME_${p.id}`
-                                  ? 'bg-emerald-600 text-white'
-                                  : isDark
-                                  ? 'bg-zinc-800 hover:bg-zinc-700 text-zinc-300'
-                                  : 'bg-zinc-200 hover:bg-zinc-300 text-zinc-700'
-                              }`}
-                            >
-                              {copiedKey === `PAX_NAME_${p.id}` ? 'Name Copied' : 'Copy Name'}
-                            </button>
-                            {passengers.length > 1 && (
-                              <button
-                                onClick={() => removePassenger(p.id)}
-                                className="p-1 text-zinc-400 hover:text-rose-500 cursor-pointer"
-                                title="Remove passenger"
-                              >
-                                <Trash2 className="w-3.5 h-3.5" />
-                              </button>
-                            )}
-                          </div>
-                        </div>
+                        {/* #1 Badge */}
+                        <span
+                          className={`text-[11px] font-mono px-2 py-1 rounded font-semibold shrink-0 ${
+                            isDark ? 'bg-zinc-800 text-zinc-400' : 'bg-zinc-200 text-zinc-700'
+                          }`}
+                        >
+                          #{idx + 1}
+                        </span>
 
-                        <div className="grid grid-cols-1 sm:grid-cols-12 gap-2">
-                          <div className="sm:col-span-6">
-                            <input
-                              type="text"
-                              value={p.name}
-                              onChange={(e) => updatePassenger(p.id, 'name', e.target.value)}
-                              placeholder="Full Name (as per Govt ID)"
-                              className={`w-full rounded-md border px-2.5 py-1.5 text-xs font-sans outline-none ${
-                                isDark
-                                  ? 'bg-[#1E2026] border-zinc-800 text-zinc-100 focus:border-blue-500'
-                                  : 'bg-white border-zinc-200 text-zinc-900 focus:border-blue-600'
-                              }`}
-                            />
-                          </div>
-                          <div className="sm:col-span-2">
-                            <input
-                              type="number"
-                              value={p.age}
-                              onChange={(e) => updatePassenger(p.id, 'age', e.target.value)}
-                              placeholder="Age"
-                              className={`w-full rounded-md border px-2 py-1.5 text-xs font-sans outline-none ${
-                                isDark
-                                  ? 'bg-[#1E2026] border-zinc-800 text-zinc-100 focus:border-blue-500'
-                                  : 'bg-white border-zinc-200 text-zinc-900 focus:border-blue-600'
-                              }`}
-                            />
-                          </div>
-                          <div className="sm:col-span-2">
-                            <select
-                              value={p.gender}
-                              onChange={(e) => updatePassenger(p.id, 'gender', e.target.value)}
-                              className={`w-full rounded-md border px-2 py-1.5 text-xs font-sans outline-none ${
-                                isDark
-                                  ? 'bg-[#1E2026] border-zinc-800 text-zinc-100 focus:border-blue-500'
-                                  : 'bg-white border-zinc-200 text-zinc-900 focus:border-blue-600'
-                              }`}
-                            >
-                              <option value="M">Male (M)</option>
-                              <option value="F">Female (F)</option>
-                              <option value="T">Other (O)</option>
-                            </select>
-                          </div>
-                          <div className="sm:col-span-2">
-                            <select
-                              value={p.berth}
-                              onChange={(e) => updatePassenger(p.id, 'berth', e.target.value)}
-                              className={`w-full rounded-md border px-2 py-1.5 text-xs font-sans outline-none ${
-                                isDark
-                                  ? 'bg-[#1E2026] border-zinc-800 text-zinc-100 focus:border-blue-500'
-                                  : 'bg-white border-zinc-200 text-zinc-900 focus:border-blue-600'
-                              }`}
-                            >
-                              <option value="No Choice">Any</option>
-                              <option value="LB">Lower</option>
-                              <option value="UB">Upper</option>
-                              <option value="MB">Middle</option>
-                              <option value="SL">Side Lower</option>
-                              <option value="SU">Side Upper</option>
-                            </select>
-                          </div>
-                        </div>
+                        {/* Full Name Input (flex-1) */}
+                        <input
+                          type="text"
+                          value={p.name}
+                          onChange={(e) => updatePassenger(p.id, 'name', e.target.value)}
+                          placeholder="Full Name (as per Govt ID)"
+                          className={`flex-1 min-w-[140px] rounded-md border px-2.5 py-1.5 text-xs font-sans outline-none ${
+                            isDark
+                              ? 'bg-[#1E2026] border-zinc-800 text-zinc-100 focus:border-blue-500'
+                              : 'bg-white border-zinc-200 text-zinc-900 focus:border-blue-600'
+                          }`}
+                        />
+
+                        {/* Age (w-16 sm:w-20) */}
+                        <input
+                          type="number"
+                          value={p.age}
+                          onChange={(e) => updatePassenger(p.id, 'age', e.target.value)}
+                          placeholder="Age"
+                          className={`w-16 sm:w-20 font-mono rounded-md border px-2 py-1.5 text-xs outline-none ${
+                            isDark
+                              ? 'bg-[#1E2026] border-zinc-800 text-zinc-100 focus:border-blue-500'
+                              : 'bg-white border-zinc-200 text-zinc-900 focus:border-blue-600'
+                          }`}
+                        />
+
+                        {/* Gender Select (w-24 sm:w-28) */}
+                        <select
+                          value={p.gender}
+                          onChange={(e) => updatePassenger(p.id, 'gender', e.target.value)}
+                          className={`w-24 sm:w-28 rounded-md border px-2 py-1.5 text-xs font-sans outline-none cursor-pointer ${
+                            isDark
+                              ? 'bg-[#1E2026] border-zinc-800 text-zinc-100 focus:border-blue-500'
+                              : 'bg-white border-zinc-200 text-zinc-900 focus:border-blue-600'
+                          }`}
+                        >
+                          <option value="M">Male (M)</option>
+                          <option value="F">Female (F)</option>
+                          <option value="T">Other (O)</option>
+                        </select>
+
+                        {/* Berth Select (w-24 sm:w-32) */}
+                        <select
+                          value={p.berth}
+                          onChange={(e) => updatePassenger(p.id, 'berth', e.target.value)}
+                          className={`w-24 sm:w-32 rounded-md border px-2 py-1.5 text-xs font-sans outline-none cursor-pointer ${
+                            isDark
+                              ? 'bg-[#1E2026] border-zinc-800 text-zinc-100 focus:border-blue-500'
+                              : 'bg-white border-zinc-200 text-zinc-900 focus:border-blue-600'
+                          }`}
+                        >
+                          <option value="No Choice">No Choice</option>
+                          <option value="LB">Lower</option>
+                          <option value="UB">Upper</option>
+                          <option value="MB">Middle</option>
+                          <option value="SL">Side Lower</option>
+                          <option value="SU">Side Upper</option>
+                        </select>
+
+                        {/* Copy Name Button */}
+                        <button
+                          type="button"
+                          onClick={() => copyToClipboard(p.name, `PAX_NAME_${p.id}`)}
+                          className={`px-2.5 py-1.5 rounded-md text-xs font-medium cursor-pointer transition-colors shrink-0 ${
+                            copiedKey === `PAX_NAME_${p.id}`
+                              ? 'bg-emerald-600 text-white'
+                              : isDark
+                                ? 'bg-zinc-800 hover:bg-zinc-700 text-zinc-300'
+                                : 'bg-zinc-200 hover:bg-zinc-300 text-zinc-700'
+                          }`}
+                          title="Copy passenger name"
+                        >
+                          {copiedKey === `PAX_NAME_${p.id}` ? 'Copied' : 'Copy Name'}
+                        </button>
+
+                        {/* Trash Icon */}
+                        {passengers.length > 1 && (
+                          <button
+                            type="button"
+                            onClick={() => removePassenger(p.id)}
+                            className="p-1.5 text-zinc-400 hover:text-rose-500 cursor-pointer shrink-0 transition-colors"
+                            title="Remove passenger"
+                          >
+                            <Trash2 className="w-3.5 h-3.5" />
+                          </button>
+                        )}
                       </div>
                     ))}
                   </div>
 
                   {passengers.length < 4 && (
                     <button
+                      type="button"
                       onClick={addPassenger}
-                      className={`w-full py-2 rounded-lg border border-dashed text-xs font-medium flex items-center justify-center gap-1.5 cursor-pointer transition-colors ${
+                      className={`w-full py-1.5 rounded-lg border border-dashed text-xs font-medium flex items-center justify-center gap-1.5 cursor-pointer transition-colors ${
                         isDark
                           ? 'border-zinc-800 hover:border-zinc-700 text-zinc-400 hover:text-zinc-200'
                           : 'border-zinc-300 hover:border-zinc-400 text-zinc-600 hover:text-zinc-900'
@@ -1581,9 +1615,8 @@ export default function App() {
           <div className="lg:col-span-4 space-y-5">
             {/* Card 3: Pre-Booking Checklist */}
             <section
-              className={`rounded-xl border p-5 sm:p-6 transition-colors ${
-                isDark ? 'bg-[#16181D] border-zinc-800/80 shadow-none' : 'bg-white border-zinc-200/90 shadow-xs'
-              }`}
+              className={`rounded-xl border p-5 sm:p-6 transition-colors ${isDark ? 'bg-[#16181D] border-zinc-800/80 shadow-none' : 'bg-white border-zinc-200/90 shadow-xs'
+                }`}
             >
               <div className="flex items-center justify-between border-b border-zinc-200 dark:border-zinc-800/80 pb-3 mb-3">
                 <h2 className="text-sm font-semibold tracking-tight text-zinc-900 dark:text-zinc-100">
@@ -1608,15 +1641,14 @@ export default function App() {
                   <div
                     key={item.id}
                     onClick={() => toggleChecklist(item.id)}
-                    className={`p-3 rounded-lg border transition-colors cursor-pointer flex items-start gap-2.5 ${
-                      item.checked
+                    className={`p-3 rounded-lg border transition-colors cursor-pointer flex items-start gap-2.5 ${item.checked
                         ? isDark
                           ? 'bg-[#1B1D23] border-zinc-800 text-zinc-200'
                           : 'bg-zinc-50 border-zinc-200 text-zinc-900'
                         : isDark
-                        ? 'bg-transparent border-zinc-800/50 text-zinc-400 hover:border-zinc-700'
-                        : 'bg-transparent border-zinc-200/60 text-zinc-500 hover:border-zinc-300'
-                    }`}
+                          ? 'bg-transparent border-zinc-800/50 text-zinc-400 hover:border-zinc-700'
+                          : 'bg-transparent border-zinc-200/60 text-zinc-500 hover:border-zinc-300'
+                      }`}
                   >
                     <button className="mt-0.5 shrink-0 text-blue-600 dark:text-blue-400">
                       {item.checked ? (
@@ -1636,9 +1668,8 @@ export default function App() {
 
             {/* Card 4: 15-Second Reflex Drill Simulator */}
             <section
-              className={`rounded-xl border p-5 sm:p-6 transition-colors ${
-                isDark ? 'bg-[#16181D] border-zinc-800/80 shadow-none' : 'bg-white border-zinc-200/90 shadow-xs'
-              }`}
+              className={`rounded-xl border p-5 sm:p-6 transition-colors ${isDark ? 'bg-[#16181D] border-zinc-800/80 shadow-none' : 'bg-white border-zinc-200/90 shadow-xs'
+                }`}
             >
               <div className="flex items-center justify-between border-b border-zinc-200 dark:border-zinc-800/80 pb-3 mb-3">
                 <div>
@@ -1687,15 +1718,14 @@ export default function App() {
                         key={btn.step}
                         onClick={() => advanceDrillStep(btn.step)}
                         disabled={drillStep !== btn.step}
-                        className={`p-3 rounded-lg text-xs font-medium border transition-colors cursor-pointer ${
-                          drillStep === btn.step
+                        className={`p-3 rounded-lg text-xs font-medium border transition-colors cursor-pointer ${drillStep === btn.step
                             ? 'bg-blue-600 border-blue-600 text-white shadow-xs'
                             : drillStep > btn.step
-                            ? 'border-emerald-200 dark:border-emerald-900/60 bg-emerald-50 dark:bg-emerald-950/20 text-emerald-700 dark:text-emerald-400'
-                            : isDark
-                            ? 'border-zinc-800 bg-[#1E2026] text-zinc-500'
-                            : 'border-zinc-200 bg-zinc-100 text-zinc-400'
-                        }`}
+                              ? 'border-emerald-200 dark:border-emerald-900/60 bg-emerald-50 dark:bg-emerald-950/20 text-emerald-700 dark:text-emerald-400'
+                              : isDark
+                                ? 'border-zinc-800 bg-[#1E2026] text-zinc-500'
+                                : 'border-zinc-200 bg-zinc-100 text-zinc-400'
+                          }`}
                       >
                         {btn.label}
                       </button>
@@ -1706,9 +1736,8 @@ export default function App() {
 
               {drillState === 'DONE' && (
                 <div
-                  className={`p-4 rounded-lg border text-center space-y-2 ${
-                    isDark ? 'bg-[#1B1D23] border-zinc-800' : 'bg-zinc-50 border-zinc-200'
-                  }`}
+                  className={`p-4 rounded-lg border text-center space-y-2 ${isDark ? 'bg-[#1B1D23] border-zinc-800' : 'bg-zinc-50 border-zinc-200'
+                    }`}
                 >
                   <div className="text-xs text-zinc-500">
                     Completed in{' '}
@@ -1723,11 +1752,10 @@ export default function App() {
                   </p>
                   <button
                     onClick={startSpeedDrill}
-                    className={`px-3 py-1.5 rounded-md text-xs font-medium border transition-colors cursor-pointer ${
-                      isDark
+                    className={`px-3 py-1.5 rounded-md text-xs font-medium border transition-colors cursor-pointer ${isDark
                         ? 'bg-zinc-800 hover:bg-zinc-700 text-zinc-200 border-zinc-700'
                         : 'bg-white hover:bg-zinc-100 text-zinc-700 border-zinc-300'
-                    }`}
+                      }`}
                   >
                     Practice Again
                   </button>
@@ -1739,9 +1767,8 @@ export default function App() {
 
         {/* Footer */}
         <footer
-          className={`mt-6 rounded-xl border p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs transition-colors ${
-            isDark ? 'bg-[#16181D] border-zinc-800/80 text-zinc-400' : 'bg-white border-zinc-200/90 text-zinc-500 shadow-xs'
-          }`}
+          className={`mt-6 rounded-xl border p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs transition-colors ${isDark ? 'bg-[#16181D] border-zinc-800/80 text-zinc-400' : 'bg-white border-zinc-200/90 text-zinc-500 shadow-xs'
+            }`}
         >
           <div className="flex items-center gap-2">
             <Info className="w-4 h-4 text-blue-600 dark:text-blue-400 shrink-0" />
@@ -1768,15 +1795,13 @@ export default function App() {
       {showGuideBook && (
         <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-3 sm:p-6 animate-in fade-in duration-100">
           <div
-            className={`w-full max-w-4xl max-h-[88vh] rounded-xl border flex flex-col shadow-xl overflow-hidden transition-colors ${
-              isDark ? 'bg-[#16181D] border-zinc-800 text-zinc-100' : 'bg-white border-zinc-200 text-zinc-900'
-            }`}
+            className={`w-full max-w-4xl max-h-[88vh] rounded-xl border flex flex-col shadow-xl overflow-hidden transition-colors ${isDark ? 'bg-[#16181D] border-zinc-800 text-zinc-100' : 'bg-white border-zinc-200 text-zinc-900'
+              }`}
           >
             {/* Modal Header */}
             <div
-              className={`px-5 py-3.5 border-b flex items-center justify-between gap-3 ${
-                isDark ? 'border-zinc-800 bg-[#121316]' : 'border-zinc-200 bg-zinc-50'
-              }`}
+              className={`px-5 py-3.5 border-b flex items-center justify-between gap-3 ${isDark ? 'border-zinc-800 bg-[#121316]' : 'border-zinc-200 bg-zinc-50'
+                }`}
             >
               <div className="flex items-center gap-2.5">
                 <BookOpen className="w-4 h-4 text-blue-600 dark:text-blue-400" />
@@ -1797,31 +1822,28 @@ export default function App() {
               <div className="flex items-center gap-2">
                 {/* Language Switcher */}
                 <div
-                  className={`inline-flex rounded-md p-0.5 border text-xs ${
-                    isDark ? 'bg-[#1E2026] border-zinc-800' : 'bg-white border-zinc-200'
-                  }`}
+                  className={`inline-flex rounded-md p-0.5 border text-xs ${isDark ? 'bg-[#1E2026] border-zinc-800' : 'bg-white border-zinc-200'
+                    }`}
                 >
                   <button
                     onClick={() => setGuideLang('hi')}
-                    className={`px-2 py-0.5 rounded font-medium transition-colors cursor-pointer ${
-                      guideLang === 'hi'
+                    className={`px-2 py-0.5 rounded font-medium transition-colors cursor-pointer ${guideLang === 'hi'
                         ? 'bg-blue-600 text-white'
                         : isDark
-                        ? 'text-zinc-400 hover:text-zinc-200'
-                        : 'text-zinc-600 hover:text-zinc-900'
-                    }`}
+                          ? 'text-zinc-400 hover:text-zinc-200'
+                          : 'text-zinc-600 hover:text-zinc-900'
+                      }`}
                   >
                     🇮🇳 हिंदी
                   </button>
                   <button
                     onClick={() => setGuideLang('en')}
-                    className={`px-2 py-0.5 rounded font-medium transition-colors cursor-pointer ${
-                      guideLang === 'en'
+                    className={`px-2 py-0.5 rounded font-medium transition-colors cursor-pointer ${guideLang === 'en'
                         ? 'bg-blue-600 text-white'
                         : isDark
-                        ? 'text-zinc-400 hover:text-zinc-200'
-                        : 'text-zinc-600 hover:text-zinc-900'
-                    }`}
+                          ? 'text-zinc-400 hover:text-zinc-200'
+                          : 'text-zinc-600 hover:text-zinc-900'
+                      }`}
                   >
                     🌐 English
                   </button>
@@ -1829,11 +1851,10 @@ export default function App() {
 
                 <button
                   onClick={() => setShowGuideBook(false)}
-                  className={`p-1.5 rounded-md border text-xs cursor-pointer transition-colors ${
-                    isDark
+                  className={`p-1.5 rounded-md border text-xs cursor-pointer transition-colors ${isDark
                       ? 'border-zinc-800 hover:bg-zinc-800 text-zinc-400'
                       : 'border-zinc-200 hover:bg-zinc-100 text-zinc-600'
-                  }`}
+                    }`}
                 >
                   <X className="w-4 h-4" />
                 </button>
@@ -1844,9 +1865,8 @@ export default function App() {
             <div className="flex-1 overflow-hidden grid grid-cols-1 md:grid-cols-12">
               {/* Left Column: Chapters */}
               <div
-                className={`md:col-span-4 border-b md:border-b-0 md:border-r p-3 overflow-y-auto max-h-[160px] md:max-h-none space-y-1 ${
-                  isDark ? 'border-zinc-800 bg-[#121316]/50' : 'border-zinc-200 bg-zinc-50/50'
-                }`}
+                className={`md:col-span-4 border-b md:border-b-0 md:border-r p-3 overflow-y-auto max-h-[160px] md:max-h-none space-y-1 ${isDark ? 'border-zinc-800 bg-[#121316]/50' : 'border-zinc-200 bg-zinc-50/50'
+                  }`}
               >
                 <span className="text-[10px] font-medium text-zinc-500 uppercase tracking-wider px-2 block mb-1">
                   {guideLang === 'hi' ? 'अध्याय सूची' : 'Chapters'}
@@ -1855,15 +1875,14 @@ export default function App() {
                   <button
                     key={chap.id}
                     onClick={() => setActiveGuideChapter(idx)}
-                    className={`w-full text-left p-2.5 rounded-lg transition-colors cursor-pointer flex items-center justify-between text-xs ${
-                      activeGuideChapter === idx
+                    className={`w-full text-left p-2.5 rounded-lg transition-colors cursor-pointer flex items-center justify-between text-xs ${activeGuideChapter === idx
                         ? isDark
                           ? 'bg-zinc-800 text-white font-medium'
                           : 'bg-zinc-200/80 text-zinc-900 font-medium'
                         : isDark
-                        ? 'text-zinc-400 hover:text-zinc-200 hover:bg-zinc-900'
-                        : 'text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100'
-                    }`}
+                          ? 'text-zinc-400 hover:text-zinc-200 hover:bg-zinc-900'
+                          : 'text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100'
+                      }`}
                   >
                     <div>
                       <div>{chap.title[guideLang]}</div>
@@ -1904,11 +1923,10 @@ export default function App() {
                   <button
                     disabled={activeGuideChapter === 0}
                     onClick={() => setActiveGuideChapter((c) => Math.max(0, c - 1))}
-                    className={`px-3 py-1.5 rounded-md text-xs font-medium border cursor-pointer disabled:opacity-40 transition-colors ${
-                      isDark
+                    className={`px-3 py-1.5 rounded-md text-xs font-medium border cursor-pointer disabled:opacity-40 transition-colors ${isDark
                         ? 'bg-zinc-800 hover:bg-zinc-700 text-zinc-200 border-zinc-700'
                         : 'bg-zinc-100 hover:bg-zinc-200 text-zinc-700 border-zinc-200'
-                    }`}
+                      }`}
                   >
                     {guideLang === 'hi' ? '← पिछला अध्याय' : '← Previous'}
                   </button>
