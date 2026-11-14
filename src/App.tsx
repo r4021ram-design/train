@@ -220,293 +220,431 @@ interface GuideChapter {
 
 const GUIDE_BOOK_CHAPTERS: GuideChapter[] = [
   {
-    id: 'windows',
-    badge: { hi: 'समय नियम', en: 'Timing Rule' },
-    title: { hi: '१. तत्काल समय एवं कोटा नियम', en: '1. Tatkal Timings & Quotas' },
+    id: 'overview-purpose',
+    badge: { hi: 'ऐप परिचय व ज़रूरत', en: 'Core Purpose & Vision' },
+    title: { hi: '१. यह ऐप क्यों ज़रूरी है और क्या काम करती है?', en: '1. Why This App Exists & What It Solves' },
     subtitle: {
-      hi: 'एसी बनाम नॉन-एसी नियम, खुलने का सही समय और किराया गणित',
-      en: 'AC vs Non-AC Rules, Opening Minutes & Fare Math'
+      hi: 'समस्याएं, 4 बड़े फायदे, कानूनी सुरक्षा और फॉर्मूला-1 कोच सिद्धांत',
+      en: 'The 4 Real Tatkal Traps, Key Benefits, Legal Safety & F1 Co-Pilot Role'
     },
     content: {
       hi: (
-        <div className="space-y-4 text-sm leading-relaxed">
-          <p>
-            भारतीय रेल (IRCTC) में तत्काल टिकट बुकिंग प्रतिदिन सुबह दो अलग-अलग स्लॉट में खुलती है:
-          </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <div className="p-3.5 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/60 space-y-1">
-              <div className="font-medium text-zinc-900 dark:text-zinc-100 flex items-center justify-between">
-                <span>वातानुकूलित (AC) तत्काल</span>
-                <span className="font-mono text-blue-600 dark:text-blue-400 text-xs">10:00:00 AM IST</span>
+        <div className="space-y-4 text-xs sm:text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">
+          {/* Section 1: Problem Kya Hoti Hai */}
+          <div className="p-3.5 rounded-lg border border-rose-200 dark:border-rose-900/60 bg-rose-50/50 dark:bg-rose-950/20 space-y-2">
+            <h4 className="font-semibold text-rose-900 dark:text-rose-200 flex items-center gap-1.5 text-sm">
+              <AlertTriangle className="w-4 h-4 text-rose-600 dark:text-rose-400 shrink-0" />
+              यह ऐप क्यों ज़रूरी है? (बुकिंग में असल समस्या क्या होती है?)
+            </h4>
+            <p className="text-xs text-rose-900/90 dark:text-rose-300/90">
+              तत्काल टिकट <strong>30 से 60 सेकंड</strong> के अंदर समाप्त हो जाती हैं। आम यात्री इन 4 गलतियों के कारण सीटें गंवा बैठते हैं:
+            </p>
+            <ul className="list-disc pl-5 space-y-1 text-xs text-rose-900/90 dark:text-rose-300/90">
+              <li><strong>घड़ी का टाइम मिसमैच:</strong> मोबाइल की सामान्य घड़ी 2-3 सेकंड आगे-पीछे होती है। गलत समय पर क्लिक करने से या तो एरर आ जाता है या 5000 लोग आगे निकल जाते हैं।</li>
+              <li><strong>हाथ से टाइपिंग में बर्बादी:</strong> यात्री का नाम, उम्र और लिंग टाइप करने में 20-25 सेकंड निकल जाते हैं।</li>
+              <li><strong>ऐप क्रैश और रीलोड:</strong> उसी फोन में UPI या बैंकिंग ऐप खोलते ही बैकग्राउंड में बुकिंग ऐप रीफ्रेश हो जाती है और सत्र समाप्त हो जाता है।</li>
+              <li><strong>मल्टी-डे तारीख भ्रम:</strong> अगर ट्रेन 1 या 2 दिन पहले किसी दूर के स्टेशन से चली हो, तो गलत तारीख पर तत्काल का इंतज़ार करने से सीट पहले ही बुक हो जाती है।</li>
+            </ul>
+          </div>
+
+          {/* Section 2: Main 4 Fayde */}
+          <div className="space-y-2">
+            <h4 className="font-semibold text-zinc-900 dark:text-zinc-100 text-sm">
+              यह ऐप कैसे मदद करती है? (मुख्य ४ बड़े फायदे)
+            </h4>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+              <div className="p-3 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50">
+                <span className="font-medium text-blue-600 dark:text-blue-400 block mb-1">१. सटीक रेलवे घड़ी (IST Clock)</span>
+                <p className="text-xs text-zinc-600 dark:text-zinc-400">आईआरसीटीसी सर्वर के साथ मिलीसेकंड तक सिंक्रनाइज़्ड घड़ी और ठीक सेकंड पर ऑडियो बीप अलर्ट।</p>
               </div>
-              <p className="text-xs text-zinc-600 dark:text-zinc-400">
-                श्रेणियां: <strong>2A, 3A, 3E, CC, EC, 1A</strong>.<br />
-                सुबह <strong className="font-mono text-zinc-900 dark:text-zinc-200">09:57:00 AM</strong> पर रेलवन (RailOne) ऐप में लॉगिन करें।
-              </p>
-            </div>
-            <div className="p-3.5 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/60 space-y-1">
-              <div className="font-medium text-zinc-900 dark:text-zinc-100 flex items-center justify-between">
-                <span>गैर-वातानुकूलित (Non-AC) तत्काल</span>
-                <span className="font-mono text-amber-600 dark:text-amber-400 text-xs">11:00:00 AM IST</span>
+              <div className="p-3 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50">
+                <span className="font-medium text-blue-600 dark:text-blue-400 block mb-1">२. १-क्लिक स्पीड वॉल्ट (क्लिपबोर्ड)</span>
+                <p className="text-xs text-zinc-600 dark:text-zinc-400">एक क्लिक में नाम और यूपीआई आईडी कॉपी। टाइपिंग का झंझट और स्पेलिंग की गलती हमेशा के लिए खत्म।</p>
               </div>
-              <p className="text-xs text-zinc-600 dark:text-zinc-400">
-                श्रेणियां: <strong>स्लीपर (SL) एवं सेकंड सीटिंग (2S)</strong>.<br />
-                सुबह <strong className="font-mono text-zinc-900 dark:text-zinc-200">10:57:00 AM</strong> पर लॉगिन करें।
-              </p>
+              <div className="p-3 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50">
+                <span className="font-medium text-blue-600 dark:text-blue-400 block mb-1">३. मल्टी-डे तत्काल कैलकुलेटर</span>
+                <p className="text-xs text-zinc-600 dark:text-zinc-400">मुंबई, आबूरोड, अहमदाबाद या अन्य रूट डालते ही सही बुकिंग दिन और खुलने का समय सेकंडों में निकालता है।</p>
+              </div>
+              <div className="p-3 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50">
+                <span className="font-medium text-blue-600 dark:text-blue-400 block mb-1">४. चेकआउट रिफ्लेक्स ड्रिल (अभ्यास)</span>
+                <p className="text-xs text-zinc-600 dark:text-zinc-400">१० बजे तत्काल खुलने से पहले ४-क्लिक बुकिंग की उंगली स्पीड टेस्ट करने का सिम्युलेटर।</p>
+              </div>
             </div>
           </div>
-          <div className="rounded-lg border border-zinc-200 dark:border-zinc-800 p-3 bg-zinc-50/50 dark:bg-zinc-900/30 text-xs text-zinc-600 dark:text-zinc-400">
-            <strong className="text-zinc-900 dark:text-zinc-200">कन्फर्म तत्काल रद्दीकरण नियम:</strong> कन्फर्म तत्काल टिकट रद्द करने पर शून्य रिफंड (₹0.00) मिलता है। केवल चार्ट बनने के बाद भी वेटिंग लिस्ट रहने पर ही क्लर्केज काटकर रिफंड आता है।
+
+          {/* Section 3: Direct Booking Kyu Nahi & F1 Coach */}
+          <div className="p-3.5 rounded-lg border border-blue-200 dark:border-blue-900/60 bg-blue-50/50 dark:bg-blue-950/20 space-y-2">
+            <h4 className="font-semibold text-blue-900 dark:text-blue-200 text-sm">
+              सीधे बुकिंग क्यों नहीं होती? और फिर इस ऐप का क्या काम है?
+            </h4>
+            <p className="text-xs text-blue-900/90 dark:text-blue-300/90">
+              <strong>कानूनी सच्चाई (रेलवे अधिनियम धारा 143):</strong> किसी भी बाहरी ऐप या बॉट द्वारा आईआरसीटीसी में अनधिकृत तरीके से ऑटो-बुकिंग करना गैर-जमानती अपराध है जिससे खाता हमेशा के लिए ब्लॉक हो जाता है। इसके अलावा बैंक OTP और Captcha सुरक्षा के लिए आधिकारिक ऐप में ही डाले जाने चाहिए।
+            </p>
+            <div className="p-2.5 rounded-md bg-white dark:bg-zinc-900/80 border border-blue-200/80 dark:border-blue-800/80 text-xs">
+              <strong>फॉर्मूला-1 कार और कोच का उदाहरण:</strong> जैसे रेस में कार ड्राइवर खुद चलाता है लेकिन रेडियो पर बैठा कोच बताता है कि कब टर्न लेना है और कब एक्सीलरेटर दबाना है — ठीक वैसे ही <strong>बुकिंग आप अपने आधिकारिक ऐप पर ही करते हैं</strong>, और यह ऐप आपका डिजिटल कोच बनकर सटीक सेकंड पर आपसे सही बटन दबवाती है!
+            </div>
           </div>
         </div>
       ),
       en: (
-        <div className="space-y-4 text-sm leading-relaxed">
-          <p>Indian Railways Tatkal booking opens in two distinct windows every morning:</p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <div className="p-3.5 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/60 space-y-1">
-              <div className="font-medium text-zinc-900 dark:text-zinc-100 flex items-center justify-between">
-                <span>AC Tatkal Window</span>
-                <span className="font-mono text-blue-600 dark:text-blue-400 text-xs">10:00:00 AM IST</span>
-              </div>
-              <p className="text-xs text-zinc-600 dark:text-zinc-400">
-                Classes: 2A, 3A, 3E, CC, EC, 1A.<br />
-                Log in to RailOne at 09:57:00 AM.
-              </p>
+        <div className="space-y-4 text-xs sm:text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">
+          <div className="p-3.5 rounded-lg border border-rose-200 dark:border-rose-900/60 bg-rose-50/50 dark:bg-rose-950/20 space-y-2">
+            <h4 className="font-semibold text-rose-900 dark:text-rose-200 text-sm">
+              Why This App Exists (The Real Ground Problems)
+            </h4>
+            <p className="text-xs">Tatkal quotas evaporate in 30-60 seconds. Passengers fail due to 4 critical pitfalls:</p>
+            <ul className="list-disc pl-5 space-y-1 text-xs">
+              <li><strong>Clock Skew:</strong> Phone clocks drift by 2-3 seconds, causing premature lockouts or landing behind 5,000 queue entrants.</li>
+              <li><strong>Typing Lag:</strong> Manually typing passenger details burns 20-25 vital seconds.</li>
+              <li><strong>RAM Crash on Payment:</strong> Switching to a banking app on the same phone kills the booking app session.</li>
+              <li><strong>Multi-Day Trap:</strong> Booking dates are miscalculated when trains originate 1-2 days earlier from distant terminals.</li>
+            </ul>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+            <div className="p-3 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50">
+              <span className="font-medium text-blue-600 dark:text-blue-400 block mb-1">1. Atomic IST Clock</span>
+              <p className="text-xs text-zinc-600 dark:text-zinc-400">IRCTC server-aligned millisecond clock with tactical audio chimes.</p>
             </div>
-            <div className="p-3.5 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/60 space-y-1">
-              <div className="font-medium text-zinc-900 dark:text-zinc-100 flex items-center justify-between">
-                <span>Non-AC Tatkal Window</span>
-                <span className="font-mono text-amber-600 dark:text-amber-400 text-xs">11:00:00 AM IST</span>
-              </div>
-              <p className="text-xs text-zinc-600 dark:text-zinc-400">
-                Classes: Sleeper (SL) & Second Sitting (2S).<br />
-                Log in to RailOne at 10:57:00 AM.
-              </p>
+            <div className="p-3 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50">
+              <span className="font-medium text-blue-600 dark:text-blue-400 block mb-1">2. 1-Tap Speed Vault</span>
+              <p className="text-xs text-zinc-600 dark:text-zinc-400">Instant clipboard triggers for passengers and UPI ID without typing.</p>
+            </div>
+            <div className="p-3 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50">
+              <span className="font-medium text-blue-600 dark:text-blue-400 block mb-1">3. Multi-Day Calculator</span>
+              <p className="text-xs text-zinc-600 dark:text-zinc-400">Accurate opening calendar for Mumbai, Abu Road, Ahmedabad & all routes.</p>
+            </div>
+            <div className="p-3 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50">
+              <span className="font-medium text-blue-600 dark:text-blue-400 block mb-1">4. Reflex Muscle Drill</span>
+              <p className="text-xs text-zinc-600 dark:text-zinc-400">Pre-game practice simulator to train finger reaction time under pressure.</p>
             </div>
           </div>
-          <div className="rounded-lg border border-zinc-200 dark:border-zinc-800 p-3 bg-zinc-50/50 dark:bg-zinc-900/30 text-xs text-zinc-600 dark:text-zinc-400">
-            <strong className="text-zinc-900 dark:text-zinc-200">Cancellation Rule:</strong> Confirmed Tatkal tickets yield zero refund (₹0.00). Only RAC or Waiting List Tatkal tickets that remain unconfirmed after chart preparation receive an automated refund minus clerkage fee.
+
+          <div className="p-3.5 rounded-lg border border-blue-200 dark:border-blue-900/60 bg-blue-50/50 dark:bg-blue-950/20 text-xs">
+            <strong>Why Not Direct Booking?</strong> Section 143 of the Railways Act strictly prohibits unauthorized automated bots (punishable by up to 3 years imprisonment). RailOne Tatkal Pro is a 100% legal, side-by-side co-pilot that keeps your account safe while giving you elite timing and speed advantages.
           </div>
         </div>
       )
     }
   },
   {
-    id: 'origin-trap',
-    badge: { hi: 'महत्वपूर्ण गणित', en: 'Critical Math' },
-    title: { hi: '२. मल्टी-डे ट्रेन ओरिजिन जाल', en: '2. Multi-Day Train Origin Trap' },
+    id: 'master-list-glitch',
+    badge: { hi: 'मास्टर लिस्ट व फॉलबैक', en: 'Master List & Fallback' },
+    title: { hi: '२. मास्टर लिस्ट का "ग्लिच ट्रैप" एवं स्पीड वॉल्ट', en: '2. Master List Glitch Trap & Speed Vault' },
     subtitle: {
-      hi: 'वह सबसे बड़ी भूल जो ३५% यात्री करते हैं!',
-      en: 'The common pitfall that trips up 35% of passengers'
+      hi: 'सर्वर लोड के समय मास्टर लिस्ट अटकने पर 1-टैप वॉल्ट कैसे टिकट बचाता है',
+      en: 'How the 1-Tap Vault rescues your reservation when IRCTC master list freezes'
     },
     content: {
       hi: (
-        <div className="space-y-4 text-sm leading-relaxed">
-          <div className="p-3.5 rounded-lg border border-amber-200 dark:border-amber-900/60 bg-amber-50 dark:bg-amber-950/20 text-amber-900 dark:text-amber-200">
-            <strong>रेलवे नियम:</strong> तत्काल कोटा आपके बैठने वाले स्टेशन से नहीं, बल्कि <strong>ट्रेन जहां से शुरू होती है (Origin Station)</strong>, उस तारीख से <strong>१ दिन पहले</strong> खुलता है।
-          </div>
-          <div className="space-y-2 text-xs text-zinc-600 dark:text-zinc-400">
-            <p className="font-medium text-zinc-900 dark:text-zinc-200">उदाहरण (लंबी दूरी की ट्रेनें):</p>
-            <p>
-              यदि ट्रेन शुक्रवार २० तारीख को आपके शहर आती है, लेकिन वह असम या बंगाल से बुधवार १८ तारीख को चली थी, तो उसका तत्काल <strong>मंगलवार १७ तारीख सुबह १०:०० AM</strong> पर खुलेगा। यदि आप गुरुवार को देखेंगे, तो सीटें पहले ही बुक हो चुकी होंगी।
+        <div className="space-y-3.5 text-xs sm:text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">
+          <div className="p-3.5 rounded-lg border border-amber-200 dark:border-amber-900/60 bg-amber-50 dark:bg-amber-950/20 text-amber-900 dark:text-amber-200 space-y-1.5">
+            <h4 className="font-semibold text-sm">मास्टर लिस्ट का "ग्लिच ट्रैप" क्या है?</h4>
+            <p className="text-xs">
+              सुबह ठीक <strong>10:00:00 AM</strong> पर लाखों लोग एक साथ लॉग इन करते हैं। अत्यधिक ट्रैफिक के कारण कई बार आईआरसीटीसी / रेलवन ऐप में <strong>मास्टर लिस्ट लोड ही नहीं होती</strong> और गोल-गोल चक्का घूमता रहता है।
+            </p>
+            <p className="text-xs">
+              ऐसे समय यात्री घबरा जाते हैं और हाथ से नाम-उम्र टाइप करने लगते हैं, जिसमें 25 सेकंड चले जाते हैं और सारी तत्काल सीटें खत्म हो जाती हैं।
             </p>
           </div>
+
+          <div className="space-y-2">
+            <h4 className="font-semibold text-zinc-900 dark:text-zinc-100 text-sm">
+              कमांड सेंटर का स्पीड वॉल्ट (Speed Vault) क्यों दिया गया है?
+            </h4>
+            <p className="text-xs">
+              यह वॉल्ट आपका <strong>प्लान-बी (Emergency Insurance)</strong> है। यदि रेलवन में मास्टर लिस्ट लोड नहीं हुई, तो आपको घबराना नहीं है:
+            </p>
+            <ol className="list-decimal pl-5 space-y-1.5 text-xs text-zinc-600 dark:text-zinc-400">
+              <li>स्क्रीन पर सामने दिए गए <strong>"Copy Name"</strong> बटन पर 1 टैप करें।</li>
+              <li>मोबाइल ऐप में नाम बॉक्स में पेस्ट करें, उम्र डालें और जेंडर चुनें (सिर्फ 3 सेकंड!)।</li>
+              <li>बर्थ प्राथमिकता हमेशा <strong>'No Choice / Any'</strong> रखें ताकि सिस्टम बिना देरी के सीट लॉक कर दे।</li>
+            </ol>
+          </div>
         </div>
       ),
       en: (
-        <div className="space-y-4 text-sm leading-relaxed">
-          <div className="p-3.5 rounded-lg border border-amber-200 dark:border-amber-900/60 bg-amber-50 dark:bg-amber-950/20 text-amber-900 dark:text-amber-200">
-            <strong>Railway Rule:</strong> Tatkal opens 1 day before the date of journey from the <strong>train originating station</strong>, not your boarding station.
+        <div className="space-y-3.5 text-xs sm:text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">
+          <div className="p-3.5 rounded-lg border border-amber-200 dark:border-amber-900/60 bg-amber-50 dark:bg-amber-950/20 text-amber-900 dark:text-amber-200 space-y-1">
+            <h4 className="font-semibold text-sm">The Master List "Glitch Trap"</h4>
+            <p className="text-xs">
+              At 10:00:00 AM, server traffic surges cause frequent timeouts when fetching the saved profile master list. Frantically typing names manually costs 20+ seconds and forfeits confirm berths.
+            </p>
           </div>
           <p className="text-xs text-zinc-600 dark:text-zinc-400">
-            If your train reaches your station on Friday, but originated from its starting hub on Wednesday, Tatkal booking opens on Tuesday morning. Waiting until Thursday guarantees missed seats.
+            The Speed Vault is your bulletproof fallback. 1-click clipboard triggers deliver passenger names in under 2 seconds directly to your input fields.
           </p>
         </div>
       )
     }
   },
   {
-    id: 'master-list',
-    badge: { hi: 'समय बचत', en: 'Speed Weapon' },
-    title: { hi: '३. मास्टर लिस्ट प्रोटोकॉल (२२ सेकंड की बचत)', en: '3. Master List Protocol (Saves 22s)' },
+    id: 'wallet-vs-upi',
+    badge: { hi: 'भुगतान तुलना', en: 'Payment Showdown' },
+    title: { hi: '३. वॉलेट बनाम यूपीआई — कौन सा सबसे तेज़ है?', en: '3. Wallet vs UPI: Which is Truly Faster?' },
     subtitle: {
-      hi: 'सुबह ०९:४५ AM से पहले यात्री विवरण सुरक्षित करने का नियम',
-      en: 'Pre-save passenger details before 09:45 AM'
+      hi: 'एसएमएस ओटीपी की रुकावट बनाम दो-फोन यूपीआई की 3-सेकंड जीत',
+      en: 'SMS OTP latency bottleneck vs Dual-Phone Instant Push Approval'
     },
     content: {
       hi: (
-        <div className="space-y-4 text-sm leading-relaxed">
+        <div className="space-y-3.5 text-xs sm:text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">
           <p>
-            10:00 AM पर हाथ से नाम, उम्र और लिंग टाइप करने में 20 से 30 सेकंड लग जाते हैं। मास्टर लिस्ट के साथ यात्री 1.5 सेकंड में सिलेक्ट हो जाते हैं।
+            तत्काल में 70% यात्री केवल भुगतान (Payment) पेज पर समय गंवाने के कारण वेटिंग लिस्ट में चले जाते हैं। आइए दोनों विकल्पों की जमीनी सच्चाई समझें:
           </p>
-          <ol className="list-decimal pl-5 space-y-1.5 text-xs text-zinc-600 dark:text-zinc-400">
-            <li>रेलवन या आईआरसीटीसी ऐप खोलें ➔ Profile ➔ Master List.</li>
-            <li>सुबह <strong>09:45 AM से पहले</strong> सभी यात्रियों के नाम जोड़ लें।</li>
-            <li>10:00 AM पर केवल "Add from Master List" टिक करें।</li>
-            <li><strong>फ्रीज विंडो:</strong> 09:45 से 10:15 AM (AC) और 10:45 से 11:15 AM (Non-AC) के बीच मास्टर लिस्ट में नए नाम नहीं जोड़े जा सकते।</li>
-          </ol>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+            <div className="p-3.5 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50 space-y-2">
+              <span className="font-semibold text-zinc-900 dark:text-zinc-100 block">
+                विकल्प १: आईआरसीटीसी ई-वॉलेट (eWallet)
+              </span>
+              <p className="text-zinc-600 dark:text-zinc-400">
+                वॉलेट तेज़ तो है, लेकिन भुगतान करते समय यह <strong>SMS OTP</strong> मांगता है। 10:00 AM पर टेलीकॉम कंपनियों पर भारी लोड होने के कारण ओटीपी आने में कभी-कभी 30 से 50 सेकंड की देरी हो जाती है।
+              </p>
+            </div>
+
+            <div className="p-3.5 rounded-lg border border-blue-200 dark:border-blue-900/60 bg-blue-50/50 dark:bg-blue-950/20 space-y-2">
+              <span className="font-semibold text-blue-900 dark:text-blue-200 block">
+                विकल्प २: दो-फोन यूपीआई (Dual-Phone UPI) — प्रो विजेता
+              </span>
+              <p className="text-blue-900/90 dark:text-blue-300/90">
+                दूसरे फोन में GPay / PhonePe खोलकर रखें। हमारे वॉल्ट से 1-क्लिक में UPI ID पेस्ट करें। दूसरे फोन पर <strong>तुरंत पुश नोटिफिकेशन</strong> आता है और बिना किसी SMS OTP के पिन डालते ही 3 सेकंड में पेमेंट पास हो जाता है!
+              </p>
+            </div>
+          </div>
         </div>
       ),
       en: (
-        <div className="space-y-4 text-sm leading-relaxed">
+        <div className="space-y-3.5 text-xs sm:text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+            <div className="p-3.5 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50 space-y-1">
+              <span className="font-semibold text-zinc-900 dark:text-zinc-100 block">IRCTC eWallet</span>
+              <p className="text-zinc-600 dark:text-zinc-400">Requires SMS OTP. Carrier congestion at 10:00 AM often delays SMS delivery by 30-45 seconds.</p>
+            </div>
+            <div className="p-3.5 rounded-lg border border-blue-200 dark:border-blue-900/60 bg-blue-50/50 dark:bg-blue-950/20 space-y-1">
+              <span className="font-semibold text-blue-900 dark:text-blue-200 block">Dual-Phone UPI (Winning Method)</span>
+              <p className="text-blue-900/90 dark:text-blue-300/90">Bypasses SMS entirely. Instant app push notification on the secondary device allows 3-second instant PIN authorization.</p>
+            </div>
+          </div>
+        </div>
+      )
+    }
+  },
+  {
+    id: 'strike-timing',
+    badge: { hi: 'सबसे बड़ा रहस्य', en: 'Timing Secret' },
+    title: { hi: '४. "T-3s स्ट्राइक टाइमिंग" — ठीक १०:००:०० का राज', en: '4. The T-3s Strike Secret: Winning at 10:00:00' },
+    subtitle: {
+      hi: '१ सेकंड पहले क्लिक करने की गलती और नेटवर्क लेटेंसी का गणित',
+      en: 'The 1-second early lockout penalty and network packet travel physics'
+    },
+    content: {
+      hi: (
+        <div className="space-y-3.5 text-xs sm:text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">
           <p>
-            Manually typing passenger details takes 20 to 30 seconds during peak rush. Master List allows 1-click bulk selection in 1.5 seconds.
+            भले ही आपके पास मास्टर लिस्ट और वॉलेट दोनों तैयार हों, अगर आपकी टाइमिंग गलत है तो सीट कभी नहीं मिलेगी:
           </p>
-          <ol className="list-decimal pl-5 space-y-1.5 text-xs text-zinc-600 dark:text-zinc-400">
-            <li>Open RailOne/IRCTC ➔ Profile ➔ Master List.</li>
-            <li>Save all passengers before 09:45 AM.</li>
-            <li>At 10:00 AM, select "Add from Master List" with checkboxes.</li>
-            <li><strong>Freeze Window:</strong> Edits are locked between 09:45-10:15 AM and 10:45-11:15 AM.</li>
-          </ol>
-        </div>
-      )
-    }
-  },
-  {
-    id: 'strike-radar',
-    badge: { hi: 'रणनीतिक समय', en: 'Tactical Timing' },
-    title: { hi: '४. ३५-सेकंड स्ट्राइक प्रोटोकॉल', en: '4. The 35-Second Strike Protocol' },
-    subtitle: {
-      hi: 'T-3m से T-0s तक सेकंड-दर-सेकंड एक्शन योजना',
-      en: 'Second-by-second action roadmap from T-3m to T-0s'
-    },
-    content: {
-      hi: (
-        <div className="space-y-2.5 text-xs text-zinc-600 dark:text-zinc-400">
-          <div className="p-2.5 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/40">
-            <strong className="text-zinc-900 dark:text-zinc-200 font-mono">09:57:00 AM (T-3m):</strong> लॉगिन करें, स्टेशन और तारीख डालें, कोटा में TATKAL चुनें और ट्रेन लिस्ट पर रुकें।
-          </div>
-          <div className="p-2.5 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/40">
-            <strong className="text-zinc-900 dark:text-zinc-200 font-mono">09:59:30 AM (T-30s):</strong> स्क्रीन रीफ्रेश न करें। अंगूठा क्लास बटन के ऊपर रखें।
-          </div>
-          <div className="p-2.5 rounded-lg border border-blue-200 dark:border-blue-900/60 bg-blue-50 dark:bg-blue-950/20 text-blue-900 dark:text-blue-200">
-            <strong className="font-mono">09:59:58 AM (Strike):</strong> क्लास बटन (3A/SL) पर टैप करें। लेटेंसी के साथ रिक्वेस्ट ठीक 10:00:00 पर पहुंचेगी।
-          </div>
-          <div className="p-2.5 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/40">
-            <strong className="text-zinc-900 dark:text-zinc-200 font-mono">10:00:05 AM:</strong> मास्टर लिस्ट से नाम चुनें, "Book only if confirm" टिक करें और UPI से भुगतान करें।
-          </div>
-        </div>
-      ),
-      en: (
-        <div className="space-y-2.5 text-xs text-zinc-600 dark:text-zinc-400">
-          <div className="p-2.5 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/40">
-            <strong className="text-zinc-900 dark:text-zinc-200 font-mono">09:57:00 AM (T-3m):</strong> Log in via Biometrics/PIN. Search route with Quota: TATKAL.
-          </div>
-          <div className="p-2.5 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/40">
-            <strong className="text-zinc-900 dark:text-zinc-200 font-mono">09:59:30 AM (T-30s):</strong> Hold position. Do NOT refresh early. Hover thumb over class.
-          </div>
-          <div className="p-2.5 rounded-lg border border-blue-200 dark:border-blue-900/60 bg-blue-50 dark:bg-blue-950/20 text-blue-900 dark:text-blue-200">
-            <strong className="font-mono">09:59:58 AM (Strike):</strong> Tap class refresh button so your request lands at 10:00:00 sharp.
-          </div>
-          <div className="p-2.5 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/40">
-            <strong className="text-zinc-900 dark:text-zinc-200 font-mono">10:00:05 AM:</strong> Select Master List, check "Confirm berths only", and approve UPI.
-          </div>
-        </div>
-      )
-    }
-  },
-  {
-    id: 'payment-tactics',
-    badge: { hi: 'भुगतान तकनीक', en: 'Payment Hack' },
-    title: { hi: '५. दो फोन (Dual-Device) भुगतान विधि', en: '5. Dual-Phone Payment Setup' },
-    subtitle: {
-      hi: 'ऐप क्रैश और ओटीपी देरी से बचने का अचूक उपाय',
-      en: 'Eliminate app reload crashes and OTP delays'
-    },
-    content: {
-      hi: (
-        <div className="space-y-3 text-sm leading-relaxed">
-          <p className="text-xs text-zinc-600 dark:text-zinc-400">
-            फोन १ पर बुकिंग करते समय जब यात्री GPay/PhonePe खोलने के लिए ऐप स्विच करते हैं, तो मोबाइल की रैम रेलवन ऐप को बैकग्राउंड में बंद कर देती है।
-          </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-            <div className="p-3 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50">
-              <span className="font-medium text-zinc-900 dark:text-zinc-100 block mb-1">पहला फोन (बुकिंग फोन)</span>
-              <p className="text-zinc-600 dark:text-zinc-400">इस पर रेलवन ऐप खुला रखें। भुगतान के समय दूसरे फोन की यूपीआई आईडी डालें।</p>
+
+          <div className="space-y-2 text-xs">
+            <div className="p-3 rounded-lg border border-rose-200 dark:border-rose-900/60 bg-rose-50/50 dark:bg-rose-950/20 text-rose-900 dark:text-rose-200">
+              <strong>१ सेकंड पहले क्लिक करने का नुकसान (09:59:59 AM):</strong> रेलवन ऐप स्क्रीन पर लाल रंग में एरर देगा: <em>"Tatkal booking not started yet"</em>. आपको पीछे जाकर दोबारा ट्रेन खोजनी पड़ेगी और 12 सेकंड बर्बाद हो जाएंगे।
             </div>
-            <div className="p-3 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50">
-              <span className="font-medium text-zinc-900 dark:text-zinc-100 block mb-1">दूसरा फोन (भुगतान फोन)</span>
-              <p className="text-zinc-600 dark:text-zinc-400">इस पर पहले से GPay/PhonePe खोलकर रखें। रिक्वेस्ट आते ही तुरंत पिन डालकर भुगतान अप्रूव करें।</p>
+            <div className="p-3 rounded-lg border border-amber-200 dark:border-amber-900/60 bg-amber-50 dark:bg-amber-950/20 text-amber-900 dark:text-amber-200">
+              <strong>२ सेकंड लेट क्लिक करने का नुकसान (10:00:02 AM):</strong> देश भर के 5,000 लोग आपसे आगे निकल जाएंगे और आपका नंबर वेटिंग लिस्ट में चला जाएगा।
+            </div>
+            <div className="p-3 rounded-lg border border-emerald-200 dark:border-emerald-900/60 bg-emerald-50/50 dark:bg-emerald-950/20 text-emerald-900 dark:text-emerald-200">
+              <strong>T-3s स्ट्राइक फॉर्मूला (09:59:58 AM):</strong> मोबाइल से रेलवे सर्वर तक सिग्नल पहुंचने में 0.5 से 1.5 सेकंड की नेटवर्क लेटेंसी लगती है। जब हमारा टाइमर <strong>T - 00:03s</strong> पर बीप बजाता है, तभी आपको क्लिक करना है — आपकी रिक्वेस्ट ठीक <strong>10:00:00.05 AM</strong> पर सर्वर गेट खुलते ही सबसे पहले अंदर घुसेगी!
             </div>
           </div>
         </div>
       ),
       en: (
-        <div className="space-y-3 text-sm leading-relaxed">
-          <p className="text-xs text-zinc-600 dark:text-zinc-400">
-            Switching apps on the booking phone to approve UPI often causes operating systems to kill background apps, aborting your reservation.
-          </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-            <div className="p-3 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50">
-              <span className="font-medium text-zinc-900 dark:text-zinc-100 block mb-1">Device 1 (Booking Phone)</span>
-              <p className="text-zinc-600 dark:text-zinc-400">Keep RailOne open. Enter Device 2's UPI ID at payment checkout.</p>
-            </div>
-            <div className="p-3 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50">
-              <span className="font-medium text-zinc-900 dark:text-zinc-100 block mb-1">Device 2 (Payment Phone)</span>
-              <p className="text-zinc-600 dark:text-zinc-400">Unlock UPI app in advance. Approve collect request with PIN immediately.</p>
-            </div>
-          </div>
-        </div>
-      )
-    }
-  },
-  {
-    id: 'emergency-vault',
-    badge: { hi: 'आपातकालीन बैकअप', en: 'Backup Plan' },
-    title: { hi: '६. १-टैप स्पीड वॉल्ट और बैकअप', en: '6. 1-Tap Speed Vault & Fallback' },
-    subtitle: {
-      hi: 'यदि मास्टर लिस्ट लोड न हो तो क्या करें?',
-      en: 'What to do if Master List fails to load?'
-    },
-    content: {
-      hi: (
-        <div className="space-y-3 text-sm leading-relaxed">
-          <p className="text-xs text-zinc-600 dark:text-zinc-400">
-            यदि आईआरसीटीसी सर्वर लोड के कारण मास्टर लिस्ट लोड न करे:
-          </p>
-          <ul className="list-disc pl-5 space-y-1 text-xs text-zinc-600 dark:text-zinc-400">
-            <li>कमांड सेंटर के स्पीड वॉल्ट से हर यात्री का नाम <strong>1-Tap Copy</strong> करके तुरंत पेस्ट करें।</li>
-            <li>सीट विकल्प में हमेशा <strong>'No Choice / Any'</strong> रखें ताकि सीट खोजने में एल्गोरिदम समय न गंवाए।</li>
-          </ul>
-        </div>
-      ),
-      en: (
-        <div className="space-y-3 text-sm leading-relaxed">
-          <p className="text-xs text-zinc-600 dark:text-zinc-400">
-            If peak server loads prevent Master List retrieval:
-          </p>
-          <ul className="list-disc pl-5 space-y-1 text-xs text-zinc-600 dark:text-zinc-400">
-            <li>Use the 1-Tap copy button for each passenger to paste details directly.</li>
-            <li>Select berth preference as 'No Choice' to prevent search delays.</li>
+        <div className="space-y-3 text-xs sm:text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">
+          <p>Timing precision separates confirmed tickets from waiting list rejections:</p>
+          <ul className="list-disc pl-5 space-y-1.5 text-xs">
+            <li><strong>1s Early (09:59:59 AM):</strong> Triggers "Tatkal not started" rejection, forcing an agonizing 10-second re-search.</li>
+            <li><strong>2s Late (10:00:02 AM):</strong> Lands behind 5,000 concurrent queue requests.</li>
+            <li><strong>The T-3s Rule (09:59:58 AM):</strong> Tap on the Strike audio chime. Network transit time guarantees your packet hits the server at 10:00:00.05 sharp.</li>
           </ul>
         </div>
       )
     }
   },
   {
-    id: 'golden-rules',
-    badge: { hi: 'कानूनी व सुरक्षित', en: 'Legal & Safe' },
-    title: { hi: '७. आईआरसीटीसी के सुनहरे नियम व सुरक्षा', en: '7. Golden Rules & IRCTC Compliance' },
+    id: 'live-day-protocol',
+    badge: { hi: 'एक्शन प्लान', en: 'Action Plan' },
+    title: { hi: '५. रियल बुकिंग के दिन कैसे इस्तेमाल करें? (४ आसान स्टेप)', en: '5. Real Booking Day Operational Protocol' },
     subtitle: {
-      hi: 'अकाउंट सुरक्षित रखने और १००% कानूनी रहने के ४ नियम',
-      en: 'Stay 100% legal, avoid bot bans and security locks'
+      hi: 'सुबह ०९:४५ से १०:००:१५ AM तक मिनट-दर-मिनट गाइड',
+      en: 'Minute-by-minute execution roadmap from 09:45 AM to 10:00:15 AM'
     },
     content: {
       hi: (
-        <div className="space-y-2 text-xs text-zinc-600 dark:text-zinc-400">
-          <p>१. कभी भी एक ही आईआरसीटीसी खाते को दो अलग-अलग टैब या फोन पर एक साथ लॉगिन न करें।</p>
-          <p>२. सुबह 09:55 AM से पहले लॉगिन न करें (3 मिनट बाद सत्र अपने आप समाप्त हो जाता है)।</p>
-          <p>३. किसी भी अवैध बॉट या ऑटो-फिल एक्सटेंशन का उपयोग न करें। हमारा साथी पूर्णतः 100% मैनुअल है।</p>
-          <p>४. "Book only if confirm berths are allotted" अनिवार्य रूप से टिक करें ताकि वेटिंग टिकट न बने।</p>
+        <div className="space-y-2.5 text-xs text-zinc-600 dark:text-zinc-400">
+          <div className="p-3 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/40">
+            <strong className="text-zinc-900 dark:text-zinc-200 font-mono block mb-0.5">स्टेप १ — सुबह ०९:४५ AM (तैयारी):</strong>
+            लैपटॉप या टैबलेट पर यह ऐप खोलकर सामने रख लें। स्पीड वॉल्ट में अपना UPI ID और यात्रियों के नाम सेव कर लें। दूसरा फोन अनलॉक करके रखें।
+          </div>
+          <div className="p-3 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/40">
+            <strong className="text-zinc-900 dark:text-zinc-200 font-mono block mb-0.5">स्टेप २ — सुबह ०९:५७ AM (लॉगिन):</strong>
+            हाथ वाले मुख्य फोन में रेलवन ऐप में बायोमेट्रिक / पिन से लॉगिन करें। From-To स्टेशन, तारीख और कोटा में <strong>TATKAL</strong> चुनकर ट्रेन लिस्ट पर रुकें।
+          </div>
+          <div className="p-3 rounded-lg border border-blue-200 dark:border-blue-900/60 bg-blue-50/50 dark:bg-blue-950/20 text-blue-900 dark:text-blue-200">
+            <strong className="font-mono block mb-0.5">स्टेप ३ — सुबह ०९:५९:५७ AM (T-3s स्ट्राइक):</strong>
+            सामने लैपटॉप स्क्रीन देखें। जैसे ही T-Minus टाइमर <strong>"T - 00:03s"</strong> पर आकर बीप करे, मोबाइल में अपनी ट्रेन क्लास (3A / SL) पर तुरंत टैप कर दें!
+          </div>
+          <div className="p-3 rounded-lg border border-emerald-200 dark:border-emerald-900/60 bg-emerald-50/50 dark:bg-emerald-950/20 text-emerald-900 dark:text-emerald-200">
+            <strong className="font-mono block mb-0.5">स्टेप ४ — सुबह १०:००:१५ AM (फास्ट चेकआउट):</strong>
+            मास्टर लिस्ट से यात्री चुनें (अटकने पर वॉल्ट से पेस्ट करें)। UPI में 1-क्लिक कॉपी आईडी पेस्ट करें और दूसरे फोन पर पिन डालकर अप्रूव करें — <strong>कन्फर्म टिकट डन!</strong>
+          </div>
         </div>
       ),
       en: (
-        <div className="space-y-2 text-xs text-zinc-600 dark:text-zinc-400">
-          <p>1. Never login to the same IRCTC account across multiple tabs simultaneously.</p>
-          <p>2. Do not login earlier than 09:56 AM to prevent session idle timeout.</p>
-          <p>3. Never use unauthorized bot extensions. RailOne Tatkal Pro is 100% manual.</p>
-          <p>4. Always check "Book only if confirm berths are allotted" to prevent unwanted WL tickets.</p>
+        <div className="space-y-2.5 text-xs text-zinc-600 dark:text-zinc-400">
+          <div className="p-3 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/40">
+            <strong className="text-zinc-900 dark:text-zinc-200 font-mono block mb-0.5">Step 1 — 09:45 AM (Setup):</strong> Open this web app on laptop. Fill Speed Vault with UPI and passenger data. Keep Phone 2 unlocked.
+          </div>
+          <div className="p-3 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/40">
+            <strong className="text-zinc-900 dark:text-zinc-200 font-mono block mb-0.5">Step 2 — 09:57 AM (Login):</strong> Login to RailOne on primary phone. Search route with Quota: TATKAL and hold on train list.
+          </div>
+          <div className="p-3 rounded-lg border border-blue-200 dark:border-blue-900/60 bg-blue-50/50 dark:bg-blue-950/20 text-blue-900 dark:text-blue-200">
+            <strong className="font-mono block mb-0.5">Step 3 — 09:59:58 AM (Strike):</strong> Watch laptop T-Minus. When Strike chime fires at T-3s, tap train class instantly.
+          </div>
+          <div className="p-3 rounded-lg border border-emerald-200 dark:border-emerald-900/60 bg-emerald-50/50 dark:bg-emerald-950/20 text-emerald-900 dark:text-emerald-200">
+            <strong className="font-mono block mb-0.5">Step 4 — 10:00:15 AM (Instant Checkout):</strong> Pick Master List, paste 1-tap UPI ID, and approve collect request on Phone 2 — Confirmed ticket booked!
+          </div>
+        </div>
+      )
+    }
+  },
+  {
+    id: 'origin-trap-rules',
+    badge: { hi: 'महत्वपूर्ण गणित', en: 'Critical Math' },
+    title: { hi: '६. तत्काल समय, कोटा एवं मल्टी-डे ट्रेन जाल', en: '6. Tatkal Timings, Quotas & Multi-Day Trap' },
+    subtitle: {
+      hi: 'एसी बनाम नॉन-एसी नियम एवं लंबी दूरी की ट्रेनों का तारीख गणित',
+      en: 'AC vs Non-AC Rules and Multi-Day originating station calendars'
+    },
+    content: {
+      hi: (
+        <div className="space-y-3.5 text-xs sm:text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+            <div className="p-3 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50">
+              <span className="font-medium text-blue-600 dark:text-blue-400 block mb-1">एसी (AC) तत्काल</span>
+              <p className="text-zinc-600 dark:text-zinc-400">खुलने का समय: <strong>सुबह १०:००:०० AM</strong> (क्लास: 2A, 3A, 3E, CC, EC, 1A)</p>
+            </div>
+            <div className="p-3 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50">
+              <span className="font-medium text-amber-600 dark:text-amber-400 block mb-1">नॉन-एसी (Non-AC) तत्काल</span>
+              <p className="text-zinc-600 dark:text-zinc-400">खुलने का समय: <strong>सुबह ११:००:०० AM</strong> (क्लास: Sleeper एवं 2S)</p>
+            </div>
+          </div>
+
+          <div className="p-3.5 rounded-lg border border-amber-200 dark:border-amber-900/60 bg-amber-50 dark:bg-amber-950/20 text-amber-900 dark:text-amber-200 text-xs space-y-1">
+            <strong>मल्टी-डे ओरिजिन नियम:</strong> तत्काल कोटा यात्रा के प्रारंभिक स्टेशन (Origin) से 1 दिन पहले खुलता है। यदि ट्रेन आपके स्टेशन पहुंचने से 1 दिन पहले किसी दूसरे शहर से चली है, तो तत्काल उसी अनुपात में 1 या 2 दिन पहले खुलेगा। ऊपर कैलकुलेटर में 'Day 2' या 'Day 3' चुनकर इसकी सही तारीख जांचें।
+          </div>
+        </div>
+      ),
+      en: (
+        <div className="space-y-3 text-xs sm:text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">
+          <p className="text-xs">AC opens at 10:00:00 AM IST; Non-AC (SL/2S) opens at 11:00:00 AM IST.</p>
+          <div className="p-3.5 rounded-lg border border-amber-200 dark:border-amber-900/60 bg-amber-50 dark:bg-amber-950/20 text-amber-900 dark:text-amber-200 text-xs">
+            <strong>Multi-Day Trap:</strong> Tatkal always opens 1 day prior to the train departure from its Origin station, regardless of where you board along the route.
+          </div>
+        </div>
+      )
+    }
+  },
+  {
+    id: 'winning-formula-summary',
+    badge: { hi: 'जीतने का फॉर्मूला', en: 'Winning Formula' },
+    title: { hi: '७. सारांश — तत्काल जीतने का अचूक फॉर्मूला', en: '7. Summary: The Tatkal Winning Formula' },
+    subtitle: {
+      hi: 'आपका काम बनाम इस ऐप का काम और १००% सुरक्षित रहने का नियम',
+      en: 'Your Role vs App Role & 100% Account Safety Rules'
+    },
+    content: {
+      hi: (
+        <div className="space-y-3.5 text-xs sm:text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">
+          <div className="rounded-lg border border-zinc-200 dark:border-zinc-800 overflow-hidden">
+            <table className="w-full text-xs text-left">
+              <thead className="bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 font-semibold">
+                <tr>
+                  <th className="p-2.5">ज़िम्मेदारी</th>
+                  <th className="p-2.5">कहाँ होगी?</th>
+                  <th className="p-2.5">कौन करेगा?</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-zinc-200 dark:divide-zinc-800 text-zinc-600 dark:text-zinc-400">
+                <tr>
+                  <td className="p-2.5 font-medium text-zinc-900 dark:text-zinc-200">टिकट बुकिंग, कैप्चा व पेमेंट</td>
+                  <td className="p-2.5">आधिकारिक RailOne / IRCTC ऐप</td>
+                  <td className="p-2.5 text-blue-600 dark:text-blue-400 font-medium">आप खुद (100% कानूनी)</td>
+                </tr>
+                <tr>
+                  <td className="p-2.5 font-medium text-zinc-900 dark:text-zinc-200">सटीक रेलवे सर्वर टाइमिंग</td>
+                  <td className="p-2.5">Tatkal Pro स्क्रीन (लैपटॉप)</td>
+                  <td className="p-2.5 text-emerald-600 dark:text-emerald-400 font-medium">Atomic Clock Engine</td>
+                </tr>
+                <tr>
+                  <td className="p-2.5 font-medium text-zinc-900 dark:text-zinc-200">T-3s स्ट्राइक बीप (क्लिक का सही क्षण)</td>
+                  <td className="p-2.5">Tatkal Pro ऑडियो इंजन</td>
+                  <td className="p-2.5 text-emerald-600 dark:text-emerald-400 font-medium">Tactical Chime</td>
+                </tr>
+                <tr>
+                  <td className="p-2.5 font-medium text-zinc-900 dark:text-zinc-200">इमरजेंसी 1-क्लिक नाम व UPI कॉपी</td>
+                  <td className="p-2.5">Tatkal Pro स्पीड वॉल्ट</td>
+                  <td className="p-2.5 text-emerald-600 dark:text-emerald-400 font-medium">Speed Vault</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div className="p-3 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/30 text-xs space-y-1">
+            <strong className="text-zinc-900 dark:text-zinc-100">३ सुनहरे सुरक्षा नियम:</strong>
+            <p>१. कभी भी किसी एजेंट को अपना पासवर्ड न दें और न ही कोई अवैध ऑटो-बुकिंग एक्सटेंशन लगाएं।</p>
+            <p>२. हमेशा "Book only if confirm berths are allotted" टिक रखें ताकि वेटिंग लिस्ट टिकट न बने।</p>
+            <p>३. इस साथी ऐप के साथ आप बिना ₹1000 दलाली दिए खुद 40 सेकंड में कन्फर्म तत्काल निकाल सकते हैं!</p>
+          </div>
+        </div>
+      ),
+      en: (
+        <div className="space-y-3.5 text-xs sm:text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">
+          <div className="rounded-lg border border-zinc-200 dark:border-zinc-800 overflow-hidden text-xs">
+            <table className="w-full text-left">
+              <thead className="bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300">
+                <tr>
+                  <th className="p-2">Task</th>
+                  <th className="p-2">Where?</th>
+                  <th className="p-2">Executor</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-zinc-200 dark:divide-zinc-800 text-zinc-600 dark:text-zinc-400">
+                <tr>
+                  <td className="p-2 font-medium">Real Booking & OTP</td>
+                  <td className="p-2">Official RailOne App</td>
+                  <td className="p-2 text-blue-500 font-medium">You (100% Legal)</td>
+                </tr>
+                <tr>
+                  <td className="p-2 font-medium">Atomic Microsecond Clock</td>
+                  <td className="p-2">Tatkal Pro Screen</td>
+                  <td className="p-2 text-emerald-500 font-medium">Atomic Engine</td>
+                </tr>
+                <tr>
+                  <td className="p-2 font-medium">T-3s Strike Audio Cues</td>
+                  <td className="p-2">Tatkal Pro Sound</td>
+                  <td className="p-2 text-emerald-500 font-medium">Tactical Audio</td>
+                </tr>
+                <tr>
+                  <td className="p-2 font-medium">1-Click Fallback Vault</td>
+                  <td className="p-2">Tatkal Pro Vault</td>
+                  <td className="p-2 text-emerald-500 font-medium">Speed Vault</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p className="text-xs text-zinc-500">
+            Follow the 4-step protocol and bypass agent fees permanently with 100% account compliance.
+          </p>
         </div>
       )
     }
@@ -981,8 +1119,8 @@ export default function App() {
       ============================================================ */}
       <header
         className={`sticky top-0 z-40 border-b backdrop-blur-md px-4 sm:px-6 py-2.5 transition-colors ${isDark
-            ? 'bg-[#121316]/90 border-zinc-800/80 text-zinc-100'
-            : 'bg-white/90 border-zinc-200/90 text-zinc-900 shadow-xs'
+          ? 'bg-[#121316]/90 border-zinc-800/80 text-zinc-100'
+          : 'bg-white/90 border-zinc-200/90 text-zinc-900 shadow-xs'
           }`}
       >
         <div className="w-full flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3">
@@ -1006,10 +1144,10 @@ export default function App() {
               <button
                 onClick={() => setTatkalMode('AC')}
                 className={`px-2.5 py-1 rounded font-medium transition-colors cursor-pointer ${tatkalMode === 'AC'
-                    ? 'bg-blue-600 text-white shadow-xs'
-                    : isDark
-                      ? 'text-zinc-400 hover:text-zinc-200'
-                      : 'text-zinc-600 hover:text-zinc-900'
+                  ? 'bg-blue-600 text-white shadow-xs'
+                  : isDark
+                    ? 'text-zinc-400 hover:text-zinc-200'
+                    : 'text-zinc-600 hover:text-zinc-900'
                   }`}
               >
                 AC (10 AM)
@@ -1017,10 +1155,10 @@ export default function App() {
               <button
                 onClick={() => setTatkalMode('NON_AC')}
                 className={`px-2.5 py-1 rounded font-medium transition-colors cursor-pointer ${tatkalMode === 'NON_AC'
-                    ? 'bg-blue-600 text-white shadow-xs'
-                    : isDark
-                      ? 'text-zinc-400 hover:text-zinc-200'
-                      : 'text-zinc-600 hover:text-zinc-900'
+                  ? 'bg-blue-600 text-white shadow-xs'
+                  : isDark
+                    ? 'text-zinc-400 hover:text-zinc-200'
+                    : 'text-zinc-600 hover:text-zinc-900'
                   }`}
               >
                 SL / 2S (11 AM)
@@ -1029,9 +1167,8 @@ export default function App() {
           </div>
 
           {/* Center: Live IST Clock & Target Countdown (High-Readability Pill) */}
-          <div className={`flex items-center justify-between md:justify-center gap-3 sm:gap-5 px-3.5 py-1.5 rounded-lg border transition-colors ${
-            isDark ? 'bg-zinc-900/90 border-zinc-800' : 'bg-zinc-100/90 border-zinc-200'
-          }`}>
+          <div className={`flex items-center justify-between md:justify-center gap-3 sm:gap-5 px-3.5 py-1.5 rounded-lg border transition-colors ${isDark ? 'bg-zinc-900/90 border-zinc-800' : 'bg-zinc-100/90 border-zinc-200'
+            }`}>
             {/* Clock + Latency Tweak */}
             <div className="flex items-center gap-2">
               <span className="text-[11px] font-medium text-zinc-500 font-sans tracking-wide hidden xs:inline">IST</span>
@@ -1043,8 +1180,8 @@ export default function App() {
                 <button
                   onClick={() => setOffsetMs((m) => Math.max(-2000, m - 250))}
                   className={`px-1.5 py-0.5 rounded text-[10px] font-mono border cursor-pointer ${isDark
-                      ? 'bg-zinc-800/80 border-zinc-700/60 text-zinc-400 hover:text-zinc-200'
-                      : 'bg-zinc-200 border-zinc-300 text-zinc-600 hover:text-zinc-900'
+                    ? 'bg-zinc-800/80 border-zinc-700/60 text-zinc-400 hover:text-zinc-200'
+                    : 'bg-zinc-200 border-zinc-300 text-zinc-600 hover:text-zinc-900'
                     }`}
                   title="Calibrate latency -0.25s"
                 >
@@ -1053,12 +1190,12 @@ export default function App() {
                 <button
                   onClick={() => setOffsetMs(0)}
                   className={`px-1.5 py-0.5 rounded text-[10px] font-mono border cursor-pointer ${offsetMs === 0
-                      ? isDark
-                        ? 'bg-zinc-800 border-zinc-700 text-zinc-300'
-                        : 'bg-zinc-300 border-zinc-400 text-zinc-800'
-                      : isDark
-                        ? 'bg-zinc-900 border-zinc-800 text-zinc-500 hover:text-zinc-300'
-                        : 'bg-zinc-100 border-zinc-200 text-zinc-400 hover:text-zinc-700'
+                    ? isDark
+                      ? 'bg-zinc-800 border-zinc-700 text-zinc-300'
+                      : 'bg-zinc-300 border-zinc-400 text-zinc-800'
+                    : isDark
+                      ? 'bg-zinc-900 border-zinc-800 text-zinc-500 hover:text-zinc-300'
+                      : 'bg-zinc-100 border-zinc-200 text-zinc-400 hover:text-zinc-700'
                     }`}
                   title="Reset latency sync"
                 >
@@ -1067,8 +1204,8 @@ export default function App() {
                 <button
                   onClick={() => setOffsetMs((m) => Math.min(2000, m + 250))}
                   className={`px-1.5 py-0.5 rounded text-[10px] font-mono border cursor-pointer ${isDark
-                      ? 'bg-zinc-800/80 border-zinc-700/60 text-zinc-400 hover:text-zinc-200'
-                      : 'bg-zinc-200 border-zinc-300 text-zinc-600 hover:text-zinc-900'
+                    ? 'bg-zinc-800/80 border-zinc-700/60 text-zinc-400 hover:text-zinc-200'
+                    : 'bg-zinc-200 border-zinc-300 text-zinc-600 hover:text-zinc-900'
                     }`}
                   title="Calibrate latency +0.25s"
                 >
@@ -1084,10 +1221,10 @@ export default function App() {
               <span className="text-[11px] font-medium text-zinc-500 font-sans tracking-wide hidden xs:inline">Target</span>
               <span
                 className={`font-mono tabular-nums text-base sm:text-lg lg:text-xl font-semibold tracking-tight ${clockData.diffSec <= 10
-                    ? 'text-emerald-600 dark:text-emerald-400'
-                    : clockData.diffSec <= 60
-                      ? 'text-amber-600 dark:text-amber-400'
-                      : 'text-zinc-800 dark:text-zinc-200'
+                  ? 'text-emerald-600 dark:text-emerald-400'
+                  : clockData.diffSec <= 60
+                    ? 'text-amber-600 dark:text-amber-400'
+                    : 'text-zinc-800 dark:text-zinc-200'
                   }`}
               >
                 T - {formatCountdown(clockData.diffSec)}
@@ -1102,8 +1239,8 @@ export default function App() {
               <button
                 onClick={start60sSimulation}
                 className={`px-2.5 py-1 rounded-md text-xs font-medium border flex items-center gap-1.5 transition-colors cursor-pointer ${isDark
-                    ? 'bg-zinc-900 border-zinc-800 hover:bg-zinc-800 text-zinc-300'
-                    : 'bg-zinc-100 border-zinc-200 hover:bg-zinc-200 text-zinc-700'
+                  ? 'bg-zinc-900 border-zinc-800 hover:bg-zinc-800 text-zinc-300'
+                  : 'bg-zinc-100 border-zinc-200 hover:bg-zinc-200 text-zinc-700'
                   }`}
                 title="Simulate the final 60 seconds before quota opening"
               >
@@ -1124,8 +1261,8 @@ export default function App() {
             <button
               onClick={() => setShowGuideBook(true)}
               className={`px-2.5 py-1 rounded-md text-xs font-medium border flex items-center gap-1.5 transition-colors cursor-pointer ${isDark
-                  ? 'bg-zinc-900 border-zinc-800 hover:bg-zinc-800 text-zinc-300'
-                  : 'bg-zinc-100 border-zinc-200 hover:bg-zinc-200 text-zinc-700'
+                ? 'bg-zinc-900 border-zinc-800 hover:bg-zinc-800 text-zinc-300'
+                : 'bg-zinc-100 border-zinc-200 hover:bg-zinc-200 text-zinc-700'
                 }`}
             >
               <BookOpen className="w-3.5 h-3.5 text-zinc-500" />
@@ -1136,8 +1273,8 @@ export default function App() {
             <button
               onClick={() => setSoundEnabled(!soundEnabled)}
               className={`p-1.5 rounded-md border text-xs transition-colors cursor-pointer ${isDark
-                  ? 'bg-zinc-900 border-zinc-800 hover:bg-zinc-800 text-zinc-400'
-                  : 'bg-zinc-100 border-zinc-200 hover:bg-zinc-200 text-zinc-600'
+                ? 'bg-zinc-900 border-zinc-800 hover:bg-zinc-800 text-zinc-400'
+                : 'bg-zinc-100 border-zinc-200 hover:bg-zinc-200 text-zinc-600'
                 }`}
               title={soundEnabled ? 'Audio alerts active' : 'Audio alerts muted'}
             >
@@ -1148,8 +1285,8 @@ export default function App() {
             <button
               onClick={() => setTheme(isDark ? 'light' : 'dark')}
               className={`p-1.5 rounded-md border text-xs transition-colors cursor-pointer ${isDark
-                  ? 'bg-zinc-900 border-zinc-800 hover:bg-zinc-800 text-amber-400'
-                  : 'bg-zinc-100 border-zinc-200 hover:bg-zinc-200 text-zinc-700'
+                ? 'bg-zinc-900 border-zinc-800 hover:bg-zinc-800 text-amber-400'
+                : 'bg-zinc-100 border-zinc-200 hover:bg-zinc-200 text-zinc-700'
                 }`}
               title={isDark ? 'Switch to daylight theme' : 'Switch to dark theme'}
             >
@@ -1160,8 +1297,8 @@ export default function App() {
             <button
               onClick={toggleFullscreen}
               className={`p-1.5 rounded-md border text-xs transition-colors cursor-pointer ${isDark
-                  ? 'bg-zinc-900 border-zinc-800 hover:bg-zinc-800 text-zinc-400'
-                  : 'bg-zinc-100 border-zinc-200 hover:bg-zinc-200 text-zinc-600'
+                ? 'bg-zinc-900 border-zinc-800 hover:bg-zinc-800 text-zinc-400'
+                : 'bg-zinc-100 border-zinc-200 hover:bg-zinc-200 text-zinc-600'
                 }`}
               title={isFullscreen ? 'Exit fullscreen' : 'Enter fullscreen'}
             >
@@ -1177,21 +1314,21 @@ export default function App() {
       <div className="w-full px-4 sm:px-6 pt-3">
         <div
           className={`w-full rounded-lg px-4 py-2.5 border text-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 ${tacticalPhase.status === 'strike' || tacticalPhase.status === 'live'
-              ? 'border-emerald-200 dark:border-emerald-900/50 bg-emerald-50 dark:bg-emerald-950/20 text-emerald-900 dark:text-emerald-300'
-              : tacticalPhase.status === 'hold'
-                ? 'border-amber-200 dark:border-amber-900/50 bg-amber-50 dark:bg-amber-950/20 text-amber-900 dark:text-amber-300'
-                : isDark
-                  ? 'border-zinc-800 bg-[#16181D] text-zinc-300'
-                  : 'border-zinc-200 bg-white text-zinc-700 shadow-xs'
+            ? 'border-emerald-200 dark:border-emerald-900/50 bg-emerald-50 dark:bg-emerald-950/20 text-emerald-900 dark:text-emerald-300'
+            : tacticalPhase.status === 'hold'
+              ? 'border-amber-200 dark:border-amber-900/50 bg-amber-50 dark:bg-amber-950/20 text-amber-900 dark:text-amber-300'
+              : isDark
+                ? 'border-zinc-800 bg-[#16181D] text-zinc-300'
+                : 'border-zinc-200 bg-white text-zinc-700 shadow-xs'
             }`}
         >
           <div className="flex items-center gap-2">
             <span
               className={`px-2 py-0.5 rounded text-[11px] font-medium tracking-wide uppercase ${tacticalPhase.status === 'strike' || tacticalPhase.status === 'live'
-                  ? 'bg-emerald-600 text-white'
-                  : tacticalPhase.status === 'hold'
-                    ? 'bg-amber-600 text-white'
-                    : 'bg-zinc-200 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200'
+                ? 'bg-emerald-600 text-white'
+                : tacticalPhase.status === 'hold'
+                  ? 'bg-amber-600 text-white'
+                  : 'bg-zinc-200 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200'
                 }`}
             >
               {tacticalPhase.badge}
@@ -1246,8 +1383,8 @@ export default function App() {
                         onChange={(e) => setFromStn(e.target.value.toUpperCase())}
                         placeholder="From Station (e.g. CSMT)"
                         className={`w-full rounded-lg border px-3 py-2 text-xs font-sans outline-none transition-colors ${isDark
-                            ? 'bg-[#1E2026] border-zinc-800 text-zinc-100 placeholder-zinc-500 focus:border-blue-500'
-                            : 'bg-white border-zinc-200 text-zinc-900 placeholder-zinc-400 focus:border-blue-600'
+                          ? 'bg-[#1E2026] border-zinc-800 text-zinc-100 placeholder-zinc-500 focus:border-blue-500'
+                          : 'bg-white border-zinc-200 text-zinc-900 placeholder-zinc-400 focus:border-blue-600'
                           }`}
                       />
                       <datalist id="stations-from">
@@ -1265,8 +1402,8 @@ export default function App() {
                         onChange={(e) => setToStn(e.target.value.toUpperCase())}
                         placeholder="To Station (e.g. NDLS)"
                         className={`w-full rounded-lg border px-3 py-2 text-xs font-sans outline-none transition-colors ${isDark
-                            ? 'bg-[#1E2026] border-zinc-800 text-zinc-100 placeholder-zinc-500 focus:border-blue-500'
-                            : 'bg-white border-zinc-200 text-zinc-900 placeholder-zinc-400 focus:border-blue-600'
+                          ? 'bg-[#1E2026] border-zinc-800 text-zinc-100 placeholder-zinc-500 focus:border-blue-500'
+                          : 'bg-white border-zinc-200 text-zinc-900 placeholder-zinc-400 focus:border-blue-600'
                           }`}
                       />
                       <datalist id="stations-to">
@@ -1301,13 +1438,12 @@ export default function App() {
                               key={p.label}
                               type="button"
                               onClick={() => applyRoutePreset(p)}
-                              className={`px-2 py-0.5 rounded text-[11px] font-mono border transition-colors cursor-pointer ${
-                                isSelected
+                              className={`px-2 py-0.5 rounded text-[11px] font-mono border transition-colors cursor-pointer ${isSelected
                                   ? 'bg-amber-600 text-white border-amber-600 font-medium shadow-xs'
                                   : isDark
                                     ? 'bg-[#1E2026] border-zinc-800 text-zinc-300 hover:text-white hover:border-amber-500/60'
                                     : 'bg-white border-zinc-200 text-zinc-700 hover:text-zinc-900 hover:border-amber-500/60'
-                              }`}
+                                }`}
                               title={`Click to fill ${p.label} (${p.train})`}
                             >
                               {p.label}
@@ -1328,13 +1464,12 @@ export default function App() {
                               key={p.label}
                               type="button"
                               onClick={() => applyRoutePreset(p)}
-                              className={`px-2 py-0.5 rounded text-[11px] font-mono border transition-colors cursor-pointer ${
-                                isSelected
+                              className={`px-2 py-0.5 rounded text-[11px] font-mono border transition-colors cursor-pointer ${isSelected
                                   ? 'bg-blue-600 text-white border-blue-600 font-medium shadow-xs'
                                   : isDark
                                     ? 'bg-[#1E2026] border-zinc-800 text-zinc-300 hover:text-white hover:border-blue-500/60'
                                     : 'bg-white border-zinc-200 text-zinc-700 hover:text-zinc-900 hover:border-blue-500/60'
-                              }`}
+                                }`}
                               title={`Click to fill ${p.label} (${p.train})`}
                             >
                               {p.label}
@@ -1352,13 +1487,12 @@ export default function App() {
                               key={p.label}
                               type="button"
                               onClick={() => applyRoutePreset(p)}
-                              className={`px-2 py-0.5 rounded text-[11px] font-mono border transition-colors cursor-pointer ${
-                                isSelected
+                              className={`px-2 py-0.5 rounded text-[11px] font-mono border transition-colors cursor-pointer ${isSelected
                                   ? 'bg-zinc-800 text-white border-zinc-700 dark:bg-zinc-700 font-medium'
                                   : isDark
                                     ? 'bg-[#181A20] border-zinc-800 text-zinc-400 hover:text-zinc-200 hover:border-zinc-700'
                                     : 'bg-zinc-100 border-zinc-200 text-zinc-600 hover:text-zinc-900 hover:border-zinc-300'
-                              }`}
+                                }`}
                               title={`Click to fill ${p.label} (${p.train})`}
                             >
                               {p.label}
@@ -1383,8 +1517,8 @@ export default function App() {
                       onChange={(e) => handleTrainInputChange(e.target.value)}
                       placeholder="e.g. 12480 - Suryanagari or 20901 - Vande Bharat"
                       className={`w-full rounded-lg border px-3 py-2 text-xs font-sans outline-none transition-colors ${isDark
-                          ? 'bg-[#1E2026] border-zinc-800 text-zinc-100 placeholder-zinc-500 focus:border-blue-500'
-                          : 'bg-white border-zinc-200 text-zinc-900 placeholder-zinc-400 focus:border-blue-600'
+                        ? 'bg-[#1E2026] border-zinc-800 text-zinc-100 placeholder-zinc-500 focus:border-blue-500'
+                        : 'bg-white border-zinc-200 text-zinc-900 placeholder-zinc-400 focus:border-blue-600'
                         }`}
                     />
                     <datalist id="trains-directory">
@@ -1404,8 +1538,8 @@ export default function App() {
                       value={travelClass}
                       onChange={(e) => handleClassChange(e.target.value)}
                       className={`w-full rounded-lg border px-3 py-2 text-xs font-sans outline-none transition-colors ${isDark
-                          ? 'bg-[#1E2026] border-zinc-800 text-zinc-100 focus:border-blue-500'
-                          : 'bg-white border-zinc-200 text-zinc-900 focus:border-blue-600'
+                        ? 'bg-[#1E2026] border-zinc-800 text-zinc-100 focus:border-blue-500'
+                        : 'bg-white border-zinc-200 text-zinc-900 focus:border-blue-600'
                         }`}
                     >
                       {Object.entries(CLASS_RULES).map(([code, info]) => (
@@ -1428,8 +1562,8 @@ export default function App() {
                       value={boardingDate}
                       onChange={(e) => setBoardingDate(e.target.value)}
                       className={`w-full rounded-lg border px-3 py-2 text-xs font-sans outline-none transition-colors ${isDark
-                          ? 'bg-[#1E2026] border-zinc-800 text-zinc-100 focus:border-blue-500'
-                          : 'bg-white border-zinc-200 text-zinc-900 focus:border-blue-600'
+                        ? 'bg-[#1E2026] border-zinc-800 text-zinc-100 focus:border-blue-500'
+                        : 'bg-white border-zinc-200 text-zinc-900 focus:border-blue-600'
                         }`}
                     />
                   </div>
@@ -1449,10 +1583,10 @@ export default function App() {
                           type="button"
                           onClick={() => setTrainDayOffset(item.day)}
                           className={`p-2 rounded-lg border text-left transition-colors cursor-pointer ${trainDayOffset === item.day
-                              ? 'border-blue-600 bg-blue-50 dark:bg-blue-950/30 text-blue-900 dark:text-blue-100 font-medium'
-                              : isDark
-                                ? 'border-zinc-800 bg-[#1E2026] text-zinc-400 hover:border-zinc-700 hover:text-zinc-200'
-                                : 'border-zinc-200 bg-zinc-50 text-zinc-600 hover:border-zinc-300'
+                            ? 'border-blue-600 bg-blue-50 dark:bg-blue-950/30 text-blue-900 dark:text-blue-100 font-medium'
+                            : isDark
+                              ? 'border-zinc-800 bg-[#1E2026] text-zinc-400 hover:border-zinc-700 hover:text-zinc-200'
+                              : 'border-zinc-200 bg-zinc-50 text-zinc-600 hover:border-zinc-300'
                             }`}
                         >
                           <div className="text-xs font-medium">{item.label}</div>
@@ -1512,10 +1646,10 @@ export default function App() {
                       <button
                         onClick={copyBookingPlanSummary}
                         className={`px-3 py-1.5 rounded-md text-xs font-medium border flex items-center gap-1.5 cursor-pointer transition-colors ${copiedKey === 'PLAN_SUMMARY'
-                            ? 'bg-emerald-600 text-white border-emerald-600'
-                            : isDark
-                              ? 'bg-zinc-800 hover:bg-zinc-700 text-zinc-200 border-zinc-700'
-                              : 'bg-white hover:bg-zinc-100 text-zinc-700 border-zinc-300'
+                          ? 'bg-emerald-600 text-white border-emerald-600'
+                          : isDark
+                            ? 'bg-zinc-800 hover:bg-zinc-700 text-zinc-200 border-zinc-700'
+                            : 'bg-white hover:bg-zinc-100 text-zinc-700 border-zinc-300'
                           }`}
                       >
                         {copiedKey === 'PLAN_SUMMARY' ? (
@@ -1583,15 +1717,15 @@ export default function App() {
                         onChange={(e) => setPrimaryUpi(e.target.value)}
                         placeholder="Primary UPI (e.g. name@okaxis)"
                         className={`flex-1 rounded-md border px-3 py-1.5 text-xs font-mono outline-none ${isDark
-                            ? 'bg-[#1E2026] border-zinc-800 text-zinc-100 focus:border-blue-500'
-                            : 'bg-white border-zinc-200 text-zinc-900 focus:border-blue-600'
+                          ? 'bg-[#1E2026] border-zinc-800 text-zinc-100 focus:border-blue-500'
+                          : 'bg-white border-zinc-200 text-zinc-900 focus:border-blue-600'
                           }`}
                       />
                       <button
                         onClick={() => copyToClipboard(primaryUpi, 'UPI_PRIMARY')}
                         className={`px-3 py-1.5 rounded-md text-xs font-medium cursor-pointer transition-colors shrink-0 ${copiedKey === 'UPI_PRIMARY'
-                            ? 'bg-emerald-600 text-white'
-                            : 'bg-blue-600 hover:bg-blue-700 text-white'
+                          ? 'bg-emerald-600 text-white'
+                          : 'bg-blue-600 hover:bg-blue-700 text-white'
                           }`}
                       >
                         {copiedKey === 'UPI_PRIMARY' ? 'Copied' : 'Copy'}
@@ -1606,17 +1740,17 @@ export default function App() {
                         onChange={(e) => setBackupUpi(e.target.value)}
                         placeholder="Backup UPI (e.g. 9876543210@ybl)"
                         className={`flex-1 rounded-md border px-3 py-1.5 text-xs font-mono outline-none ${isDark
-                            ? 'bg-[#1E2026] border-zinc-800 text-zinc-100 focus:border-blue-500'
-                            : 'bg-white border-zinc-200 text-zinc-900 focus:border-blue-600'
+                          ? 'bg-[#1E2026] border-zinc-800 text-zinc-100 focus:border-blue-500'
+                          : 'bg-white border-zinc-200 text-zinc-900 focus:border-blue-600'
                           }`}
                       />
                       <button
                         onClick={() => copyToClipboard(backupUpi, 'UPI_BACKUP')}
                         className={`px-3 py-1.5 rounded-md text-xs font-medium border cursor-pointer transition-colors shrink-0 ${copiedKey === 'UPI_BACKUP'
-                            ? 'bg-emerald-600 text-white border-emerald-600'
-                            : isDark
-                              ? 'bg-zinc-800 hover:bg-zinc-700 text-zinc-200 border-zinc-700'
-                              : 'bg-white hover:bg-zinc-100 text-zinc-700 border-zinc-300'
+                          ? 'bg-emerald-600 text-white border-emerald-600'
+                          : isDark
+                            ? 'bg-zinc-800 hover:bg-zinc-700 text-zinc-200 border-zinc-700'
+                            : 'bg-white hover:bg-zinc-100 text-zinc-700 border-zinc-300'
                           }`}
                       >
                         {copiedKey === 'UPI_BACKUP' ? 'Copied' : 'Backup'}
@@ -1640,15 +1774,13 @@ export default function App() {
                     {passengers.map((p, idx) => (
                       <div
                         key={p.id}
-                        className={`flex flex-wrap sm:flex-nowrap items-center gap-2 p-1.5 sm:p-2 rounded-lg border transition-colors ${
-                          isDark ? 'bg-[#181A20] border-zinc-800/80' : 'bg-zinc-50 border-zinc-200'
-                        }`}
+                        className={`flex flex-wrap sm:flex-nowrap items-center gap-2 p-1.5 sm:p-2 rounded-lg border transition-colors ${isDark ? 'bg-[#181A20] border-zinc-800/80' : 'bg-zinc-50 border-zinc-200'
+                          }`}
                       >
                         {/* #1 Badge */}
                         <span
-                          className={`text-[11px] font-mono px-2 py-1 rounded font-semibold shrink-0 ${
-                            isDark ? 'bg-zinc-800 text-zinc-400' : 'bg-zinc-200 text-zinc-700'
-                          }`}
+                          className={`text-[11px] font-mono px-2 py-1 rounded font-semibold shrink-0 ${isDark ? 'bg-zinc-800 text-zinc-400' : 'bg-zinc-200 text-zinc-700'
+                            }`}
                         >
                           #{idx + 1}
                         </span>
@@ -1659,11 +1791,10 @@ export default function App() {
                           value={p.name}
                           onChange={(e) => updatePassenger(p.id, 'name', e.target.value)}
                           placeholder="Full Name (as per Govt ID)"
-                          className={`flex-1 min-w-[140px] rounded-md border px-2.5 py-1.5 text-xs font-sans outline-none ${
-                            isDark
+                          className={`flex-1 min-w-[140px] rounded-md border px-2.5 py-1.5 text-xs font-sans outline-none ${isDark
                               ? 'bg-[#1E2026] border-zinc-800 text-zinc-100 focus:border-blue-500'
                               : 'bg-white border-zinc-200 text-zinc-900 focus:border-blue-600'
-                          }`}
+                            }`}
                         />
 
                         {/* Age (w-16 sm:w-20) */}
@@ -1672,22 +1803,20 @@ export default function App() {
                           value={p.age}
                           onChange={(e) => updatePassenger(p.id, 'age', e.target.value)}
                           placeholder="Age"
-                          className={`w-16 sm:w-20 font-mono rounded-md border px-2 py-1.5 text-xs outline-none ${
-                            isDark
+                          className={`w-16 sm:w-20 font-mono rounded-md border px-2 py-1.5 text-xs outline-none ${isDark
                               ? 'bg-[#1E2026] border-zinc-800 text-zinc-100 focus:border-blue-500'
                               : 'bg-white border-zinc-200 text-zinc-900 focus:border-blue-600'
-                          }`}
+                            }`}
                         />
 
                         {/* Gender Select (w-24 sm:w-28) */}
                         <select
                           value={p.gender}
                           onChange={(e) => updatePassenger(p.id, 'gender', e.target.value)}
-                          className={`w-24 sm:w-28 rounded-md border px-2 py-1.5 text-xs font-sans outline-none cursor-pointer ${
-                            isDark
+                          className={`w-24 sm:w-28 rounded-md border px-2 py-1.5 text-xs font-sans outline-none cursor-pointer ${isDark
                               ? 'bg-[#1E2026] border-zinc-800 text-zinc-100 focus:border-blue-500'
                               : 'bg-white border-zinc-200 text-zinc-900 focus:border-blue-600'
-                          }`}
+                            }`}
                         >
                           <option value="M">Male (M)</option>
                           <option value="F">Female (F)</option>
@@ -1698,11 +1827,10 @@ export default function App() {
                         <select
                           value={p.berth}
                           onChange={(e) => updatePassenger(p.id, 'berth', e.target.value)}
-                          className={`w-24 sm:w-32 rounded-md border px-2 py-1.5 text-xs font-sans outline-none cursor-pointer ${
-                            isDark
+                          className={`w-24 sm:w-32 rounded-md border px-2 py-1.5 text-xs font-sans outline-none cursor-pointer ${isDark
                               ? 'bg-[#1E2026] border-zinc-800 text-zinc-100 focus:border-blue-500'
                               : 'bg-white border-zinc-200 text-zinc-900 focus:border-blue-600'
-                          }`}
+                            }`}
                         >
                           <option value="No Choice">No Choice</option>
                           <option value="LB">Lower</option>
@@ -1716,13 +1844,12 @@ export default function App() {
                         <button
                           type="button"
                           onClick={() => copyToClipboard(p.name, `PAX_NAME_${p.id}`)}
-                          className={`px-2.5 py-1.5 rounded-md text-xs font-medium cursor-pointer transition-colors shrink-0 ${
-                            copiedKey === `PAX_NAME_${p.id}`
+                          className={`px-2.5 py-1.5 rounded-md text-xs font-medium cursor-pointer transition-colors shrink-0 ${copiedKey === `PAX_NAME_${p.id}`
                               ? 'bg-emerald-600 text-white'
                               : isDark
                                 ? 'bg-zinc-800 hover:bg-zinc-700 text-zinc-300'
                                 : 'bg-zinc-200 hover:bg-zinc-300 text-zinc-700'
-                          }`}
+                            }`}
                           title="Copy passenger name"
                         >
                           {copiedKey === `PAX_NAME_${p.id}` ? 'Copied' : 'Copy Name'}
@@ -1747,11 +1874,10 @@ export default function App() {
                     <button
                       type="button"
                       onClick={addPassenger}
-                      className={`w-full py-1.5 rounded-lg border border-dashed text-xs font-medium flex items-center justify-center gap-1.5 cursor-pointer transition-colors ${
-                        isDark
+                      className={`w-full py-1.5 rounded-lg border border-dashed text-xs font-medium flex items-center justify-center gap-1.5 cursor-pointer transition-colors ${isDark
                           ? 'border-zinc-800 hover:border-zinc-700 text-zinc-400 hover:text-zinc-200'
                           : 'border-zinc-300 hover:border-zinc-400 text-zinc-600 hover:text-zinc-900'
-                      }`}
+                        }`}
                     >
                       <UserPlus className="w-3.5 h-3.5" /> Add Passenger ({passengers.length} of 4)
                     </button>
@@ -1794,12 +1920,12 @@ export default function App() {
                     key={item.id}
                     onClick={() => toggleChecklist(item.id)}
                     className={`p-3 rounded-lg border transition-colors cursor-pointer flex items-start gap-2.5 ${item.checked
-                        ? isDark
-                          ? 'bg-[#1B1D23] border-zinc-800 text-zinc-200'
-                          : 'bg-zinc-50 border-zinc-200 text-zinc-900'
-                        : isDark
-                          ? 'bg-transparent border-zinc-800/50 text-zinc-400 hover:border-zinc-700'
-                          : 'bg-transparent border-zinc-200/60 text-zinc-500 hover:border-zinc-300'
+                      ? isDark
+                        ? 'bg-[#1B1D23] border-zinc-800 text-zinc-200'
+                        : 'bg-zinc-50 border-zinc-200 text-zinc-900'
+                      : isDark
+                        ? 'bg-transparent border-zinc-800/50 text-zinc-400 hover:border-zinc-700'
+                        : 'bg-transparent border-zinc-200/60 text-zinc-500 hover:border-zinc-300'
                       }`}
                   >
                     <button className="mt-0.5 shrink-0 text-blue-600 dark:text-blue-400">
@@ -1871,12 +1997,12 @@ export default function App() {
                         onClick={() => advanceDrillStep(btn.step)}
                         disabled={drillStep !== btn.step}
                         className={`p-3 rounded-lg text-xs font-medium border transition-colors cursor-pointer ${drillStep === btn.step
-                            ? 'bg-blue-600 border-blue-600 text-white shadow-xs'
-                            : drillStep > btn.step
-                              ? 'border-emerald-200 dark:border-emerald-900/60 bg-emerald-50 dark:bg-emerald-950/20 text-emerald-700 dark:text-emerald-400'
-                              : isDark
-                                ? 'border-zinc-800 bg-[#1E2026] text-zinc-500'
-                                : 'border-zinc-200 bg-zinc-100 text-zinc-400'
+                          ? 'bg-blue-600 border-blue-600 text-white shadow-xs'
+                          : drillStep > btn.step
+                            ? 'border-emerald-200 dark:border-emerald-900/60 bg-emerald-50 dark:bg-emerald-950/20 text-emerald-700 dark:text-emerald-400'
+                            : isDark
+                              ? 'border-zinc-800 bg-[#1E2026] text-zinc-500'
+                              : 'border-zinc-200 bg-zinc-100 text-zinc-400'
                           }`}
                       >
                         {btn.label}
@@ -1905,8 +2031,8 @@ export default function App() {
                   <button
                     onClick={startSpeedDrill}
                     className={`px-3 py-1.5 rounded-md text-xs font-medium border transition-colors cursor-pointer ${isDark
-                        ? 'bg-zinc-800 hover:bg-zinc-700 text-zinc-200 border-zinc-700'
-                        : 'bg-white hover:bg-zinc-100 text-zinc-700 border-zinc-300'
+                      ? 'bg-zinc-800 hover:bg-zinc-700 text-zinc-200 border-zinc-700'
+                      : 'bg-white hover:bg-zinc-100 text-zinc-700 border-zinc-300'
                       }`}
                   >
                     Practice Again
@@ -1980,10 +2106,10 @@ export default function App() {
                   <button
                     onClick={() => setGuideLang('hi')}
                     className={`px-2 py-0.5 rounded font-medium transition-colors cursor-pointer ${guideLang === 'hi'
-                        ? 'bg-blue-600 text-white'
-                        : isDark
-                          ? 'text-zinc-400 hover:text-zinc-200'
-                          : 'text-zinc-600 hover:text-zinc-900'
+                      ? 'bg-blue-600 text-white'
+                      : isDark
+                        ? 'text-zinc-400 hover:text-zinc-200'
+                        : 'text-zinc-600 hover:text-zinc-900'
                       }`}
                   >
                     🇮🇳 हिंदी
@@ -1991,10 +2117,10 @@ export default function App() {
                   <button
                     onClick={() => setGuideLang('en')}
                     className={`px-2 py-0.5 rounded font-medium transition-colors cursor-pointer ${guideLang === 'en'
-                        ? 'bg-blue-600 text-white'
-                        : isDark
-                          ? 'text-zinc-400 hover:text-zinc-200'
-                          : 'text-zinc-600 hover:text-zinc-900'
+                      ? 'bg-blue-600 text-white'
+                      : isDark
+                        ? 'text-zinc-400 hover:text-zinc-200'
+                        : 'text-zinc-600 hover:text-zinc-900'
                       }`}
                   >
                     🌐 English
@@ -2004,8 +2130,8 @@ export default function App() {
                 <button
                   onClick={() => setShowGuideBook(false)}
                   className={`p-1.5 rounded-md border text-xs cursor-pointer transition-colors ${isDark
-                      ? 'border-zinc-800 hover:bg-zinc-800 text-zinc-400'
-                      : 'border-zinc-200 hover:bg-zinc-100 text-zinc-600'
+                    ? 'border-zinc-800 hover:bg-zinc-800 text-zinc-400'
+                    : 'border-zinc-200 hover:bg-zinc-100 text-zinc-600'
                     }`}
                 >
                   <X className="w-4 h-4" />
@@ -2028,12 +2154,12 @@ export default function App() {
                     key={chap.id}
                     onClick={() => setActiveGuideChapter(idx)}
                     className={`w-full text-left p-2.5 rounded-lg transition-colors cursor-pointer flex items-center justify-between text-xs ${activeGuideChapter === idx
-                        ? isDark
-                          ? 'bg-zinc-800 text-white font-medium'
-                          : 'bg-zinc-200/80 text-zinc-900 font-medium'
-                        : isDark
-                          ? 'text-zinc-400 hover:text-zinc-200 hover:bg-zinc-900'
-                          : 'text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100'
+                      ? isDark
+                        ? 'bg-zinc-800 text-white font-medium'
+                        : 'bg-zinc-200/80 text-zinc-900 font-medium'
+                      : isDark
+                        ? 'text-zinc-400 hover:text-zinc-200 hover:bg-zinc-900'
+                        : 'text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100'
                       }`}
                   >
                     <div>
@@ -2076,8 +2202,8 @@ export default function App() {
                     disabled={activeGuideChapter === 0}
                     onClick={() => setActiveGuideChapter((c) => Math.max(0, c - 1))}
                     className={`px-3 py-1.5 rounded-md text-xs font-medium border cursor-pointer disabled:opacity-40 transition-colors ${isDark
-                        ? 'bg-zinc-800 hover:bg-zinc-700 text-zinc-200 border-zinc-700'
-                        : 'bg-zinc-100 hover:bg-zinc-200 text-zinc-700 border-zinc-200'
+                      ? 'bg-zinc-800 hover:bg-zinc-700 text-zinc-200 border-zinc-700'
+                      : 'bg-zinc-100 hover:bg-zinc-200 text-zinc-700 border-zinc-200'
                       }`}
                   >
                     {guideLang === 'hi' ? '← पिछला अध्याय' : '← Previous'}
