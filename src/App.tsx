@@ -63,24 +63,78 @@ export interface ClassRule {
   clerkage: number;
 }
 
-// Popular Station Presets
+// Popular Station Presets (Primary: Mumbai Hubs, Abu Road, Ahmedabad + Pan-India Hubs)
 const POPULAR_STATIONS = [
+  // Primary Mumbai Hubs
+  { code: 'BDTS', name: 'Bandra Terminus (BDTS)' },
+  { code: 'MMCT', name: 'Mumbai Central (MMCT / BCT)' },
   { code: 'CSMT', name: 'Mumbai CSMT' },
-  { code: 'BCT', name: 'Mumbai Central (MMCT)' },
-  { code: 'LTT', name: 'Lokmanya Tilak T' },
-  { code: 'NDLS', name: 'New Delhi' },
-  { code: 'PUNE', name: 'Pune Jn' },
-  { code: 'ADI', name: 'Ahmedabad Jn' },
-  { code: 'HWH', name: 'Howrah Jn' },
-  { code: 'SBC', name: 'KSR Bengaluru' },
-  { code: 'MAS', name: 'MGR Chennai Central' },
-  { code: 'PNBE', name: 'Patna Jn' },
-  { code: 'BSB', name: 'Varanasi Jn' },
-  { code: 'JP', name: 'Jaipur Jn' }
+  { code: 'BVI', name: 'Borivali (BVI)' },
+  { code: 'DDR', name: 'Dadar Western (DDR)' },
+  { code: 'LTT', name: 'Lokmanya Tilak T (LTT)' },
+
+  // Key Destination Hubs (Abu Road, Ahmedabad & Rajasthan/Gujarat Corridors)
+  { code: 'ABR', name: 'Abu Road (ABR)' },
+  { code: 'ADI', name: 'Ahmedabad Jn (ADI)' },
+  { code: 'ST', name: 'Surat (ST)' },
+  { code: 'BRC', name: 'Vadodara Jn (BRC)' },
+  { code: 'FA', name: 'Falna (FA)' },
+  { code: 'MJ', name: 'Marwar Jn (MJ)' },
+  { code: 'JU', name: 'Jodhpur Jn (JU)' },
+  { code: 'JP', name: 'Jaipur Jn (JP)' },
+  { code: 'AII', name: 'Ajmer Jn (AII)' },
+
+  // Pan-India Major Junctions
+  { code: 'NDLS', name: 'New Delhi (NDLS)' },
+  { code: 'PUNE', name: 'Pune Jn (PUNE)' },
+  { code: 'HWH', name: 'Howrah Jn (HWH)' },
+  { code: 'SBC', name: 'KSR Bengaluru (SBC)' },
+  { code: 'MAS', name: 'MGR Chennai Central (MAS)' },
+  { code: 'PNBE', name: 'Patna Jn (PNBE)' },
+  { code: 'BSB', name: 'Varanasi Jn (BSB)' },
+  { code: 'GKP', name: 'Gorakhpur Jn (GKP)' }
+];
+
+export interface TrainDirectoryItem {
+  number: string;
+  name: string;
+  from: string;
+  to: string;
+  defaultClass: string;
+}
+
+// Master Train Directory (Primary Mumbai ➔ Abu Road / Ahmedabad + Pan-India)
+const POPULAR_TRAINS: TrainDirectoryItem[] = [
+  // Mumbai ➔ Abu Road (ABR)
+  { number: '12480', name: '12480 - Suryanagari Superfast Express (BDTS ➔ ABR ➔ JU)', from: 'BDTS', to: 'ABR', defaultClass: '3A' },
+  { number: '14702', name: '14702 - Amrapur Aravali Express (BDTS ➔ ABR ➔ SGNR)', from: 'BDTS', to: 'ABR', defaultClass: '3A' },
+  { number: '12979', name: '12979 - Bandra Jaipur Superfast Express (BDTS ➔ ABR ➔ JP)', from: 'BDTS', to: 'ABR', defaultClass: '3A' },
+  { number: '12216', name: '12216 - Bandra DEE Garib Rath Express (BDTS ➔ ABR)', from: 'BDTS', to: 'ABR', defaultClass: '3A' },
+  { number: '22915', name: '22915 - Bandra Terminus Hisar SF Express (BDTS ➔ ABR)', from: 'BDTS', to: 'ABR', defaultClass: '3A' },
+  { number: '20943', name: '20943 - Bandra Bhagat Ki Kothi Humsafar (BDTS ➔ ABR)', from: 'BDTS', to: 'ABR', defaultClass: '3A' },
+  { number: '12957', name: '12957 - Swarna Jayanti Rajdhani Express (MMCT ➔ ABR)', from: 'MMCT', to: 'ABR', defaultClass: '3A' },
+  { number: '19031', name: '19031 - Yoga Express (ADI / BDTS ➔ ABR)', from: 'BDTS', to: 'ABR', defaultClass: 'SL' },
+
+  // Mumbai ➔ Ahmedabad (ADI)
+  { number: '20901', name: '20901 - Mumbai Central Vande Bharat Express (MMCT ➔ ADI)', from: 'MMCT', to: 'ADI', defaultClass: 'CC' },
+  { number: '12009', name: '12009 - Mumbai Central Ahmedabad Shatabdi Express (MMCT ➔ ADI)', from: 'MMCT', to: 'ADI', defaultClass: 'CC' },
+  { number: '12933', name: '12933 - Karnavati Express (MMCT ➔ ADI)', from: 'MMCT', to: 'ADI', defaultClass: 'CC' },
+  { number: '12901', name: '12901 - Gujarat Mail (MMCT ➔ ADI)', from: 'MMCT', to: 'ADI', defaultClass: '3A' },
+  { number: '22953', name: '22953 - Gujarat Superfast Express (MMCT ➔ ADI)', from: 'MMCT', to: 'ADI', defaultClass: 'CC' },
+  { number: '12971', name: '12971 - Bandra Bhavnagar Superfast (BDTS ➔ ADI)', from: 'BDTS', to: 'ADI', defaultClass: '3A' },
+  { number: '22927', name: '22927 - Lokshakti Express (BDTS ➔ ADI)', from: 'BDTS', to: 'ADI', defaultClass: 'SL' },
+
+  // Pan-India Major Routes
+  { number: '12951', name: '12951 - Tejas Rajdhani Express (MMCT ➔ NDLS)', from: 'MMCT', to: 'NDLS', defaultClass: '3A' },
+  { number: '12953', name: '12953 - August Kranti Tejas Rajdhani (MMCT ➔ NZM)', from: 'MMCT', to: 'NDLS', defaultClass: '3A' },
+  { number: '12302', name: '12302 - Howrah Rajdhani Express (NDLS ➔ HWH)', from: 'NDLS', to: 'HWH', defaultClass: '3A' },
+  { number: '12123', name: '12123 - Deccan Queen Express (CSMT ➔ PUNE)', from: 'CSMT', to: 'PUNE', defaultClass: 'CC' },
+  { number: '12008', name: '12008 - Mysuru Chennai Shatabdi (SBC ➔ MAS)', from: 'SBC', to: 'MAS', defaultClass: 'CC' }
 ];
 
 export interface RoutePreset {
   label: string;
+  category: 'abu' | 'adi' | 'other';
   from: string;
   to: string;
   train: string;
@@ -88,10 +142,20 @@ export interface RoutePreset {
 }
 
 const ROUTE_PRESETS: RoutePreset[] = [
-  { label: 'CSMT ⇄ NDLS', from: 'CSMT', to: 'NDLS', train: '12951 - Tejas Rajdhani Express', defaultClass: '3A' },
-  { label: 'MMCT ⇄ ADI', from: 'BCT', to: 'ADI', train: '12009 - Shatabdi Express', defaultClass: 'CC' },
-  { label: 'CSMT ⇄ PUNE', from: 'CSMT', to: 'PUNE', train: '12123 - Deccan Queen', defaultClass: 'CC' },
-  { label: 'NDLS ⇄ HWH', from: 'NDLS', to: 'HWH', train: '12302 - Howrah Rajdhani', defaultClass: '3A' }
+  // Primary: Mumbai -> Abu Road (Default)
+  { label: 'BDTS ⇄ ABR (Suryanagari)', category: 'abu', from: 'BDTS', to: 'ABR', train: '12480 - Suryanagari Superfast Express', defaultClass: '3A' },
+  { label: 'BDTS ⇄ ABR (Aravali)', category: 'abu', from: 'BDTS', to: 'ABR', train: '14702 - Amrapur Aravali Express', defaultClass: '3A' },
+  { label: 'BDTS ⇄ ABR (Garib Rath)', category: 'abu', from: 'BDTS', to: 'ABR', train: '12216 - Bandra DEE Garib Rath Express', defaultClass: '3A' },
+
+  // Primary: Mumbai -> Ahmedabad
+  { label: 'MMCT ⇄ ADI (Vande Bharat)', category: 'adi', from: 'MMCT', to: 'ADI', train: '20901 - Mumbai Central Vande Bharat Express', defaultClass: 'CC' },
+  { label: 'MMCT ⇄ ADI (Shatabdi)', category: 'adi', from: 'MMCT', to: 'ADI', train: '12009 - Mumbai Central Ahmedabad Shatabdi Express', defaultClass: 'CC' },
+  { label: 'MMCT ⇄ ADI (Karnavati)', category: 'adi', from: 'MMCT', to: 'ADI', train: '12933 - Karnavati Express', defaultClass: 'CC' },
+
+  // Other Major Routes (Pan-India)
+  { label: 'CSMT ⇄ NDLS (Rajdhani)', category: 'other', from: 'CSMT', to: 'NDLS', train: '12951 - Tejas Rajdhani Express', defaultClass: '3A' },
+  { label: 'NDLS ⇄ HWH (Rajdhani)', category: 'other', from: 'NDLS', to: 'HWH', train: '12302 - Howrah Rajdhani', defaultClass: '3A' },
+  { label: 'CSMT ⇄ PUNE (Deccan Queen)', category: 'other', from: 'CSMT', to: 'PUNE', train: '12123 - Deccan Queen', defaultClass: 'CC' }
 ];
 
 // Class Tatkal Fare Rules
@@ -672,9 +736,9 @@ export default function App() {
     return d.toISOString().split('T')[0];
   }, []);
 
-  const [fromStn, setFromStn] = useState<string>('CSMT');
-  const [toStn, setToStn] = useState<string>('NDLS');
-  const [trainInfo, setTrainInfo] = useState<string>('12951 - Tejas Rajdhani Express');
+  const [fromStn, setFromStn] = useState<string>('BDTS');
+  const [toStn, setToStn] = useState<string>('ABR');
+  const [trainInfo, setTrainInfo] = useState<string>('12480 - Suryanagari Superfast Express');
   const [boardingDate, setBoardingDate] = useState<string>(tomorrowStr);
   const [travelClass, setTravelClass] = useState<string>('3A');
   const [trainDayOffset, setTrainDayOffset] = useState<number>(1);
@@ -694,6 +758,21 @@ export default function App() {
       handleClassChange(preset.defaultClass);
     }
     playBeep(750, 0.05, 'sine');
+  };
+
+  const handleTrainInputChange = (val: string) => {
+    setTrainInfo(val);
+    const trimmed = val.trim();
+    const matched = POPULAR_TRAINS.find(
+      (t) => t.name.toLowerCase() === val.toLowerCase() || t.number === trimmed
+    );
+    if (matched) {
+      setFromStn(matched.from);
+      setToStn(matched.to);
+      if (matched.defaultClass && CLASS_RULES[matched.defaultClass]) {
+        handleClassChange(matched.defaultClass);
+      }
+    }
   };
 
   const handleClassChange = (cls: string) => {
@@ -1200,29 +1279,94 @@ export default function App() {
                     </div>
                   </div>
 
-                  {/* 1-Click Route & Train Presets */}
-                  <div className="flex flex-wrap items-center gap-1.5 mt-2">
-                    <span className="text-[11px] text-zinc-500 font-medium">Quick Presets:</span>
-                    {ROUTE_PRESETS.map((p) => {
-                      const isSelected = fromStn === p.from && toStn === p.to;
-                      return (
-                        <button
-                          key={p.label}
-                          type="button"
-                          onClick={() => applyRoutePreset(p)}
-                          className={`px-2 py-0.5 rounded text-[11px] font-mono border transition-colors cursor-pointer ${
-                            isSelected
-                              ? 'bg-blue-600/15 border-blue-500/50 text-blue-600 dark:text-blue-400 font-medium'
-                              : isDark
-                                ? 'bg-[#1E2026] border-zinc-800 text-zinc-400 hover:text-zinc-200 hover:border-zinc-700'
-                                : 'bg-zinc-100 border-zinc-200 text-zinc-600 hover:text-zinc-900 hover:border-zinc-300'
-                          }`}
-                          title={`Click to fill ${p.label} (${p.train})`}
-                        >
-                          {p.label}
-                        </button>
-                      );
-                    })}
+                  {/* Categorized Route Presets (Mumbai ➔ Abu Road & Ahmedabad Default + All Others) */}
+                  <div className="space-y-1.5 mt-2.5">
+                    <div className="flex items-center justify-between">
+                      <span className="text-[11px] text-zinc-500 font-medium">Quick Route Presets:</span>
+                      <span className="text-[10px] text-amber-600 dark:text-amber-400 font-medium">
+                        Focus: Mumbai ➔ Abu Road & Ahmedabad
+                      </span>
+                    </div>
+
+                    <div className="flex flex-wrap items-center gap-1.5">
+                      {/* Group 1: Mumbai -> Abu Road */}
+                      <div className="flex flex-wrap items-center gap-1 bg-amber-500/10 dark:bg-amber-500/15 border border-amber-500/30 rounded-md p-1">
+                        <span className="text-[10px] font-semibold text-amber-700 dark:text-amber-300 px-1">
+                          ABR:
+                        </span>
+                        {ROUTE_PRESETS.filter((p) => p.category === 'abu').map((p) => {
+                          const isSelected = fromStn === p.from && toStn === p.to && (trainInfo.includes(p.label.split('(')[1]?.replace(')', '') || '') || trainInfo.startsWith(p.train.split(' ')[0]));
+                          return (
+                            <button
+                              key={p.label}
+                              type="button"
+                              onClick={() => applyRoutePreset(p)}
+                              className={`px-2 py-0.5 rounded text-[11px] font-mono border transition-colors cursor-pointer ${
+                                isSelected
+                                  ? 'bg-amber-600 text-white border-amber-600 font-medium shadow-xs'
+                                  : isDark
+                                    ? 'bg-[#1E2026] border-zinc-800 text-zinc-300 hover:text-white hover:border-amber-500/60'
+                                    : 'bg-white border-zinc-200 text-zinc-700 hover:text-zinc-900 hover:border-amber-500/60'
+                              }`}
+                              title={`Click to fill ${p.label} (${p.train})`}
+                            >
+                              {p.label}
+                            </button>
+                          );
+                        })}
+                      </div>
+
+                      {/* Group 2: Mumbai -> Ahmedabad */}
+                      <div className="flex flex-wrap items-center gap-1 bg-blue-500/10 dark:bg-blue-500/15 border border-blue-500/30 rounded-md p-1">
+                        <span className="text-[10px] font-semibold text-blue-700 dark:text-blue-300 px-1">
+                          ADI:
+                        </span>
+                        {ROUTE_PRESETS.filter((p) => p.category === 'adi').map((p) => {
+                          const isSelected = fromStn === p.from && toStn === p.to && (trainInfo.includes(p.label.split('(')[1]?.replace(')', '') || '') || trainInfo.startsWith(p.train.split(' ')[0]));
+                          return (
+                            <button
+                              key={p.label}
+                              type="button"
+                              onClick={() => applyRoutePreset(p)}
+                              className={`px-2 py-0.5 rounded text-[11px] font-mono border transition-colors cursor-pointer ${
+                                isSelected
+                                  ? 'bg-blue-600 text-white border-blue-600 font-medium shadow-xs'
+                                  : isDark
+                                    ? 'bg-[#1E2026] border-zinc-800 text-zinc-300 hover:text-white hover:border-blue-500/60'
+                                    : 'bg-white border-zinc-200 text-zinc-700 hover:text-zinc-900 hover:border-blue-500/60'
+                              }`}
+                              title={`Click to fill ${p.label} (${p.train})`}
+                            >
+                              {p.label}
+                            </button>
+                          );
+                        })}
+                      </div>
+
+                      {/* Group 3: Other Pan-India Corridors */}
+                      <div className="flex flex-wrap items-center gap-1">
+                        {ROUTE_PRESETS.filter((p) => p.category === 'other').map((p) => {
+                          const isSelected = fromStn === p.from && toStn === p.to;
+                          return (
+                            <button
+                              key={p.label}
+                              type="button"
+                              onClick={() => applyRoutePreset(p)}
+                              className={`px-2 py-0.5 rounded text-[11px] font-mono border transition-colors cursor-pointer ${
+                                isSelected
+                                  ? 'bg-zinc-800 text-white border-zinc-700 dark:bg-zinc-700 font-medium'
+                                  : isDark
+                                    ? 'bg-[#181A20] border-zinc-800 text-zinc-400 hover:text-zinc-200 hover:border-zinc-700'
+                                    : 'bg-zinc-100 border-zinc-200 text-zinc-600 hover:text-zinc-900 hover:border-zinc-300'
+                              }`}
+                              title={`Click to fill ${p.label} (${p.train})`}
+                            >
+                              {p.label}
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </div>
                   </div>
                 </div>
 
@@ -1234,14 +1378,22 @@ export default function App() {
                     </label>
                     <input
                       type="text"
+                      list="trains-directory"
                       value={trainInfo}
-                      onChange={(e) => setTrainInfo(e.target.value)}
-                      placeholder="12951 - Rajdhani Express"
+                      onChange={(e) => handleTrainInputChange(e.target.value)}
+                      placeholder="e.g. 12480 - Suryanagari or 20901 - Vande Bharat"
                       className={`w-full rounded-lg border px-3 py-2 text-xs font-sans outline-none transition-colors ${isDark
                           ? 'bg-[#1E2026] border-zinc-800 text-zinc-100 placeholder-zinc-500 focus:border-blue-500'
                           : 'bg-white border-zinc-200 text-zinc-900 placeholder-zinc-400 focus:border-blue-600'
                         }`}
                     />
+                    <datalist id="trains-directory">
+                      {POPULAR_TRAINS.map((t) => (
+                        <option key={t.number} value={t.name}>
+                          {t.from} ➔ {t.to} ({CLASS_RULES[t.defaultClass]?.name || t.defaultClass})
+                        </option>
+                      ))}
+                    </datalist>
                   </div>
 
                   <div className="sm:col-span-5">
